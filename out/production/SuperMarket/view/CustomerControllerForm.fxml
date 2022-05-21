@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="CustomerContext" prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerControllerFormController">
+   <children>
+      <Label layoutX="350.0" layoutY="27.0" text="Customers">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="66.0" layoutY="76.0" prefHeight="3.0" prefWidth="800.0" />
+      <TableView fx:id="tblCustomer" layoutX="17.0" layoutY="214.0" prefHeight="456.0" prefWidth="898.0" stylesheets="@../DarkTheme.css">
+         <columns>
+            <TableColumn fx:id="colID" prefWidth="117.0" text="ID" />
+            <TableColumn fx:id="colTitle" prefWidth="119.0" text="Title" />
+            <TableColumn fx:id="colName" prefWidth="118.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="118.0" text="Address" />
+            <TableColumn fx:id="colCity" prefWidth="140.0" text="City" />
+            <TableColumn fx:id="colProvince" prefWidth="136.0" text="Province" />
+            <TableColumn fx:id="colPostCode" minWidth="0.0" prefWidth="156.0" text="Post Code" />
+         </columns>
+      </TableView>
+      <HBox layoutX="20.0" layoutY="103.0" prefHeight="63.0" prefWidth="888.0">
+         <children>
+            <JFXButton onAction="#addCustomerOnAction" prefHeight="64.0" prefWidth="222.0" styleClass="buttonAdd" stylesheets="@../DarkTheme.css" text="ADD CUSTOMER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/add.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#editCustomerOnAction" prefHeight="70.0" prefWidth="222.0" styleClass="buttonUpdate" stylesheets="@../DarkTheme.css" text="UPDATE CUSTOMER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/update.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#searchCustomerOnAction" prefHeight="63.0" prefWidth="222.0" styleClass="buttonSearch" stylesheets="@../DarkTheme.css" text="SEARCH CUSTOMER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#removeCustomerOnAction" prefHeight="63.0" prefWidth="222.0" styleClass="buttonDelete" stylesheets="@../DarkTheme.css" text="DELETE CUSTOMER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

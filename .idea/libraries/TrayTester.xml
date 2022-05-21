@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="TrayTester">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/TrayTester.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.22.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jfoenix-8.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fontawesomefx-8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/AnimateFX-1.2.0 .jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

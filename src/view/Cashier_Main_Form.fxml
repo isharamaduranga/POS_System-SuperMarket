@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="CashierDashboardContext" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CashierMainFormController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="106.0" prefWidth="1200.0" style="-fx-background-color: #c8d6e5;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="362.0" layoutY="6.0" prefHeight="52.0" prefWidth="1200.0" style="-fx-background-color: #002B52FF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="460.0" layoutY="8.0" prefHeight="36.0" prefWidth="283.0" text="CASHIER DASHBOARD" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <HBox layoutX="347.0" layoutY="52.0" prefHeight="52.0" prefWidth="670.0">
+                     <children>
+                        <JFXButton fx:id="btnDetailsMenu" onAction="#ViewOrderDetailsOnAction" prefHeight="52.0" prefWidth="214.0" text="Order Details">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@assests/orderDetails.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#logOutOnAction" prefHeight="52.0" prefWidth="214.0" text="Log Out">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/logoutCashier.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#shutDownOnAction" prefHeight="52.0" prefWidth="214.0" text="Shut Down">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/shutoff.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="694.0" prefWidth="265.0" style="-fx-background-color: #002B52FF;" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="66.0" layoutY="165.0" prefHeight="523.0" prefWidth="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0">
+                     <children>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#dashBoardOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" DASH-BOARD" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/home.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#manageCustomerOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" CUSTOMERS" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonDBlue">
+                                 <image>
+                                    <Image url="@assests/customer.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#addNewCustomerOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" ADD NEW-CUSTOMER" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/addCustomer.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#placeOrderOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" PLACE ORDER" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/placeOrder.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#updateOrderOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" UPDATE ORDER" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/updateOrder.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#deleteOrderOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text="DELETE ORDER" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/deleteOrder.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="67.0" fitWidth="61.0" layoutX="97.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/cashier.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="48.0" layoutY="82.0" text="Ishara Maduranga" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="108.0" text="ishara500@gmail.com" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane fx:id="dashBoardContext" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="694.0" fitWidth="935.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@assests/background.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblDate" layoutX="262.0" layoutY="27.0" prefHeight="51.0" prefWidth="233.0" text="2022-03-05">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDay" layoutX="278.0" layoutY="78.0" prefHeight="35.0" prefWidth="167.0" text="SUNDAY">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTime" layoutX="445.0" layoutY="27.0" prefHeight="73.0" prefWidth="213.0" text="4:20:30">
+                     <font>
+                        <Font name="System Bold" size="50.0" />
+                     </font>
+                  </Label>
+                  <JFXButton layoutX="108.0" layoutY="568.0" onAction="#orderTabels" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonLightBlue" stylesheets="@../DarkTheme.css" text="ORDER &amp; ORDER DETAILS" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="499.0" layoutY="568.0" onAction="#PlaceOrder" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonSearch" stylesheets="@../DarkTheme.css" text="PLACE ORDER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </JFXButton>
+                  <Separator layoutX="430.0" layoutY="13.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="6.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

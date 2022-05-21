@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlaceOrderFormController">
+   <children>
+      <Label layoutX="346.0" layoutY="24.0" text="Place Order Form">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Separator layoutX="31.0" layoutY="63.0" prefHeight="0.0" prefWidth="803.0" />
+      <Label layoutX="23.0" layoutY="72.0" text="Order ID :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="331.0" layoutY="74.0" text="Order Date :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="663.0" layoutY="73.0" text="Order Time :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblOrderID" layoutX="123.0" layoutY="73.0" text="O-001">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDate" layoutX="461.0" layoutY="74.0" text="2021-08-15">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" layoutX="784.0" layoutY="73.0" text="18:18:30">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbCustomerID" labelFloat="true" layoutX="23.0" layoutY="112.0" prefHeight="31.0" prefWidth="187.0" promptText="Customer ID" />
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="262.0" layoutY="112.0" prefHeight="31.0" prefWidth="187.0" promptText="Name" />
+      <JFXTextField fx:id="txtaddress" labelFloat="true" layoutX="501.0" layoutY="112.0" prefHeight="31.0" prefWidth="187.0" promptText="Address" />
+      <JFXTextField fx:id="txtCity" labelFloat="true" layoutX="725.0" layoutY="112.0" prefHeight="31.0" prefWidth="187.0" promptText="City" />
+      <JFXComboBox fx:id="cmbItemID" labelFloat="true" layoutX="25.0" layoutY="171.0" prefHeight="31.0" prefWidth="187.0" promptText="Item ID" />
+      <JFXTextField fx:id="txtDiscription" labelFloat="true" layoutX="262.0" layoutY="170.0" prefHeight="31.0" prefWidth="187.0" promptText="Discription" />
+      <JFXTextField fx:id="txtQTYOnHand" labelFloat="true" layoutX="501.0" layoutY="171.0" prefHeight="31.0" prefWidth="187.0" promptText="QTY On Hand" />
+      <JFXTextField fx:id="txtUnitPrice" labelFloat="true" layoutX="725.0" layoutY="171.0" prefHeight="31.0" prefWidth="187.0" promptText="Unit Price" />
+      <Label layoutX="21.0" layoutY="241.0" text="QTY :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtQTY" layoutX="80.0" layoutY="236.0" />
+      <Label layoutX="298.0" layoutY="235.0" text="Discount">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDiscount" layoutX="376.0" layoutY="231.0" prefHeight="40.0" prefWidth="50.0" text="0" />
+      <Label layoutX="437.0" layoutY="233.0" prefHeight="31.0" prefWidth="26.0" text="\%">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="506.0" layoutY="230.0" onAction="#clearOnAction" prefHeight="40.0" prefWidth="144.0" style="-fx-background-radius: 2.5EM;" styleClass="cashierBtn" stylesheets="@../DarkTheme.css" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="686.0" layoutY="229.0" onAction="#addToCartOnAction" prefHeight="40.0" prefWidth="155.0" style="-fx-background-radius: 2.5EM;" styleClass="buttonAdd" stylesheets="@../DarkTheme.css" text="Add to Cart" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="tblCart" layoutX="22.0" layoutY="292.0" prefHeight="316.0" prefWidth="895.0" stylesheets="@../DarkTheme.css">
+         <columns>
+            <TableColumn fx:id="colItemID" prefWidth="133.0" text="Item Code" />
+            <TableColumn fx:id="colDescription" prefWidth="182.0" text="Description" />
+            <TableColumn fx:id="colQTY" prefWidth="141.0" text="QTY" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="149.0" text="Unit Price" />
+            <TableColumn fx:id="colDiscount" prefWidth="139.0" text="Discount" />
+            <TableColumn fx:id="colTotal" prefWidth="150.0" text="Total" />
+         </columns>
+      </TableView>
+      <Label layoutX="58.0" layoutY="631.0" prefHeight="35.0" prefWidth="128.0" text="Total :-" textFill="RED">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotal" layoutX="174.0" layoutY="628.0" prefHeight="46.0" prefWidth="174.0" text="0.00" textFill="RED">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="594.0" layoutY="629.0" onAction="#ComfirmOrderOnAction" prefHeight="43.0" prefWidth="239.0" style="-fx-background-radius: 1.0EM;" styleClass="buttonLightBlue" stylesheets="@../DarkTheme.css" text="Comfirm Order" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
