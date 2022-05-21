@@ -8,18 +8,18 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import util.CrudUtil;
+import view.TM.CartTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PlaceOrderFormController {
@@ -40,7 +40,7 @@ public class PlaceOrderFormController {
     public TextField txtQTY;
     public TextField txtDiscount;
 
-    public TableView tblCart;
+    public TableView<CartTM> tblCart;
     public TableColumn colItemID;
     public TableColumn colDescription;
     public TableColumn colQTY;
@@ -50,7 +50,16 @@ public class PlaceOrderFormController {
 
     public Label lblTotal;
 
+    int cartSelectedRowCountForDelete = -1;
     public void initialize(){
+
+        colItemID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colQTY.setCellValueFactory(new PropertyValueFactory<>("QTY"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colDiscount.setCellValueFactory(new PropertyValueFactory<>("Discount"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+
         curDateTime();
         autoId();
 
@@ -183,19 +192,84 @@ public class PlaceOrderFormController {
     }
 
     public void clearOnAction(ActionEvent actionEvent) {
-
+        if (cartSelectedRowCountForDelete==-1){
+            new Alert(Alert.AlertType.WARNING, "Please Select a row").show();
+        }else{
+            list.remove(cartSelectedRowCountForDelete);
+            calculateCost();
+            tblCart.refresh();
+        }
     }
 
+    private int isExists(CartTM tm){
+        for (int i = 0; i < list.size(); i++) {
+            if (tm.getItemCode().equals(list.get(i).getItemCode())){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    ObservableList<CartTM> list=FXCollections.observableArrayList();
     public void addToCartOnAction(ActionEvent actionEvent) {
 
-        String discription = txtDiscription.getText();
-        int qtyOnHand = Integer.parseInt(txtQTYOnHand.getText());
-        String unitPrice = txtUnitPrice.getText();
-        String qtyText = txtQTY.getText();
+        if(!txtQTY.getText().equals("") && !txtDiscount.getText().equals("")){
+
+            String discription = txtDiscription.getText();
+            int qtyOnHand = Integer.parseInt(txtQTYOnHand.getText());
+            double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+            int qtyForCustomer = Integer.parseInt(txtQTY.getText());
+            double discount= Double.parseDouble(txtDiscount.getText());
+
+            double calTot=(unitPrice*qtyForCustomer);
+            Double total=calTot-((calTot/100)*discount);
 
 
-        //fieldClear();
+            if (qtyOnHand<qtyForCustomer){
+                new Alert(Alert.AlertType.WARNING,"Invalid QTY").show();
+                return;
+            }
+
+            CartTM tm= new CartTM(cmbItemID.getValue(),discription,qtyForCustomer,unitPrice,discount,total);
+
+            int numberOfRow=isExists(tm);
+
+            if(numberOfRow==-1){
+                list.add(tm);
+            }else{
+                CartTM temp = list.get(numberOfRow);
+                CartTM newTm = new CartTM(
+                        temp.getItemCode(),
+                        temp.getDescription(),
+                        temp.getQTY()+qtyForCustomer,
+                        unitPrice,
+                        discount,
+                        total+temp.getTotal()
+                );
+                list.remove(numberOfRow);
+                list.add(newTm);
+            }
+            tblCart.setItems(list);
+            calculateCost();
+
+            fieldClear();
+
+        }else{
+            new Alert(Alert.AlertType.WARNING,"Something went Wrong. Check Fields... ").show();
+        }
+
+
     }
+
+    private void calculateCost() {
+        double total=0;
+        for (CartTM tm : list) {
+            total+= tm.getTotal();
+        }
+        lblTotal.setText(total+" /=");
+    }
+
 
     public void ComfirmOrderOnAction(ActionEvent actionEvent) {
 
