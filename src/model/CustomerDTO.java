@@ -1,5 +1,7 @@
 package model;
 
+import javafx.collections.ObservableList;
+
 public class CustomerDTO {
     private String cusID;
     private String cusTitle;

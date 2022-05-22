@@ -1,10 +1,9 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
-import util.CrudUtil;
 import util.Utilities;
 
 import java.io.IOException;
@@ -23,9 +22,15 @@ public class SearchCustomerFormController {
 
 
     public void searchCustomerOnAction(ActionEvent actionEvent) {
+        String id = txtID.getText();
+
         try {
-            ResultSet result = CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", txtID.getText());
+
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            ResultSet result = customerDAO.searchCustomer(id);
+
             if (result.next()) {
+
                 txtTitle.setVisible(true);
                 txtName.setVisible(true);
                 txtAddress.setVisible(true);
@@ -39,16 +44,11 @@ public class SearchCustomerFormController {
                 txtCity.setText(result.getString(5));
                 txtProvince.setText(result.getString(6));
                 txtPostCode.setText(result.getString(7));
-
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Empty set..!").show();
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
-
 
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {

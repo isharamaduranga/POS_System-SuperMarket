@@ -1,13 +1,16 @@
 package controller;
 
+import dao.CustomerDAOImpl;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.CustomerDTO;
 import util.CrudUtil;
 import view.TM.CustomerTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CustomerTableForCashierFormController {
 
@@ -35,19 +38,18 @@ public class CustomerTableForCashierFormController {
     private void loadAllCustomers() {
 
         try {
-            ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
 
-            while (rst.next()) {
+            for (CustomerDTO customer : allCustomer) {
                 tblCustomer.getItems().add(new CustomerTM(
-                        rst.getString("cusID"),
-                        rst.getString("cusTitle"),
-                        rst.getString("cusName"),
-                        rst.getString("cusAddress"),
-                        rst.getString("city"),
-                        rst.getString("Povince"),
-                        rst.getString("postCode")
-
-                ));
+                        customer.getCusID(),
+                        customer.getCusTitle(),
+                        customer.getCusName(),
+                        customer.getCusAddress(),
+                        customer.getCity(),
+                        customer.getProvince(),
+                        customer.getPostCode()));
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

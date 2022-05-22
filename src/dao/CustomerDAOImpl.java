@@ -1,5 +1,7 @@
 package dao;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.CustomerDTO;
 import util.CrudUtil;
 
@@ -41,4 +43,12 @@ public class CustomerDAOImpl {
         return CrudUtil.execute("DELETE FROM Customer WHERE CusID=?",id);
     }
 
+    public ObservableList<String> getCustomerIds() throws SQLException, ClassNotFoundException {
+        ObservableList<String> ids = FXCollections.observableArrayList();
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
+        while (rst.next()) {
+            ids.add(rst.getString(1));
+        }
+        return ids;
+    }
 }

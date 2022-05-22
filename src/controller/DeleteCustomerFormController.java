@@ -8,12 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import model.CustomerDTO;
 import util.CrudUtil;
 import util.Utilities;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DeleteCustomerFormController {
     public JFXComboBox<String> cmdCustomerID;
@@ -59,14 +61,10 @@ public class DeleteCustomerFormController {
 
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
-        ObservableList<String> ids = FXCollections.observableArrayList();
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
-        while (rst.next()) {
-            ids.add(rst.getString(1));
-        }
 
-        cmdCustomerID.setItems(ids);
-
+        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+        ObservableList<String> customerIds = customerDAO.getCustomerIds();
+        cmdCustomerID.setItems(customerIds);
     }
 
     public void clear() {
