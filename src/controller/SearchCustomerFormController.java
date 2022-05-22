@@ -5,7 +5,6 @@ import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import util.Utilities;
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;

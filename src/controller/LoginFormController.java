@@ -22,24 +22,24 @@ public class LoginFormController {
     public JFXButton adminBtn;
     public JFXButton cashierBtn;
 
-    int attemptsLogAdmin=0;
-    int attemptsLogCashier =0;
+    int attemptsLogAdmin = 0;
+    int attemptsLogCashier = 0;
 
     public void LogInAdminOnAction(ActionEvent actionEvent) throws IOException {
 
-        if(adminBtn.getText().equals("LOG IN ADMIN")) {
+        if (adminBtn.getText().equals("LOG IN ADMIN")) {
 
             attemptsLogAdmin++;
             if (attemptsLogAdmin < 5) {  // attempts calculate
 
                 if (txtUserName.getText().equals("a") & pwdPassword.getText().equals("1")) {
 
-                    Stage stage= (Stage)loginFormContext.getScene().getWindow();
+                    Stage stage = (Stage) loginFormContext.getScene().getWindow();
                     stage.close();
                     URL resource = getClass().getResource("../view/Admin_Main_Form.fxml");
                     Parent load = FXMLLoader.load(resource);
                     Scene scene = new Scene(load);
-                    Stage stage1= new Stage();
+                    Stage stage1 = new Stage();
                     stage1.setScene(scene);
                     stage1.centerOnScreen();
                     stage1.show();
@@ -55,9 +55,10 @@ public class LoginFormController {
                 pwdPassword.setVisible(false);
             }
 
-        }else{}
+        } else {
+        }
 
-        if(adminBtn.getText().equals("LOG IN CASHIER")) {
+        if (adminBtn.getText().equals("LOG IN CASHIER")) {
 
             attemptsLogCashier++;
             if (attemptsLogCashier < 5) {       // attempts calculate
@@ -79,13 +80,14 @@ public class LoginFormController {
                 pwdPassword.setVisible(false);
             }
 
-        }else{}
+        } else {
+        }
 
     }
 
     public void LogInCashierOnAction(ActionEvent actionEvent) throws IOException {
         // cashier button catch that name and set admin get text
-        String temp =adminBtn.getText();
+        String temp = adminBtn.getText();
         adminBtn.setText(cashierBtn.getText());
         cashierBtn.setText(temp);
 

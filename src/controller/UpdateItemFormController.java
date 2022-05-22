@@ -3,13 +3,13 @@ package controller;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.ItemDAOImpl;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import model.ItemDTO;
 import util.Utilities;
+
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,12 +23,12 @@ public class UpdateItemFormController {
     public JFXComboBox<String> cmbItemCode;
     public AnchorPane updateItemContext;
 
-    public void initialize(){
+    public void initialize() {
 
         try {
             loadAllItemCode();
 
-        } catch (SQLException |ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -40,7 +40,7 @@ public class UpdateItemFormController {
     private void setItemData(String itemCode) {
         try {
 
-            String code =cmbItemCode.getValue();
+            String code = cmbItemCode.getValue();
 
             ItemDAOImpl itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
@@ -66,8 +66,8 @@ public class UpdateItemFormController {
     }
 
     public void ConfirmUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        ItemDTO dto= new ItemDTO((String) cmbItemCode.getValue(),txtDescription.getText(),txtPackSize.getText(),
-                Double.parseDouble(txtUnitPrice.getText()),Integer.parseInt(txtQTYOnHand.getText()));
+        ItemDTO dto = new ItemDTO((String) cmbItemCode.getValue(), txtDescription.getText(), txtPackSize.getText(),
+                Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQTYOnHand.getText()));
 
         try {
             ItemDAOImpl itemDAO = new ItemDAOImpl();
@@ -85,6 +85,7 @@ public class UpdateItemFormController {
         clear();
 
     }
+
     public void clear() throws SQLException, ClassNotFoundException {
         cmbItemCode.setItems(null);
         txtDescription.clear();
@@ -96,6 +97,6 @@ public class UpdateItemFormController {
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(updateItemContext,"ItemControllerForm");
+        Utilities.setUiChildren(updateItemContext, "ItemControllerForm");
     }
 }

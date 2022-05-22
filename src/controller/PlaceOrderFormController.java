@@ -54,7 +54,8 @@ public class PlaceOrderFormController {
     public Label lblTotal;
 
     int cartSelectedRowCountForDelete = -1;
-    public void initialize(){
+
+    public void initialize() {
 
         colItemID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -112,28 +113,29 @@ public class PlaceOrderFormController {
 
     private void setCustomerData(String customerID) throws SQLException, ClassNotFoundException {
 
-            ResultSet result = CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", customerID);
-            if (result.next()) {
-                txtName.setText(result.getString(3));
-                txtaddress.setText(result.getString(4));
-                txtCity.setText(result.getString(5));
+        ResultSet result = CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", customerID);
+        if (result.next()) {
+            txtName.setText(result.getString(3));
+            txtaddress.setText(result.getString(4));
+            txtCity.setText(result.getString(5));
 
-            }
+        }
     }
 
 
     private void loadItemIds() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
-        ObservableList<String> codes= FXCollections.observableArrayList();
+        ObservableList<String> codes = FXCollections.observableArrayList();
 
         while (rst.next()) {
-            codes.add(rst.getString(1)); ;
+            codes.add(rst.getString(1));
+            ;
         }
         cmbItemID.setItems(codes);
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
-        ObservableList<String> ids= FXCollections.observableArrayList();
+        ObservableList<String> ids = FXCollections.observableArrayList();
         ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
         while (rst.next()) {
             ids.add(rst.getString(1));
@@ -158,6 +160,7 @@ public class PlaceOrderFormController {
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
     }
+
     public void autoId() {
         try {
             ResultSet result = CrudUtil.execute("SELECT OrderID FROM `Order` ORDER BY OrderID DESC LIMIT 1");
@@ -183,11 +186,10 @@ public class PlaceOrderFormController {
     }
 
 
-
     public void clearOnAction(ActionEvent actionEvent) {
-        if (cartSelectedRowCountForDelete==-1){
+        if (cartSelectedRowCountForDelete == -1) {
             new Alert(Alert.AlertType.WARNING, "Please Select a row").show();
-        }else{
+        } else {
             list.remove(cartSelectedRowCountForDelete);
 
             calculateCost();
@@ -195,9 +197,9 @@ public class PlaceOrderFormController {
         }
     }
 
-    private int isExists(CartTM tm){
+    private int isExists(CartTM tm) {
         for (int i = 0; i < list.size(); i++) {
-            if (tm.getItemCode().equals(list.get(i).getItemCode())){
+            if (tm.getItemCode().equals(list.get(i).getItemCode())) {
                 return i;
             }
         }
@@ -205,42 +207,42 @@ public class PlaceOrderFormController {
     }
 
 
+    ObservableList<CartTM> list = FXCollections.observableArrayList();
 
-    ObservableList<CartTM> list=FXCollections.observableArrayList();
     public void addToCartOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
-        if(!txtQTY.getText().equals("") && !txtDiscount.getText().equals("")){
+        if (!txtQTY.getText().equals("") && !txtDiscount.getText().equals("")) {
 
             String discription = txtDiscription.getText();
             int qtyOnHand = Integer.parseInt(txtQTYOnHand.getText());
             double unitPrice = Double.parseDouble(txtUnitPrice.getText());
             int qtyForCustomer = Integer.parseInt(txtQTY.getText());
-            double discount= Double.parseDouble(txtDiscount.getText());
+            double discount = Double.parseDouble(txtDiscount.getText());
 
-            double calTot=(unitPrice*qtyForCustomer);
-            Double total=calTot-((calTot/100)*discount);
+            double calTot = (unitPrice * qtyForCustomer);
+            Double total = calTot - ((calTot / 100) * discount);
 
 
-            if (qtyOnHand<qtyForCustomer){
-                new Alert(Alert.AlertType.WARNING,"Invalid QTY").show();
+            if (qtyOnHand < qtyForCustomer) {
+                new Alert(Alert.AlertType.WARNING, "Invalid QTY").show();
                 return;
             }
 
-            CartTM tm= new CartTM(cmbItemID.getValue(),discription,qtyForCustomer,unitPrice,discount,total);
+            CartTM tm = new CartTM(cmbItemID.getValue(), discription, qtyForCustomer, unitPrice, discount, total);
 
-            int numberOfRow=isExists(tm);
+            int numberOfRow = isExists(tm);
 
-            if(numberOfRow==-1){
+            if (numberOfRow == -1) {
                 list.add(tm);
-            }else{
+            } else {
                 CartTM temp = list.get(numberOfRow);
                 CartTM newTm = new CartTM(
                         temp.getItemCode(),
                         temp.getDescription(),
-                        temp.getQTY()+qtyForCustomer,
+                        temp.getQTY() + qtyForCustomer,
                         unitPrice,
                         discount,
-                        total+temp.getTotal()
+                        total + temp.getTotal()
                 );
                 list.remove(numberOfRow);
                 list.add(newTm);
@@ -250,27 +252,26 @@ public class PlaceOrderFormController {
             calculateCost();
 
 
-
-
-        }else{
-            new Alert(Alert.AlertType.WARNING,"Something went Wrong. Check Fields... ").show();
+        } else {
+            new Alert(Alert.AlertType.WARNING, "Something went Wrong. Check Fields... ").show();
         }
 
     }
+
     private boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty,itemCode);
+        return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
     }
 
     private void quntityChange() {
         int value = Integer.parseInt(txtQTYOnHand.getText());
-        if(!txtQTY.getText().equals("") & (value>0) ){
+        if (!txtQTY.getText().equals("") & (value > 0)) {
             int q = Integer.parseInt(txtQTY.getText());
             int q2 = Integer.parseInt(txtQTYOnHand.getText());
-            int result= q2 - q;
+            int result = q2 - q;
 
-            if(result<=0){
-                new Alert(Alert.AlertType.WARNING,"Out Of Stock...!").show();
-            }else {
+            if (result <= 0) {
+                new Alert(Alert.AlertType.WARNING, "Out Of Stock...!").show();
+            } else {
                 txtQTYOnHand.setText(String.valueOf(result));
             }
 
@@ -279,11 +280,11 @@ public class PlaceOrderFormController {
 
 
     private void calculateCost() {
-        double total=0;
+        double total = 0;
         for (CartTM tm : list) {
-            total+= tm.getTotal();
+            total += tm.getTotal();
         }
-        lblTotal.setText(total+" /=");
+        lblTotal.setText(total + " /=");
     }
 
 
@@ -308,7 +309,7 @@ public class PlaceOrderFormController {
                     )
             );
         }
-        Connection connection  = null;
+        Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
             connection.setAutoCommit(false);
@@ -326,7 +327,7 @@ public class PlaceOrderFormController {
                     isDetailsSaved = CrudUtil.execute("INSERT INTO `Order Details` VALUES(?,?,?,?,?)",
                             detail.getOrderID(), detail.getItemCode(), detail.getOrderQTY(), detail.getDiscount(), detail.getTotal());
 
-                    updateQty(detail.getItemCode(),detail.getOrderQTY());
+                    updateQty(detail.getItemCode(), detail.getOrderQTY());
                 }
 
                 if (isDetailsSaved) {
@@ -336,11 +337,11 @@ public class PlaceOrderFormController {
                     connection.rollback();
                     new Alert(Alert.AlertType.ERROR, "Error...!").show();
                 }
-            }else {
+            } else {
                 new Alert(Alert.AlertType.ERROR, "Error...!").show();
             }
-        }catch (SQLException | ClassNotFoundException e){
-        }finally {
+        } catch (SQLException | ClassNotFoundException e) {
+        } finally {
             connection.setAutoCommit(true);
         }
         autoId();
@@ -355,6 +356,6 @@ public class PlaceOrderFormController {
         txtDiscription.clear();
         txtQTYOnHand.clear();
         txtUnitPrice.clear();
-         txtDiscount.clear();
+        txtDiscount.clear();
     }
 }

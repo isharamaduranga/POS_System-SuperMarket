@@ -6,11 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import model.ItemDTO;
-import util.CrudUtil;
 import util.Utilities;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddNewItemFormController {

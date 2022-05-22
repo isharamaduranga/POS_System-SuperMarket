@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import model.CustomerDTO;
 import java.sql.SQLException;
 
-public class AddNewCustomerFormController {
+public class  AddNewCustomerFormController {
 
     public JFXTextField txtID;
     public JFXTextField txtTitle;
@@ -37,10 +37,10 @@ public class AddNewCustomerFormController {
         String province = txtProvince.getText();
         String postalCode = txtPostCode.getText();
 
-        CustomerDTO dto=new CustomerDTO(txtID.getText(),txtTitle.getText(),txtName.getText(),txtAddress.getText(),
-                txtCity.getText(),txtProvince.getText(),txtPostCode.getText());
+        CustomerDTO dto = new CustomerDTO(txtID.getText(), txtTitle.getText(), txtName.getText(), txtAddress.getText(),
+                txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
 
-        if (!title.equals("") && !name.equals("")&&!address.equals("")&&!city.equals("")&&!province.equals("")&&!postalCode.equals("")) {
+        if (!title.equals("") && !name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postalCode.equals("")) {
             try {
 
                 CustomerDAOImpl customerDAO = new CustomerDAOImpl();
@@ -57,11 +57,12 @@ public class AddNewCustomerFormController {
                 new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
             }
             clear();
-        }else {
+        } else {
             new Alert(Alert.AlertType.WARNING, "something went wrong Please Check Fields... !!!").show();
         }
     }
-    public void clear(){
+
+    public void clear() {
         txtID.clear();
         txtTitle.clear();
         txtName.clear();

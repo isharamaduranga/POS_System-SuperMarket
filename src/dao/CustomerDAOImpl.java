@@ -9,40 +9,46 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl {
+public class CustomerDAOImpl implements CustomerDAO {
 
+    @Override
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
-        ArrayList<CustomerDTO> allCustomer= new ArrayList<>();
+        ArrayList<CustomerDTO> allCustomer = new ArrayList<>();
         while (rst.next()) {
 
-            allCustomer.add(new CustomerDTO(rst.getString(1),rst.getString(2),
-                    rst.getString(3),rst.getString(4),rst.getString(5),
-                    rst.getString(6),rst.getString(7) ));
+            allCustomer.add(new CustomerDTO(rst.getString(1), rst.getString(2),
+                    rst.getString(3), rst.getString(4), rst.getString(5),
+                    rst.getString(6), rst.getString(7)));
 
         }
         return allCustomer;
     }
 
-    public boolean saveCustomer(CustomerDTO dto)throws SQLException, ClassNotFoundException{
+    @Override
+    public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO Customer (CusID,CusTitle,CusName,CusAddress,City,Povince,PostCode) VALUES (?,?,?,?,?,?,?)",
                 dto.getCusID(), dto.getCusTitle(), dto.getCusName(), dto.getCusAddress(), dto.getCity(), dto.getProvince(), dto.getPostCode());
 
     }
 
+    @Override
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-      return CrudUtil.execute("UPDATE customer SET CusTitle=?,CusName=?,CusAddress=?,City=?,Povince=?,PostCode=? WHERE CusID=?",
+        return CrudUtil.execute("UPDATE customer SET CusTitle=?,CusName=?,CusAddress=?,City=?,Povince=?,PostCode=? WHERE CusID=?",
                 dto.getCusTitle(), dto.getCusName(), dto.getCusAddress(), dto.getCity(), dto.getProvince(), dto.getPostCode(), dto.getCusID());
     }
 
+    @Override
     public ResultSet searchCustomer(String id) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", id);
     }
 
+    @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("DELETE FROM Customer WHERE CusID=?",id);
+        return CrudUtil.execute("DELETE FROM Customer WHERE CusID=?", id);
     }
 
+    @Override
     public ObservableList<String> getCustomerIds() throws SQLException, ClassNotFoundException {
         ObservableList<String> ids = FXCollections.observableArrayList();
         ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
@@ -52,6 +58,7 @@ public class CustomerDAOImpl {
         return ids;
     }
 
+    @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
         ResultSet result = CrudUtil.execute("SELECT CusID FROM Customer ORDER BY CusID DESC LIMIT 1");
 
@@ -66,7 +73,7 @@ public class CustomerDAOImpl {
             n++;
             String snum = Integer.toString(n);
             String newID = txt + snum;
-              return newID;
+            return newID;
         } else {
             return "CI1000";
         }

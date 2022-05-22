@@ -25,7 +25,7 @@ public class UpdateCustomerFormController {
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
-            String cusId=txtCustomerID.getText();
+            String cusId = txtCustomerID.getText();
 
             CustomerDAOImpl customerDAO = new CustomerDAOImpl();
 

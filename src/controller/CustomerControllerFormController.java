@@ -1,6 +1,5 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
@@ -8,12 +7,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.CustomerDTO;
-import util.CrudUtil;
 import util.Utilities;
 import view.TM.CustomerTM;
-
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -29,8 +25,7 @@ public class CustomerControllerFormController {
     public TableColumn colPostCode;
 
 
-
-    public void initialize(){
+    public void initialize() {
 
         colID.setCellValueFactory(new PropertyValueFactory<>("cusID"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("cusTitle"));
@@ -41,7 +36,7 @@ public class CustomerControllerFormController {
         colPostCode.setCellValueFactory(new PropertyValueFactory<>("postCode"));
 
 
-            loadAllCustomers();
+        loadAllCustomers();
     }
 
 
@@ -66,18 +61,18 @@ public class CustomerControllerFormController {
     }
 
     public void addCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(CustomerContext,"AddNewCustomerForm");
+        Utilities.setUiChildren(CustomerContext, "AddNewCustomerForm");
     }
 
     public void editCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(CustomerContext,"UpdateCustomerForm");
+        Utilities.setUiChildren(CustomerContext, "UpdateCustomerForm");
     }
 
     public void searchCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(CustomerContext,"SearchCustomerForm");
+        Utilities.setUiChildren(CustomerContext, "SearchCustomerForm");
     }
 
     public void removeCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(CustomerContext,"DeleteCustomerForm");
+        Utilities.setUiChildren(CustomerContext, "DeleteCustomerForm");
     }
 }

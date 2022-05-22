@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXTextField;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
-import util.CrudUtil;
 import util.Utilities;
 
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class SearchItemFormController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
-            String code =txtCode.getText();
+            String code = txtCode.getText();
 
             ItemDAOImpl itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
@@ -39,6 +38,6 @@ public class SearchItemFormController {
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(searchItemContext,"ItemControllerForm");
+        Utilities.setUiChildren(searchItemContext, "ItemControllerForm");
     }
 }

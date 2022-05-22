@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.Utilities;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -51,7 +50,7 @@ public class CashierMainFormController {
 
     public void ViewOrderDetailsOnAction(ActionEvent actionEvent) throws IOException {
 
-        Utilities.leftTransition("OrderAndOrderDetailsTableForm",btnDetailsMenu,dashBoardContext);
+        Utilities.leftTransition("OrderAndOrderDetailsTableForm", btnDetailsMenu, dashBoardContext);
 
     }
 

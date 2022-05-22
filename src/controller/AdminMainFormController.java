@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.Utilities;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -34,7 +35,7 @@ public class AdminMainFormController {
     public Label lblCustomers;
     public Label lblItems;
 
-    public void initialize(){
+    public void initialize() {
         curDateTime();
 
     }
@@ -42,11 +43,11 @@ public class AdminMainFormController {
     private void curDateTime() {
         lblDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
-        Timeline clock=new Timeline(new KeyFrame(Duration.ZERO, event -> {
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, event -> {
 
             LocalTime currentTime = LocalTime.now();
 
-            lblTime.setText(currentTime.getHour()+":"+currentTime.getMinute()+":"+currentTime.getSecond());
+            lblTime.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
 
             lblDay.setText(LocalDate.now().getDayOfWeek().toString());
         }),
@@ -58,29 +59,29 @@ public class AdminMainFormController {
     }
 
     public void dashBoardOnAction(ActionEvent actionEvent) throws IOException {
-        Stage stage=(Stage) dashBoardContext.getScene().getWindow();
+        Stage stage = (Stage) dashBoardContext.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/Admin_Main_Form.fxml"))));
     }
 
     public void manageItemsOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(dashBoardContext,"ItemControllerForm");
+        Utilities.setUiChildren(dashBoardContext, "ItemControllerForm");
     }
 
     public void manageCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(dashBoardContext,"CustomerControllerForm");
+        Utilities.setUiChildren(dashBoardContext, "CustomerControllerForm");
     }
 
     public void customerListOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.leftTransition("CustomerControllerForm",btnCustomerMenu,dashBoardContext);
+        Utilities.leftTransition("CustomerControllerForm", btnCustomerMenu, dashBoardContext);
     }
 
     public void ItemListOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.leftTransition("ItemControllerForm",btnItemMenu,dashBoardContext);
+        Utilities.leftTransition("ItemControllerForm", btnItemMenu, dashBoardContext);
     }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
         Utilities.close(dashBoardContext);
-        Utilities.setUiNew("Login_Form","Log In Form");
+        Utilities.setUiNew("Login_Form", "Log In Form");
     }
 
     public void logOutOnAction(ActionEvent actionEvent) {

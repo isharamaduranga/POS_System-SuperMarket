@@ -5,10 +5,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.CustomerDTO;
-import util.CrudUtil;
 import view.TM.CustomerTM;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ public class CustomerTableForCashierFormController {
     public TableColumn colProvince;
     public TableColumn colPostCode;
 
-    public void initialize(){
+    public void initialize() {
         colID.setCellValueFactory(new PropertyValueFactory<>("cusID"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("cusTitle"));
         colName.setCellValueFactory(new PropertyValueFactory<>("cusName"));

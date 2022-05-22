@@ -22,7 +22,7 @@ public class DeleteItemFormController {
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {
-            String code=txtCode.getText();
+            String code = txtCode.getText();
 
             ItemDAOImpl itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
@@ -46,7 +46,7 @@ public class DeleteItemFormController {
     public void DeleteCustomerOnAction(ActionEvent actionEvent) {
 
         try {
-            String code=txtCode.getText();
+            String code = txtCode.getText();
 
             ItemDAOImpl itemDAO = new ItemDAOImpl();
 
