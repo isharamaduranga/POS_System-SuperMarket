@@ -2,6 +2,14 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.input.KeyEvent;
+import model.CustomerDTO;
+import model.OrderDetailsDTO;
+import util.CrudUtil;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UpdateOrderFormController {
 
@@ -10,10 +18,50 @@ public class UpdateOrderFormController {
     public JFXTextField txtOrderQty;
     public JFXTextField txtDiscount;
 
-    public void searchOrderDetaisOnAction(ActionEvent actionEvent) {
-    }
 
     public void UpdateComfirmOnAction(ActionEvent actionEvent) {
+        OrderDetailsDTO dto = new OrderDetailsDTO(txtOrderID.getText(),txtItemCode.getText(),Integer.parseInt(txtOrderQty.getText()),
+                Double.parseDouble(txtDiscount.getText()));
 
+        try {
+            if (CrudUtil.execute("UPDATE `Order Details` SET  Orderqty=?, Discount=?,Price=? WHERE OrderID=?",
+                    dto.getOrderQTY(), dto.getDiscount(), dto.getTotal(), dto.getOrderID())) {
+
+                new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
+
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Try Again").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        txtOrderID.clear();
+        clear();
+    }
+
+
+    public void searchOrderDetaisOnAction(KeyEvent keyEvent) {
+        try {
+            ResultSet result = CrudUtil.execute("SELECT * FROM `Order Details` WHERE OrderID=?",txtOrderID.getText());
+            if (result.next()) {
+
+                txtItemCode.setText(result.getString(2));
+                txtOrderQty.setText(String.valueOf(result.getInt(3)));
+                txtDiscount.setText(String.valueOf(result.getDouble(4)));
+
+
+            } else {
+                 clear();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clear(){
+
+        txtItemCode.clear();
+        txtDiscount.clear();
+        txtOrderQty.clear();
     }
 }

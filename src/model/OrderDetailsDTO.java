@@ -18,6 +18,13 @@ public class OrderDetailsDTO {
         this.total = total;
     }
 
+    public OrderDetailsDTO(String orderID, String itemCode, int orderQTY, double discount) {
+        this.orderID = orderID;
+        this.itemCode = itemCode;
+        this.orderQTY = orderQTY;
+        this.discount = discount;
+    }
+
     public String getOrderID() {
         return orderID;
     }

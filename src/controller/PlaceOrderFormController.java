@@ -303,7 +303,7 @@ public class PlaceOrderFormController {
                             s,
                             tm.getItemCode(),
                             tm.getQTY(),
-                            tm.getUnitPrice(),
+                            tm.getDiscount(),
                             tm.getTotal()
                     )
             );
@@ -355,7 +355,6 @@ public class PlaceOrderFormController {
         txtDiscription.clear();
         txtQTYOnHand.clear();
         txtUnitPrice.clear();
-        int dis=0;
-        txtDiscount.setText(String.valueOf(dis));
+         txtDiscount.clear();
     }
 }
