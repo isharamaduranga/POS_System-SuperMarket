@@ -2,20 +2,18 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import model.ItemDTO;
-import util.CrudUtil;
 import util.Utilities;
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class UpdateItemFormController {
     public JFXTextField txtDescription;
@@ -42,12 +40,16 @@ public class UpdateItemFormController {
     private void setItemData(String itemCode) {
         try {
 
-            ResultSet result = CrudUtil.execute("SELECT * FROM Item WHERE ItemCode=?",itemCode);
+            String code =cmbItemCode.getValue();
+
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ResultSet result = itemDAO.searchItem(code);
+
             if (result.next()) {
                 txtDescription.setText(result.getString(2));
                 txtPackSize.setText(result.getString(3));
-                txtUnitPrice.setText(result.getString(4));
-                txtQTYOnHand.setText(result.getString(5));
+                txtUnitPrice.setText(String.valueOf(result.getDouble(4)));
+                txtQTYOnHand.setText(String.valueOf(result.getInt(5)));
 
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -56,13 +58,11 @@ public class UpdateItemFormController {
     }
 
     private void loadAllItemCode() throws SQLException, ClassNotFoundException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
-        ObservableList<String> codes= FXCollections.observableArrayList();
 
-        while (rst.next()) {
-           codes.add(rst.getString(1)); ;
-        }
-        cmbItemCode.setItems(codes);
+        ItemDAOImpl itemDAO = new ItemDAOImpl();
+        ObservableList<String> itemsCode = itemDAO.getItemsCode();
+        cmbItemCode.setItems(itemsCode);
+
     }
 
     public void ConfirmUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -70,8 +70,9 @@ public class UpdateItemFormController {
                 Double.parseDouble(txtUnitPrice.getText()),Integer.parseInt(txtQTYOnHand.getText()));
 
         try {
-            if (CrudUtil.execute("UPDATE Item SET Description=?,PackSize=?,UnitPrice=?,QtyOnHand=? WHERE ItemCode=?",
-                    dto.getItemDescription(), dto.getPackSize(), dto.getUnitPrice(), dto.getQtyOnHand(), dto.getItemID())) {
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+
+            if (itemDAO.updateItem(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 

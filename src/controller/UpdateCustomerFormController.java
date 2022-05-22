@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.CustomerDTO;
-import util.CrudUtil;
 import util.Utilities;
 
 import java.io.IOException;

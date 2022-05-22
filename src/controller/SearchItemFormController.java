@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import util.CrudUtil;
@@ -20,13 +21,16 @@ public class SearchItemFormController {
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
+            String code =txtCode.getText();
 
-            ResultSet result = CrudUtil.execute("SELECT * FROM Item WHERE ItemCode=?",txtCode.getText());
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ResultSet result = itemDAO.searchItem(code);
+
             if (result.next()) {
                 txtDescription.setText(result.getString(2));
                 txtPackSize.setText(result.getString(3));
-                txtUnitPrice.setText(result.getString(4));
-                txtQtyOnHand.setText(result.getString(5));
+                txtUnitPrice.setText(String.valueOf(result.getDouble(4)));
+                txtQtyOnHand.setText(String.valueOf(result.getInt(5)));
 
             }
         } catch (SQLException | ClassNotFoundException e) {

@@ -1,11 +1,11 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import util.CrudUtil;
 import util.Utilities;
 
 import java.io.IOException;
@@ -22,7 +22,11 @@ public class DeleteItemFormController {
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {
-            ResultSet result = CrudUtil.execute("SELECT * FROM Item WHERE ItemCode=?", txtCode.getText());
+            String code=txtCode.getText();
+
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ResultSet result = itemDAO.searchItem(code);
+
             if (result.next()) {
 
                 txtDescription.setText(result.getString(2));
@@ -42,8 +46,11 @@ public class DeleteItemFormController {
     public void DeleteCustomerOnAction(ActionEvent actionEvent) {
 
         try {
+            String code=txtCode.getText();
 
-            if (CrudUtil.execute("DELETE FROM Item WHERE ItemCode=?", txtCode.getText())) {
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+
+            if (itemDAO.deleteItem(code)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();
@@ -61,9 +68,7 @@ public class DeleteItemFormController {
         txtPackSize.clear();
         txtUnitPrice.clear();
         txtQtyOnHand.clear();
-
     }
-
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
         Utilities.setUiChildren(deleteItemContext, "ItemControllerForm");

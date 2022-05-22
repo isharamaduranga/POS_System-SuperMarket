@@ -71,7 +71,7 @@
             </JFXButton>
          </children>
       </HBox>
-      <TableView fx:id="tblItem" layoutX="20.0" layoutY="190.0" prefHeight="483.0" prefWidth="894.0">
+      <TableView fx:id="tblItem" layoutX="20.0" layoutY="190.0" prefHeight="483.0" prefWidth="894.0" stylesheets="@../DarkTheme.css">
          <columns>
             <TableColumn fx:id="colCode" prefWidth="163.0" text="Code" />
             <TableColumn fx:id="colDescription" prefWidth="206.0" text="Discription" />

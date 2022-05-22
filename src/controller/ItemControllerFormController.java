@@ -1,17 +1,18 @@
 package controller;
 
+import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import util.CrudUtil;
+import model.ItemDTO;
 import util.Utilities;
 import view.TM.ItemTM;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ItemControllerFormController {
 
@@ -23,7 +24,7 @@ public class ItemControllerFormController {
     public TableColumn colUnitPrice;
     public TableColumn colQtyOnHand;
 
-    public void initialize(){
+    public void initialize() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("itemID"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));
         colPackSize.setCellValueFactory(new PropertyValueFactory<>("packSize"));
@@ -35,17 +36,19 @@ public class ItemControllerFormController {
 
     private void loadAllItems() {
         try {
-            ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ArrayList<ItemDTO> allItems = itemDAO.getAllItems();
 
-            while (rst.next()) {
+            for (ItemDTO item : allItems) {
                 tblItem.getItems().add(new ItemTM(
-                        rst.getString("ItemCode"),
-                        rst.getString("Description"),
-                        rst.getString("PackSize"),
-                        rst.getDouble("UnitPrice"),
-                        rst.getInt("QtyOnHand")
+                        item.getItemID(),
+                        item.getItemDescription(),
+                        item.getPackSize(),
+                        item.getUnitPrice(),
+                        item.getQtyOnHand()
                 ));
             }
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -53,18 +56,18 @@ public class ItemControllerFormController {
     }
 
     public void addItemOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(ItemContext,"AddNewItemForm");
+        Utilities.setUiChildren(ItemContext, "AddNewItemForm");
     }
 
     public void updateItemOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(ItemContext,"UpdateItemForm");
+        Utilities.setUiChildren(ItemContext, "UpdateItemForm");
     }
 
     public void searchItemOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(ItemContext,"SearchItemForm");
+        Utilities.setUiChildren(ItemContext, "SearchItemForm");
     }
 
     public void deleteItemOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(ItemContext,"DeleteItemForm");
+        Utilities.setUiChildren(ItemContext, "DeleteItemForm");
     }
 }

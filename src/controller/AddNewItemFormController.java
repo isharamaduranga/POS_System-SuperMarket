@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
@@ -32,61 +33,46 @@ public class AddNewItemFormController {
         String code = txtCode.getText();
         String description = txtDescription.getText();
         String size = txtPackSize.getText();
-        double price= Double.parseDouble(txtUnitPrice.getText());
-        int qty= Integer.parseInt(txtQtyOnHand.getText());
+        double price = Double.parseDouble(txtUnitPrice.getText());
+        int qty = Integer.parseInt(txtQtyOnHand.getText());
 
 
         ItemDTO dto = new ItemDTO(
                 txtCode.getText(), txtDescription.getText(), txtPackSize.getText(),
                 Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText())
         );
+        try {
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+
+            if (itemDAO.saveItem(dto)) {
 
 
+                new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
-                    try {
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Item Already exists !!!").show();
+            }
 
-                        if (CrudUtil.execute("INSERT INTO Item (ItemCode,Description,PackSize,UnitPrice,QtyOnHand) VALUES (?,?,?,?,?)",
-                                dto.getItemID(), dto.getItemDescription(), dto.getPackSize(), dto.getUnitPrice(), dto.getQtyOnHand())) {
-
-
-                            new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
-
-                        } else {
-                            new Alert(Alert.AlertType.WARNING, "Item Already exists !!!").show();
-                        }
-
-                    } catch (SQLException | ClassNotFoundException e) {
-                        new Alert(Alert.AlertType.ERROR, "Failed to save the Item " + e.getMessage()).show();
-                    }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to save the Item " + e.getMessage()).show();
+        }
 
 
-                    clear();
+        clear();
     }
+
     public void autoId() {
         try {
-            ResultSet result = CrudUtil.execute("SELECT ItemCode FROM Item ORDER BY ItemCode DESC LIMIT 1");
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            String s = itemDAO.generateNewId();
+            txtCode.setText(s);
 
-            if (result.next()) {
-
-                String rnno = result.getString("ItemCode");
-                int co = rnno.length();
-                String txt = rnno.substring(0, 2);//mul deka  (II)
-                String num = rnno.substring(2, co);//aga deaka (1000)
-
-                int n = Integer.parseInt(num);
-                n++;
-                String snum = Integer.toString(n);
-                String ftxt = txt + snum;
-                txtCode.setText(ftxt);
-            } else {
-                txtCode.setText("II1000");
-            }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void clear(){
+    public void clear() {
         txtCode.clear();
         txtDescription.clear();
         txtPackSize.clear();

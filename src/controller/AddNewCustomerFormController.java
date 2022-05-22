@@ -1,15 +1,12 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
+
 import com.jfoenix.controls.JFXTextField;
 import dao.CustomerDAOImpl;
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import model.CustomerDTO;
-import util.CrudUtil;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddNewCustomerFormController {
@@ -61,7 +58,7 @@ public class AddNewCustomerFormController {
             }
             clear();
         }else {
-            new Alert(Alert.AlertType.WARNING, "something went wrong !!!").show();
+            new Alert(Alert.AlertType.WARNING, "something went wrong Please Check Fields... !!!").show();
         }
     }
     public void clear(){
@@ -77,23 +74,11 @@ public class AddNewCustomerFormController {
 
     public void autoId() {
         try {
-            ResultSet result = CrudUtil.execute("SELECT CusID FROM Customer ORDER BY CusID DESC LIMIT 1");
 
-            if (result.next()) {
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            String s = customerDAO.generateNewId();
+            txtID.setText(s);
 
-                String rnno = result.getString("CusID");
-                int co = rnno.length();
-                String txt = rnno.substring(0, 2);//mul deka  (CI)
-                String num = rnno.substring(2, co);//aga deaka (1000)
-
-                int n = Integer.parseInt(num);
-                n++;
-                String snum = Integer.toString(n);
-                String ftxt = txt + snum;
-                txtID.setText(ftxt);
-            } else {
-                txtID.setText("CI1000");
-            }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

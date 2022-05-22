@@ -51,4 +51,24 @@ public class CustomerDAOImpl {
         }
         return ids;
     }
+
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        ResultSet result = CrudUtil.execute("SELECT CusID FROM Customer ORDER BY CusID DESC LIMIT 1");
+
+        if (result.next()) {
+
+            String rnno = result.getString("CusID");
+            int co = rnno.length();
+            String txt = rnno.substring(0, 2);//mul deka  (CI)
+            String num = rnno.substring(2, co);//aga deaka (1000)
+
+            int n = Integer.parseInt(num);
+            n++;
+            String snum = Integer.toString(n);
+            String newID = txt + snum;
+              return newID;
+        } else {
+            return "CI1000";
+        }
+    }
 }
