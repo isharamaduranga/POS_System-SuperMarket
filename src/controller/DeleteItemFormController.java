@@ -21,11 +21,15 @@ public class DeleteItemFormController {
     public JFXTextField txtQtyOnHand;
     public AnchorPane deleteItemContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private ItemDAO itemDAO = new ItemDAOImpl();
+
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {
             String code = txtCode.getText();
 
-            ItemDAO itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
 
             if (result.next()) {
@@ -48,8 +52,6 @@ public class DeleteItemFormController {
 
         try {
             String code = txtCode.getText();
-
-            ItemDAO itemDAO = new ItemDAOImpl();
 
             if (itemDAO.deleteItem(code)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();

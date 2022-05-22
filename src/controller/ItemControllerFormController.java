@@ -10,9 +10,11 @@ import javafx.scene.layout.AnchorPane;
 import model.ItemDTO;
 import util.Utilities;
 import view.TM.ItemTM;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 public class ItemControllerFormController {
 
     public AnchorPane ItemContext;
@@ -22,6 +24,12 @@ public class ItemControllerFormController {
     public TableColumn colPackSize;
     public TableColumn colUnitPrice;
     public TableColumn colQtyOnHand;
+
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private ItemDAO itemDAO = new ItemDAOImpl();
+
 
     public void initialize() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("itemID"));
@@ -35,7 +43,6 @@ public class ItemControllerFormController {
 
     private void loadAllItems() {
         try {
-            ItemDAO itemDAO = new ItemDAOImpl();
             ArrayList<ItemDTO> allItems = itemDAO.getAllItems();
 
             for (ItemDTO item : allItems) {

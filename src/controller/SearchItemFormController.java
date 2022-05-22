@@ -19,11 +19,16 @@ public class SearchItemFormController {
     public JFXTextField txtCode;
     public AnchorPane searchItemContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private ItemDAO itemDAO = new ItemDAOImpl();
+
+
     public void searchOnAction(ActionEvent actionEvent) {
         try {
             String code = txtCode.getText();
 
-            ItemDAO itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
 
             if (result.next()) {

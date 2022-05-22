@@ -20,6 +20,10 @@ public class AddNewItemFormController {
     public JFXTextField txtUnitPrice;
     public JFXTextField txtQtyOnHand;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private ItemDAO itemDAO = new ItemDAOImpl();
 
     public void initialize() {
         autoId();
@@ -41,10 +45,8 @@ public class AddNewItemFormController {
                 Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText())
         );
         try {
-            ItemDAO itemDAO = new ItemDAOImpl();
 
             if (itemDAO.saveItem(dto)) {
-
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
@@ -62,7 +64,6 @@ public class AddNewItemFormController {
 
     public void autoId() {
         try {
-            ItemDAO itemDAO = new ItemDAOImpl();
             String s = itemDAO.generateNewId();
             txtCode.setText(s);
 

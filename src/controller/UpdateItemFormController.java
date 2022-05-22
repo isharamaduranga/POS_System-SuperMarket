@@ -24,6 +24,12 @@ public class UpdateItemFormController {
     public JFXComboBox<String> cmbItemCode;
     public AnchorPane updateItemContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private ItemDAO itemDAO = new ItemDAOImpl();
+
+
     public void initialize() {
 
         try {
@@ -43,7 +49,6 @@ public class UpdateItemFormController {
 
             String code = cmbItemCode.getValue();
 
-            ItemDAO itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
 
             if (result.next()) {
@@ -60,7 +65,6 @@ public class UpdateItemFormController {
 
     private void loadAllItemCode() throws SQLException, ClassNotFoundException {
 
-        ItemDAO itemDAO = new ItemDAOImpl();
         ObservableList<String> itemsCode = itemDAO.getItemsCode();
         cmbItemCode.setItems(itemsCode);
 
@@ -71,7 +75,6 @@ public class UpdateItemFormController {
                 Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQTYOnHand.getText()));
 
         try {
-            ItemDAO itemDAO = new ItemDAOImpl();
 
             if (itemDAO.updateItem(dto)) {
 
