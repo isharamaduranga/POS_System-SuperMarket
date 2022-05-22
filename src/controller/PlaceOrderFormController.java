@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,13 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import model.OrderDTO;
+import model.OrderDetailsDTO;
 import util.CrudUtil;
 import view.TM.CartTM;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,7 +78,6 @@ public class PlaceOrderFormController {
 
             try {
                 setCustomerData(newValue);
-
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -91,7 +93,9 @@ public class PlaceOrderFormController {
             }
 
         });
-
+        tblCart.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            cartSelectedRowCountForDelete = (int) newValue;
+        });
 
 
     }
@@ -178,24 +182,14 @@ public class PlaceOrderFormController {
         }
     }
 
-    public void fieldClear(){
-        cmbCustomerID.getSelectionModel().clearSelection();
-        txtName.clear();
-        txtaddress.clear();
-        txtCity.clear();
-        cmbItemID.getSelectionModel().clearSelection();
-        txtDiscription.clear();
-        txtQTYOnHand.clear();
-        txtUnitPrice.clear();
-        txtQTY.clear();
-        txtDiscount.clear();
-    }
+
 
     public void clearOnAction(ActionEvent actionEvent) {
         if (cartSelectedRowCountForDelete==-1){
             new Alert(Alert.AlertType.WARNING, "Please Select a row").show();
         }else{
             list.remove(cartSelectedRowCountForDelete);
+
             calculateCost();
             tblCart.refresh();
         }
@@ -211,8 +205,9 @@ public class PlaceOrderFormController {
     }
 
 
+
     ObservableList<CartTM> list=FXCollections.observableArrayList();
-    public void addToCartOnAction(ActionEvent actionEvent) {
+    public void addToCartOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
         if(!txtQTY.getText().equals("") && !txtDiscount.getText().equals("")){
 
@@ -251,16 +246,37 @@ public class PlaceOrderFormController {
                 list.add(newTm);
             }
             tblCart.setItems(list);
+            quntityChange();
             calculateCost();
 
-            fieldClear();
+
+
 
         }else{
             new Alert(Alert.AlertType.WARNING,"Something went Wrong. Check Fields... ").show();
         }
 
-
     }
+    private boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty,itemCode);
+    }
+
+    private void quntityChange() {
+        int value = Integer.parseInt(txtQTYOnHand.getText());
+        if(!txtQTY.getText().equals("") & (value>0) ){
+            int q = Integer.parseInt(txtQTY.getText());
+            int q2 = Integer.parseInt(txtQTYOnHand.getText());
+            int result= q2 - q;
+
+            if(result<=0){
+                new Alert(Alert.AlertType.WARNING,"Out Of Stock...!").show();
+            }else {
+                txtQTYOnHand.setText(String.valueOf(result));
+            }
+
+        }
+    }
+
 
     private void calculateCost() {
         double total=0;
@@ -271,7 +287,75 @@ public class PlaceOrderFormController {
     }
 
 
-    public void ComfirmOrderOnAction(ActionEvent actionEvent) {
+    public void ComfirmOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
+        String s = lblOrderID.getText();
+        OrderDTO order = new OrderDTO(
+                s,
+                lblDate.getText(),
+                cmbCustomerID.getSelectionModel().getSelectedItem()
+        );
+        ArrayList<OrderDetailsDTO> details = new ArrayList<>();
+        for (CartTM tm : list
+        ) {
+            details.add(
+                    new OrderDetailsDTO(
+                            s,
+                            tm.getItemCode(),
+                            tm.getQTY(),
+                            tm.getUnitPrice(),
+                            tm.getTotal()
+                    )
+            );
+        }
+        Connection connection  = null;
+        try {
+            connection = DBConnection.getDbConnection().getConnection();
+            connection.setAutoCommit(false);
+            //boolean isOrderSaved = new CusOrderCrudController().saveOrder(order);
+
+            boolean isOrderSaved = CrudUtil.execute("INSERT INTO `Order` values(?,?,?)", order.getOrderID(), order.getOrderDate(), order.getCusID());
+
+
+            if (isOrderSaved) {
+                //  boolean isDetailsSaved=new CusOrderCrudController().saveOrderDetails(details);
+
+                boolean isDetailsSaved = false;
+                for (OrderDetailsDTO detail : details) {
+
+                    isDetailsSaved = CrudUtil.execute("INSERT INTO `Order Details` VALUES(?,?,?,?,?)",
+                            detail.getOrderID(), detail.getItemCode(), detail.getOrderQTY(), detail.getDiscount(), detail.getTotal());
+
+                    updateQty(detail.getItemCode(),detail.getOrderQTY());
+                }
+
+                if (isDetailsSaved) {
+                    connection.commit();
+                    new Alert(Alert.AlertType.CONFIRMATION, "Saved Successfully...!").showAndWait();
+                } else {
+                    connection.rollback();
+                    new Alert(Alert.AlertType.ERROR, "Error...!").show();
+                }
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Error...!").show();
+            }
+        }catch (SQLException | ClassNotFoundException e){
+        }finally {
+            connection.setAutoCommit(true);
+        }
+        autoId();
+        lblTotal.setText("0.00 /=");
+        cmbCustomerID.getSelectionModel().clearSelection();
+        cmbItemID.getSelectionModel().clearSelection();
+        tblCart.getItems().clear();
+        txtQTY.clear();
+        txtName.clear();
+        txtaddress.clear();
+        txtCity.clear();
+        txtDiscription.clear();
+        txtQTYOnHand.clear();
+        txtUnitPrice.clear();
+        int dis=0;
+        txtDiscount.setText(String.valueOf(dis));
     }
 }
