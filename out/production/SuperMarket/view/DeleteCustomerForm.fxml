@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="deleteCustomerContext" prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeleteCustomerFormController">
+   <children>
+      <Label layoutX="354.0" layoutY="62.0" text="Delete Customer">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="98.0" layoutY="118.0" prefHeight="0.0" prefWidth="800.0" />
+      <Label alignment="BASELINE_LEFT" layoutX="283.0" layoutY="132.0" prefHeight="27.0" prefWidth="393.0" text="Enter The Customer ID For Need To Deleted  " textFill="#f22626">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="355.0" layoutY="612.0" onAction="#DeleteCustomerOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonDelete" stylesheets="@../DarkTheme.css" text="DELETE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </JFXButton>
+      <Pane layoutX="24.0" layoutY="24.0" prefHeight="47.0" prefWidth="935.0" style="-fx-background-color: #002b52;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXComboBox fx:id="cmdCustomerID" labelFloat="true" layoutX="355.0" layoutY="182.0" prefHeight="31.0" prefWidth="287.0" promptText="Please Select Customer ID" unFocusColor="#fc0000" />
+      <JFXTextField fx:id="txtName" layoutX="350.0" layoutY="298.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtTitle" layoutX="350.0" layoutY="239.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtAddress" layoutX="350.0" layoutY="355.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtCity" layoutX="350.0" layoutY="415.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtProvince" layoutX="350.0" layoutY="473.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtPostCode" layoutX="350.0" layoutY="532.0" prefHeight="26.0" prefWidth="339.0" />
+      <Label alignment="BASELINE_LEFT" layoutX="155.0" layoutY="245.0" prefHeight="26.0" prefWidth="167.0" text="Customer Title       :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="155.0" layoutY="305.0" prefHeight="26.0" prefWidth="167.0" text="Customer Name     :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="155.0" layoutY="365.0" prefHeight="26.0" prefWidth="167.0" text="Customer Address  :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="155.0" layoutY="425.0" prefHeight="26.0" prefWidth="167.0" text="City                          :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="155.0" layoutY="482.0" prefHeight="26.0" prefWidth="167.0" text="Province                  :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="155.0" layoutY="537.0" prefHeight="26.0" prefWidth="167.0" text="Post Code               :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="4.0" layoutY="53.0" onAction="#btnBackOnAction" prefHeight="38.0" prefWidth="109.0" style="-fx-background-radius: 3.0EM;" styleClass="cashierBtn" stylesheets="@../DarkTheme.css" text="BACK">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@assests/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
