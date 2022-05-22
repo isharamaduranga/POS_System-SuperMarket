@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +41,7 @@ public class DeleteCustomerFormController {
     private void setCustomerData(String id) {
         try {
 
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             ResultSet result = customerDAO.searchCustomer(id);
 
             if (result.next()) {
@@ -59,7 +60,7 @@ public class DeleteCustomerFormController {
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
 
-        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+        CustomerDAO customerDAO = new CustomerDAOImpl();
         ObservableList<String> customerIds = customerDAO.getCustomerIds();
         cmdCustomerID.setItems(customerIds);
     }
@@ -76,7 +77,7 @@ public class DeleteCustomerFormController {
 
     public void DeleteCustomerOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
 
             if (customerDAO.deleteCustomer(cmdCustomerID.getValue())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();

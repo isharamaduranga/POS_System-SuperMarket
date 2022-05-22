@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +26,7 @@ public class SearchCustomerFormController {
 
         try {
 
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             ResultSet result = customerDAO.searchCustomer(id);
 
             if (result.next()) {

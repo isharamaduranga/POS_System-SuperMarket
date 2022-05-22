@@ -2,6 +2,7 @@ package controller;
 
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -43,7 +44,7 @@ public class  AddNewCustomerFormController {
         if (!title.equals("") && !name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postalCode.equals("")) {
             try {
 
-                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+                CustomerDAO customerDAO = new CustomerDAOImpl();
 
                 if (customerDAO.saveCustomer(dto)) {
 
@@ -76,7 +77,7 @@ public class  AddNewCustomerFormController {
     public void autoId() {
         try {
 
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             String s = customerDAO.generateNewId();
             txtID.setText(s);
 

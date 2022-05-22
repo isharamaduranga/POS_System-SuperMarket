@@ -1,5 +1,6 @@
 package controller;
 
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,7 +36,7 @@ public class CustomerTableForCashierFormController {
     private void loadAllCustomers() {
 
         try {
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
             ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {

@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -27,7 +28,7 @@ public class UpdateCustomerFormController {
         try {
             String cusId = txtCustomerID.getText();
 
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            CustomerDAO customerDAO = new CustomerDAOImpl();
 
             ResultSet rst = customerDAO.searchCustomer(cusId);
             if (rst.next()) {
@@ -51,7 +52,7 @@ public class UpdateCustomerFormController {
                 txtAddress.getText(), txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
 
 
-        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+        CustomerDAO customerDAO = new CustomerDAOImpl();
 
         try {
             if (customerDAO.updateCustomer(dto)) {
