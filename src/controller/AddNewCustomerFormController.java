@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAOImpl;
 import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -30,12 +31,6 @@ public class AddNewCustomerFormController {
 
     }
 
-    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT CusID FROM Customer WHERE CusID=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
-    }
 
     public void addNewCustomerOnAction(ActionEvent actionEvent) {
 
@@ -53,9 +48,10 @@ public class AddNewCustomerFormController {
         if (!title.equals("") && !name.equals("")&&!address.equals("")&&!city.equals("")&&!province.equals("")&&!postalCode.equals("")) {
             try {
 
+                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
 
-                if (CrudUtil.execute("INSERT INTO Customer (CusID,CusTitle,CusName,CusAddress,City,Povince,PostCode) VALUES (?,?,?,?,?,?,?)",
-                        dto.getCusID(), dto.getCusTitle(), dto.getCusName(), dto.getCusAddress(), dto.getCity(), dto.getProvince(), dto.getPostCode())) {
+                if (customerDAO.saveCustomer(dto)) {
+
                     new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
                 } else {
@@ -65,8 +61,6 @@ public class AddNewCustomerFormController {
             } catch (SQLException | ClassNotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
             }
-
-
             clear();
         }else {
             new Alert(Alert.AlertType.WARNING, "something went wrong !!!").show();
