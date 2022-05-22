@@ -28,5 +28,10 @@ public class CustomerDAOImpl {
 
     }
 
+    public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+      return CrudUtil.execute("UPDATE customer SET CusTitle=?,CusName=?,CusAddress=?,City=?,Povince=?,PostCode=? WHERE CusID=?",
+                dto.getCusTitle(), dto.getCusName(), dto.getCusAddress(), dto.getCity(), dto.getProvince(), dto.getPostCode(), dto.getCusID());
+    }
+
 
 }

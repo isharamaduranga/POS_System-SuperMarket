@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
@@ -47,9 +48,11 @@ public class UpdateCustomerFormController {
         CustomerDTO dto = new CustomerDTO(txtCustomerID.getText(), txtTitle.getText(), txtName.getText(),
                 txtAddress.getText(), txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
 
+
+        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+
         try {
-            if (CrudUtil.execute("UPDATE customer SET CusTitle=?,CusName=?,CusAddress=?,City=?,Povince=?,PostCode=? WHERE CusID=?",
-                    dto.getCusTitle(), dto.getCusName(), dto.getCusAddress(), dto.getCity(), dto.getProvince(), dto.getPostCode(), dto.getCusID())) {
+            if (customerDAO.updateCustomer(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 
