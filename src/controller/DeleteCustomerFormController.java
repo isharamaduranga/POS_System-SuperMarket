@@ -25,6 +25,11 @@ public class DeleteCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane deleteCustomerContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
+
     public void initialize() {
         try {
             loadAllCustomerIds();
@@ -41,7 +46,6 @@ public class DeleteCustomerFormController {
     private void setCustomerData(String id) {
         try {
 
-            CustomerDAO customerDAO = new CustomerDAOImpl();
             ResultSet result = customerDAO.searchCustomer(id);
 
             if (result.next()) {
@@ -60,7 +64,6 @@ public class DeleteCustomerFormController {
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
 
-        CustomerDAO customerDAO = new CustomerDAOImpl();
         ObservableList<String> customerIds = customerDAO.getCustomerIds();
         cmdCustomerID.setItems(customerIds);
     }
@@ -77,7 +80,6 @@ public class DeleteCustomerFormController {
 
     public void DeleteCustomerOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
-            CustomerDAO customerDAO = new CustomerDAOImpl();
 
             if (customerDAO.deleteCustomer(cmdCustomerID.getValue())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();

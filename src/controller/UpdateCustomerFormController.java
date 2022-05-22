@@ -24,11 +24,14 @@ public class UpdateCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane updateCustomerContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
+
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
             String cusId = txtCustomerID.getText();
-
-            CustomerDAO customerDAO = new CustomerDAOImpl();
 
             ResultSet rst = customerDAO.searchCustomer(cusId);
             if (rst.next()) {
@@ -50,9 +53,6 @@ public class UpdateCustomerFormController {
     public void ConfirmUpdateOnAction(ActionEvent actionEvent) {
         CustomerDTO dto = new CustomerDTO(txtCustomerID.getText(), txtTitle.getText(), txtName.getText(),
                 txtAddress.getText(), txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
-
-
-        CustomerDAO customerDAO = new CustomerDAOImpl();
 
         try {
             if (customerDAO.updateCustomer(dto)) {

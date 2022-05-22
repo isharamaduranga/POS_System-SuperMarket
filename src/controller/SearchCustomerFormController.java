@@ -6,6 +6,7 @@ import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import util.Utilities;
+
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,13 +21,17 @@ public class SearchCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane searchCustomerContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
+
 
     public void searchCustomerOnAction(ActionEvent actionEvent) {
         String id = txtID.getText();
 
         try {
 
-            CustomerDAO customerDAO = new CustomerDAOImpl();
             ResultSet result = customerDAO.searchCustomer(id);
 
             if (result.next()) {

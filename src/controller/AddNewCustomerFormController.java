@@ -8,9 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import model.CustomerDTO;
+
 import java.sql.SQLException;
 
-public class  AddNewCustomerFormController {
+public class AddNewCustomerFormController {
 
     public JFXTextField txtID;
     public JFXTextField txtTitle;
@@ -21,12 +22,16 @@ public class  AddNewCustomerFormController {
     public JFXTextField txtProvince;
     public AnchorPane addCustomerContext;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
+
 
     public void initialize() {
         autoId();
 
     }
-
 
     public void addNewCustomerOnAction(ActionEvent actionEvent) {
 
@@ -43,8 +48,6 @@ public class  AddNewCustomerFormController {
 
         if (!title.equals("") && !name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postalCode.equals("")) {
             try {
-
-                CustomerDAO customerDAO = new CustomerDAOImpl();
 
                 if (customerDAO.saveCustomer(dto)) {
 
@@ -77,7 +80,6 @@ public class  AddNewCustomerFormController {
     public void autoId() {
         try {
 
-            CustomerDAO customerDAO = new CustomerDAOImpl();
             String s = customerDAO.generateNewId();
             txtID.setText(s);
 

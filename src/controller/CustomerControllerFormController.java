@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import model.CustomerDTO;
 import util.Utilities;
 import view.TM.CustomerTM;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class CustomerControllerFormController {
     public TableColumn colProvince;
     public TableColumn colPostCode;
 
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
 
     public void initialize() {
 
@@ -43,7 +48,6 @@ public class CustomerControllerFormController {
 
     private void loadAllCustomers() {
         try {
-            CustomerDAO customerDAO = new CustomerDAOImpl();
             ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {

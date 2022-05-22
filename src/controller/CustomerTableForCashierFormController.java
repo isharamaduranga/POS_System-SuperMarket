@@ -7,6 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.CustomerDTO;
 import view.TM.CustomerTM;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -20,6 +21,11 @@ public class CustomerTableForCashierFormController {
     public TableColumn colCity;
     public TableColumn colProvince;
     public TableColumn colPostCode;
+
+    /**
+     * Apply Dependency Injection (Property Injection)
+     */
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
 
     public void initialize() {
         colID.setCellValueFactory(new PropertyValueFactory<>("cusID"));
@@ -36,7 +42,6 @@ public class CustomerTableForCashierFormController {
     private void loadAllCustomers() {
 
         try {
-            CustomerDAO customerDAO = new CustomerDAOImpl();
             ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {
