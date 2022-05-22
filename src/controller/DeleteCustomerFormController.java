@@ -25,11 +25,11 @@ public class DeleteCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane deleteCustomerContext;
 
-    public void initialize(){
+    public void initialize() {
         try {
             loadAllCustomerIds();
 
-        } catch (SQLException |  ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -59,7 +59,7 @@ public class DeleteCustomerFormController {
 
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
-        ObservableList<String> ids= FXCollections.observableArrayList();
+        ObservableList<String> ids = FXCollections.observableArrayList();
         ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
         while (rst.next()) {
             ids.add(rst.getString(1));
@@ -80,14 +80,15 @@ public class DeleteCustomerFormController {
     }
 
     public void DeleteCustomerOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        try{
+        try {
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
 
-            if(CrudUtil.execute("DELETE FROM Customer WHERE CusID=?",cmdCustomerID.getValue())){
-                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").showAndWait();
-            }else{
-                new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+            if (customerDAO.deleteCustomer(cmdCustomerID.getValue())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
             }
-        }catch (ClassNotFoundException | SQLException |NullPointerException  e){
+        } catch (ClassNotFoundException | SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         clear();
@@ -95,6 +96,6 @@ public class DeleteCustomerFormController {
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Utilities.setUiChildren(deleteCustomerContext,"CustomerControllerForm");
+        Utilities.setUiChildren(deleteCustomerContext, "CustomerControllerForm");
     }
 }

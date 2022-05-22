@@ -37,4 +37,8 @@ public class CustomerDAOImpl {
         return CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", id);
     }
 
+    public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("DELETE FROM Customer WHERE CusID=?",id);
+    }
+
 }
