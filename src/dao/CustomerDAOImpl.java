@@ -33,5 +33,8 @@ public class CustomerDAOImpl {
                 dto.getCusTitle(), dto.getCusName(), dto.getCusAddress(), dto.getCity(), dto.getProvince(), dto.getPostCode(), dto.getCusID());
     }
 
+    public ResultSet searchCustomer(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", id);
+    }
 
 }

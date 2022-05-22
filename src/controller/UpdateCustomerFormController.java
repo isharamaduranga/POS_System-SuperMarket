@@ -26,15 +26,18 @@ public class UpdateCustomerFormController {
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
+            String cusId=txtCustomerID.getText();
 
-            ResultSet result = CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", txtCustomerID.getText());
-            if (result.next()) {
-                txtTitle.setText(result.getString(2));
-                txtName.setText(result.getString(3));
-                txtAddress.setText(result.getString(4));
-                txtCity.setText(result.getString(5));
-                txtProvince.setText(result.getString(6));
-                txtPostCode.setText(result.getString(7));
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+
+            ResultSet rst = customerDAO.searchCustomer(cusId);
+            if (rst.next()) {
+                txtTitle.setText(rst.getString(2));
+                txtName.setText(rst.getString(3));
+                txtAddress.setText(rst.getString(4));
+                txtCity.setText(rst.getString(5));
+                txtProvince.setText(rst.getString(6));
+                txtPostCode.setText(rst.getString(7));
 
             } else {
                 clear();

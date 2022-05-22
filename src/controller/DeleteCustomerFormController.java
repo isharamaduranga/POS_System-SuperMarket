@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +41,9 @@ public class DeleteCustomerFormController {
     private void setCustomerData(String id) {
         try {
 
-            ResultSet result = CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", id);
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            ResultSet result = customerDAO.searchCustomer(id);
+
             if (result.next()) {
                 txtTitle.setText(result.getString(2));
                 txtName.setText(result.getString(3));
