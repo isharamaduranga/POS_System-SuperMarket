@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +23,7 @@ public class SearchItemFormController {
         try {
             String code = txtCode.getText();
 
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
 
             if (result.next()) {

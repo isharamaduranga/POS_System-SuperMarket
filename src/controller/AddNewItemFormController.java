@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -40,7 +41,7 @@ public class AddNewItemFormController {
                 Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText())
         );
         try {
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
 
             if (itemDAO.saveItem(dto)) {
 
@@ -61,7 +62,7 @@ public class AddNewItemFormController {
 
     public void autoId() {
         try {
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
             String s = itemDAO.generateNewId();
             txtCode.setText(s);
 

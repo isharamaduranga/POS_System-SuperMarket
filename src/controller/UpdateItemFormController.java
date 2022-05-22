@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,7 +43,7 @@ public class UpdateItemFormController {
 
             String code = cmbItemCode.getValue();
 
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
 
             if (result.next()) {
@@ -59,7 +60,7 @@ public class UpdateItemFormController {
 
     private void loadAllItemCode() throws SQLException, ClassNotFoundException {
 
-        ItemDAOImpl itemDAO = new ItemDAOImpl();
+        ItemDAO itemDAO = new ItemDAOImpl();
         ObservableList<String> itemsCode = itemDAO.getItemsCode();
         cmbItemCode.setItems(itemsCode);
 
@@ -70,7 +71,7 @@ public class UpdateItemFormController {
                 Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQTYOnHand.getText()));
 
         try {
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
 
             if (itemDAO.updateItem(dto)) {
 

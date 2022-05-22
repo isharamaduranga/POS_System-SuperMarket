@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
@@ -34,7 +35,7 @@ public class ItemControllerFormController {
 
     private void loadAllItems() {
         try {
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
             ArrayList<ItemDTO> allItems = itemDAO.getAllItems();
 
             for (ItemDTO item : allItems) {

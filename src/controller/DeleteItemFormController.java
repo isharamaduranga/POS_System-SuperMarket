@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -24,7 +25,7 @@ public class DeleteItemFormController {
         try {
             String code = txtCode.getText();
 
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
             ResultSet result = itemDAO.searchItem(code);
 
             if (result.next()) {
@@ -48,7 +49,7 @@ public class DeleteItemFormController {
         try {
             String code = txtCode.getText();
 
-            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            ItemDAO itemDAO = new ItemDAOImpl();
 
             if (itemDAO.deleteItem(code)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();

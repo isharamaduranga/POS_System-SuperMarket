@@ -2,7 +2,6 @@ package dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.CustomerDTO;
 import model.ItemDTO;
 import util.CrudUtil;
 
@@ -10,8 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemDAOImpl {
+public class ItemDAOImpl implements ItemDAO {
 
+    @Override
     public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
         ArrayList<ItemDTO> allItems = new ArrayList<>();
@@ -27,24 +27,29 @@ public class ItemDAOImpl {
         return allItems;
     }
 
+    @Override
     public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO Item (ItemCode,Description,PackSize,UnitPrice,QtyOnHand) VALUES (?,?,?,?,?)",
                 dto.getItemID(), dto.getItemDescription(), dto.getPackSize(), dto.getUnitPrice(), dto.getQtyOnHand());
     }
 
+    @Override
     public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("DELETE FROM Item WHERE ItemCode=?", code);
     }
 
+    @Override
     public ResultSet searchItem(String code) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("SELECT * FROM Item WHERE ItemCode=?", code);
     }
 
+    @Override
     public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE Item SET Description=?,PackSize=?,UnitPrice=?,QtyOnHand=? WHERE ItemCode=?",
                 dto.getItemDescription(), dto.getPackSize(), dto.getUnitPrice(), dto.getQtyOnHand(), dto.getItemID());
     }
 
+    @Override
     public ObservableList<String> getItemsCode() throws SQLException, ClassNotFoundException {
         ObservableList<String> codes = FXCollections.observableArrayList();
         ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
@@ -54,6 +59,7 @@ public class ItemDAOImpl {
         return codes;
     }
 
+    @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
         ResultSet result = CrudUtil.execute("SELECT ItemCode FROM Item ORDER BY ItemCode DESC LIMIT 1");
 
@@ -73,5 +79,6 @@ public class ItemDAOImpl {
             return "II1000";
         }
     }
+
 
 }
