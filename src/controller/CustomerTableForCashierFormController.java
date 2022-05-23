@@ -1,6 +1,6 @@
 package controller;
 
-import dao.CustomerDAO;
+import dao.CrudDAO;
 import dao.CustomerDAOImpl;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,7 +25,7 @@ public class CustomerTableForCashierFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
 
     public void initialize() {
         colID.setCellValueFactory(new PropertyValueFactory<>("cusID"));
@@ -42,7 +42,7 @@ public class CustomerTableForCashierFormController {
     private void loadAllCustomers() {
 
         try {
-            ArrayList<CustomerDTO> allCustomer = customerDAO.getAllCustomer();
+            ArrayList<CustomerDTO> allCustomer = crudDAO.getAll();
 
             for (CustomerDTO customer : allCustomer) {
                 tblCustomer.getItems().add(new CustomerTM(

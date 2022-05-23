@@ -1,12 +1,13 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.ItemDAO;
+import dao.CrudDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import model.ItemDTO;
 import util.Utilities;
 
 import java.io.IOException;
@@ -24,13 +25,13 @@ public class DeleteItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+    private CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {
             String code = txtCode.getText();
 
-            ResultSet result = itemDAO.searchItem(code);
+            ResultSet result = itemDAO.search(code);
 
             if (result.next()) {
 
@@ -53,7 +54,7 @@ public class DeleteItemFormController {
         try {
             String code = txtCode.getText();
 
-            if (itemDAO.deleteItem(code)) {
+            if (itemDAO.delete(code)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();

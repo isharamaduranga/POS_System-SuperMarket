@@ -2,7 +2,7 @@ package controller;
 
 
 import com.jfoenix.controls.JFXTextField;
-import dao.CustomerDAO;
+import dao.CrudDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -25,11 +25,12 @@ public class AddNewCustomerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CrudDAO<CustomerDTO,String> crudDAO = new CustomerDAOImpl();
 
 
     public void initialize() {
         autoId();
+
 
     }
 
@@ -49,7 +50,8 @@ public class AddNewCustomerFormController {
         if (!title.equals("") && !name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postalCode.equals("")) {
             try {
 
-                if (customerDAO.saveCustomer(dto)) {
+
+                if (crudDAO.save(dto)) {
 
                     new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
@@ -80,7 +82,7 @@ public class AddNewCustomerFormController {
     public void autoId() {
         try {
 
-            String s = customerDAO.generateNewId();
+            String s = crudDAO.generateNewId();
             txtID.setText(s);
 
         } catch (ClassNotFoundException | SQLException e) {

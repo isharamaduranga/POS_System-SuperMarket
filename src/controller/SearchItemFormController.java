@@ -1,10 +1,11 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.ItemDAO;
+import dao.CrudDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
+import model.ItemDTO;
 import util.Utilities;
 
 import java.io.IOException;
@@ -22,14 +23,14 @@ public class SearchItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+    private CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
 
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
             String code = txtCode.getText();
 
-            ResultSet result = itemDAO.searchItem(code);
+            ResultSet result = itemDAO.search(code);
 
             if (result.next()) {
                 txtDescription.setText(result.getString(2));

@@ -1,6 +1,6 @@
 package controller;
 
-import dao.ItemDAO;
+import dao.CrudDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
@@ -28,7 +28,7 @@ public class ItemControllerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+    private CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
 
 
     public void initialize() {
@@ -43,7 +43,7 @@ public class ItemControllerFormController {
 
     private void loadAllItems() {
         try {
-            ArrayList<ItemDTO> allItems = itemDAO.getAllItems();
+            ArrayList<ItemDTO> allItems = itemDAO.getAll();
 
             for (ItemDTO item : allItems) {
                 tblItem.getItems().add(new ItemTM(

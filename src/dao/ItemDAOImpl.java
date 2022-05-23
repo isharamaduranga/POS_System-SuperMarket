@@ -9,10 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements ItemDAO {
+public class ItemDAOImpl implements CrudDAO<ItemDTO,String> {
+
 
     @Override
-    public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
+    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException, SQLException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
         ArrayList<ItemDTO> allItems = new ArrayList<>();
 
@@ -28,29 +29,29 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean save(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO Item (ItemCode,Description,PackSize,UnitPrice,QtyOnHand) VALUES (?,?,?,?,?)",
                 dto.getItemID(), dto.getItemDescription(), dto.getPackSize(), dto.getUnitPrice(), dto.getQtyOnHand());
     }
 
     @Override
-    public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
+    public boolean delete(String code) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("DELETE FROM Item WHERE ItemCode=?", code);
     }
 
     @Override
-    public ResultSet searchItem(String code) throws SQLException, ClassNotFoundException {
+    public ResultSet search(String code) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("SELECT * FROM Item WHERE ItemCode=?", code);
     }
 
     @Override
-    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean update(ItemDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE Item SET Description=?,PackSize=?,UnitPrice=?,QtyOnHand=? WHERE ItemCode=?",
                 dto.getItemDescription(), dto.getPackSize(), dto.getUnitPrice(), dto.getQtyOnHand(), dto.getItemID());
     }
 
     @Override
-    public ObservableList<String> getItemsCode() throws SQLException, ClassNotFoundException {
+    public ObservableList<String> getIds() throws SQLException, ClassNotFoundException {
         ObservableList<String> codes = FXCollections.observableArrayList();
         ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
         while (rst.next()) {
@@ -79,6 +80,7 @@ public class ItemDAOImpl implements ItemDAO {
             return "II1000";
         }
     }
+
 
 
 }

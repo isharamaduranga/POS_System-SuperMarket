@@ -1,7 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.CustomerDAO;
+import dao.CrudDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -27,13 +27,13 @@ public class UpdateCustomerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
             String cusId = txtCustomerID.getText();
 
-            ResultSet rst = customerDAO.searchCustomer(cusId);
+            ResultSet rst = crudDAO.search(cusId);
             if (rst.next()) {
                 txtTitle.setText(rst.getString(2));
                 txtName.setText(rst.getString(3));
@@ -55,7 +55,7 @@ public class UpdateCustomerFormController {
                 txtAddress.getText(), txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
 
         try {
-            if (customerDAO.updateCustomer(dto)) {
+            if (crudDAO.update(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 

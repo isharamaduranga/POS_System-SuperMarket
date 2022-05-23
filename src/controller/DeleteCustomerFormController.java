@@ -2,12 +2,13 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.CustomerDAO;
+import dao.CrudDAO;
 import dao.CustomerDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import model.CustomerDTO;
 import util.Utilities;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class DeleteCustomerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
 
     public void initialize() {
         try {
@@ -46,7 +47,7 @@ public class DeleteCustomerFormController {
     private void setCustomerData(String id) {
         try {
 
-            ResultSet result = customerDAO.searchCustomer(id);
+            ResultSet result = crudDAO.search(id);
 
             if (result.next()) {
                 txtTitle.setText(result.getString(2));
@@ -64,7 +65,7 @@ public class DeleteCustomerFormController {
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
 
-        ObservableList<String> customerIds = customerDAO.getCustomerIds();
+        ObservableList<String> customerIds = crudDAO.getIds();
         cmdCustomerID.setItems(customerIds);
     }
 
@@ -81,7 +82,7 @@ public class DeleteCustomerFormController {
     public void DeleteCustomerOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
 
-            if (customerDAO.deleteCustomer(cmdCustomerID.getValue())) {
+            if (crudDAO.delete(cmdCustomerID.getValue())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();

@@ -1,11 +1,12 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.ItemDAO;
+import dao.CrudDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import model.CustomerDTO;
 import model.ItemDTO;
 import util.Utilities;
 
@@ -23,7 +24,7 @@ public class AddNewItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+    private CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
 
     public void initialize() {
         autoId();
@@ -46,7 +47,7 @@ public class AddNewItemFormController {
         );
         try {
 
-            if (itemDAO.saveItem(dto)) {
+            if (itemDAO.save(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 

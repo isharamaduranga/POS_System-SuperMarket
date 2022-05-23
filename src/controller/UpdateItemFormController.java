@@ -2,7 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.ItemDAO;
+import dao.CrudDAO;
 import dao.ItemDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +27,7 @@ public class UpdateItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+    private CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
 
 
     public void initialize() {
@@ -49,7 +49,7 @@ public class UpdateItemFormController {
 
             String code = cmbItemCode.getValue();
 
-            ResultSet result = itemDAO.searchItem(code);
+            ResultSet result = itemDAO.search(code);
 
             if (result.next()) {
                 txtDescription.setText(result.getString(2));
@@ -65,7 +65,7 @@ public class UpdateItemFormController {
 
     private void loadAllItemCode() throws SQLException, ClassNotFoundException {
 
-        ObservableList<String> itemsCode = itemDAO.getItemsCode();
+        ObservableList<String> itemsCode = itemDAO.getIds();
         cmbItemCode.setItems(itemsCode);
 
     }
@@ -76,7 +76,7 @@ public class UpdateItemFormController {
 
         try {
 
-            if (itemDAO.updateItem(dto)) {
+            if (itemDAO.update(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 

@@ -1,10 +1,11 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.CustomerDAO;
+import dao.CrudDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
+import model.CustomerDTO;
 import util.Utilities;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class SearchCustomerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
 
 
     public void searchCustomerOnAction(ActionEvent actionEvent) {
@@ -32,7 +33,7 @@ public class SearchCustomerFormController {
 
         try {
 
-            ResultSet result = customerDAO.searchCustomer(id);
+            ResultSet result = crudDAO.search(id);
 
             if (result.next()) {
 
