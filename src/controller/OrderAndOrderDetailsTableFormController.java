@@ -1,25 +1,27 @@
 package controller;
 
+import dao.CrudDAO;
+import dao.OrderDAOImpl;
+import dao.OrderDetailsDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import util.CrudUtil;
+import model.OrderDTO;
+import model.OrderDetailsDTO;
 import view.TM.OrderDetailsTM;
 import view.TM.OrderTM;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderAndOrderDetailsTableFormController {
     public TableView<OrderTM> tblOrder;
     public TableColumn colOrderTemp;
     public TableColumn colOrderDate;
     public TableColumn colCustId;
-
     public ComboBox cmbSelectTable;
-
     public TableView<OrderDetailsTM> tblOrderDetails;
     public TableColumn colOrderID2;
     public TableColumn colItemCode2;
@@ -27,9 +29,17 @@ public class OrderAndOrderDetailsTableFormController {
     public TableColumn colDisCount;
     public TableColumn colPrice;
 
-    public void initialize(){
+
+    /**
+     * Dependency Injection
+     */
+    private final CrudDAO<OrderDTO, String> orderDAO = new OrderDAOImpl();
+    private final CrudDAO<OrderDetailsDTO, String> orderDetailsDAO = new OrderDetailsDAOImpl();
+
+
+    public void initialize() {
         try {
-            cmbSelectTable.getItems().addAll("Order","Order Details");
+            cmbSelectTable.getItems().addAll("Order", "Order Details");
             cmbSelectTable.setValue("Order");
 
             colOrderTemp.setCellValueFactory(new PropertyValueFactory<>("orderID"));
@@ -49,39 +59,43 @@ public class OrderAndOrderDetailsTableFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     private void loadAllOrder() throws SQLException, ClassNotFoundException {
 
-        ResultSet rst = CrudUtil.execute("SELECT * FROM `Order`");
-        while (rst.next()) {
+        ArrayList<OrderDTO> allOrder = orderDAO.getAll();
+
+        for (OrderDTO order : allOrder) {
             tblOrder.getItems().add(new OrderTM(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3)));
+                    order.getOrderID(),
+                    order.getOrderDate(),
+                    order.getCusID()
+            ));
         }
         tblOrder.refresh();
     }
 
     private void loadAllOrderDetails() throws SQLException, ClassNotFoundException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM `Order Details`");
-        while (rst.next()) {
+
+        ArrayList<OrderDetailsDTO> allOrderDetails = orderDetailsDAO.getAll();
+
+        for (OrderDetailsDTO Details : allOrderDetails) {
             tblOrderDetails.getItems().add(new OrderDetailsTM(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getInt(3),
-                    rst.getDouble(4),
-                    rst.getDouble(5)
-                    ));
+                    Details.getOrderID(),
+                    Details.getItemCode(),
+                    Details.getOrderQTY(),
+                    Details.getDiscount(),
+                    Details.getTotal())
+            );
         }
+        tblOrderDetails.refresh();
     }
 
     public void selectTabelOnAction(ActionEvent actionEvent) {
-        if(cmbSelectTable.getValue().equals("Order Details")){
+        if (cmbSelectTable.getValue().equals("Order Details")) {
             tblOrder.setVisible(false);
             tblOrderDetails.setVisible(true);
-        }else{
+        } else {
             tblOrder.setVisible(true);
             tblOrderDetails.setVisible(false);
         }

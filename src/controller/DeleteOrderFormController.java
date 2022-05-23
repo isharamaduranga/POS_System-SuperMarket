@@ -1,11 +1,13 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CrudDAO;
+import dao.OrderDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import util.CrudUtil;
+import model.OrderDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +18,20 @@ public class DeleteOrderFormController {
     public JFXTextField txtDate;
     public JFXTextField txtCustID;
 
+    /**
+     * Dependency Injection
+     */
+    private final CrudDAO<OrderDTO, String> orderDAO = new OrderDAOImpl();
+
+
     public void removeOnAction(ActionEvent actionEvent) {
         try {
 
-            if (CrudUtil.execute("DELETE FROM `Order` WHERE OrderID=?", txtOrderId.getText())) {
+            String oid = txtOrderId.getText();
+
+            boolean isDelete = orderDAO.delete(oid);
+
+            if (isDelete) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();
@@ -33,22 +45,23 @@ public class DeleteOrderFormController {
 
     public void searchOrder(KeyEvent keyEvent) {
         try {
-            ResultSet result = CrudUtil.execute("SELECT * FROM `Order` WHERE OrderID=?",txtOrderId.getText());
+
+            String oid = txtOrderId.getText();
+            ResultSet result = orderDAO.search(oid);
             if (result.next()) {
 
                 txtDate.setText(result.getString(2));
                 txtCustID.setText(result.getString(3));
 
-
             } else {
-                   clear();
+                clear();
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public void clear(){
 
+    public void clear() {
         txtDate.clear();
         txtCustID.clear();
     }

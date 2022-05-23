@@ -2,9 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.CustomerDAOImpl;
-import dao.ItemDAOImpl;
+import dao.*;
 import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -60,6 +58,14 @@ public class PlaceOrderFormController {
 
     int cartSelectedRowCountForDelete = -1;
 
+    /**
+     * Dependency Injection
+     */
+    private final CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
+    private final CrudDAO<CustomerDTO, String> customerDAO = new CustomerDAOImpl();
+    private final CrudDAO<OrderDTO, String> orderDAO = new OrderDAOImpl();
+    private final CrudDAO<OrderDetailsDTO, String> orderDetailsDAO = new OrderDetailsDAOImpl();
+
     public void initialize() {
 
         colItemID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
@@ -81,35 +87,27 @@ public class PlaceOrderFormController {
         }
 
         cmbCustomerID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
             try {
                 setCustomerData(newValue);
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         });
         cmbItemID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
             try {
                 setItemData(newValue);
-
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         });
         tblCart.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             cartSelectedRowCountForDelete = (int) newValue;
         });
-
-
     }
 
     private void setItemData(String itemCode) throws SQLException, ClassNotFoundException {
 
-        /**  / di */
-        CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+
         ResultSet result = itemDAO.search(itemCode);
 
         if (result.next()) {
@@ -120,8 +118,7 @@ public class PlaceOrderFormController {
     }
 
     private void setCustomerData(String customerID) throws SQLException, ClassNotFoundException {
-/**  / di */
-        CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+
         ResultSet result = customerDAO.search(customerID);
 
         if (result.next()) {
@@ -132,34 +129,27 @@ public class PlaceOrderFormController {
         }
     }
 
-
     private void loadItemIds() throws SQLException, ClassNotFoundException {
 
-        CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+
         ObservableList<String> codes = itemDAO.getIds();
         cmbItemID.setItems(codes);
-
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
 
-        CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+
         ObservableList<String> ids = customerDAO.getIds();
         cmbCustomerID.setItems(ids);
     }
 
     private void curDateTime() {
         lblDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, event -> {
-
             LocalTime currentTime = LocalTime.now();
-
             lblTime.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
-
         }),
                 new KeyFrame(Duration.seconds(1))
-
         );
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
@@ -167,23 +157,9 @@ public class PlaceOrderFormController {
 
     public void autoId() {
         try {
-            ResultSet result = CrudUtil.execute("SELECT OrderID FROM `Order` ORDER BY OrderID DESC LIMIT 1");
+            String s = orderDAO.generateNewId();
+            lblOrderID.setText(s);
 
-            if (result.next()) {
-
-                String rnno = result.getString("OrderID");
-                int co = rnno.length();
-                String txt = rnno.substring(0, 2);//mul deka  (CI)
-                String num = rnno.substring(2, co);//aga deaka (1000)
-
-                int n = Integer.parseInt(num);
-                n++;
-                String snum = Integer.toString(n);
-                String ftxt = txt + snum;
-                lblOrderID.setText(ftxt);
-            } else {
-                lblOrderID.setText("OI1000");
-            }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -262,12 +238,18 @@ public class PlaceOrderFormController {
 
     }
 
+    /**
+     * =================================================================================================================
+     */
     private boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
 
         return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
 
-
     }
+
+    /**
+     * =================================================================================================================
+     */
 
     private void quntityChange() {
         int value = Integer.parseInt(txtQTYOnHand.getText());
@@ -281,10 +263,8 @@ public class PlaceOrderFormController {
             } else {
                 txtQTYOnHand.setText(String.valueOf(result));
             }
-
         }
     }
-
 
     private void calculateCost() {
         double total = 0;
@@ -293,7 +273,6 @@ public class PlaceOrderFormController {
         }
         lblTotal.setText(total + " /=");
     }
-
 
     public void ComfirmOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
@@ -320,20 +299,18 @@ public class PlaceOrderFormController {
         try {
             connection = DBConnection.getDbConnection().getConnection();
             connection.setAutoCommit(false);
-            //boolean isOrderSaved = new CusOrderCrudController().saveOrder(order);
 
-            boolean isOrderSaved = CrudUtil.execute("INSERT INTO `Order` values(?,?,?)", order.getOrderID(), order.getOrderDate(), order.getCusID());
-
+            boolean isOrderSaved = orderDAO.save(order);
 
             if (isOrderSaved) {
-                //  boolean isDetailsSaved=new CusOrderCrudController().saveOrderDetails(details);
 
                 boolean isDetailsSaved = false;
                 for (OrderDetailsDTO detail : details) {
 
-                    isDetailsSaved = CrudUtil.execute("INSERT INTO `Order Details` VALUES(?,?,?,?,?)",
-                            detail.getOrderID(), detail.getItemCode(), detail.getOrderQTY(), detail.getDiscount(), detail.getTotal());
 
+                    isDetailsSaved = orderDetailsDAO.save(detail);
+
+                    /**  quantity update */
                     updateQty(detail.getItemCode(), detail.getOrderQTY());
                 }
 

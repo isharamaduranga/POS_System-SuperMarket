@@ -1,12 +1,12 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import dao.CrudDAO;
+import dao.OrderDetailsDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
-import model.CustomerDTO;
 import model.OrderDetailsDTO;
-import util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,14 +18,19 @@ public class UpdateOrderFormController {
     public JFXTextField txtOrderQty;
     public JFXTextField txtDiscount;
 
+    /**
+     * Dependency Injection
+     */
+    private final CrudDAO<OrderDetailsDTO, String> orderDetailsDAO = new OrderDetailsDAOImpl();
 
     public void UpdateComfirmOnAction(ActionEvent actionEvent) {
-        OrderDetailsDTO dto = new OrderDetailsDTO(txtOrderID.getText(),txtItemCode.getText(),Integer.parseInt(txtOrderQty.getText()),
+        OrderDetailsDTO dto = new OrderDetailsDTO(txtOrderID.getText(), txtItemCode.getText(), Integer.parseInt(txtOrderQty.getText()),
                 Double.parseDouble(txtDiscount.getText()));
 
         try {
-            if (CrudUtil.execute("UPDATE `Order Details` SET  Orderqty=?, Discount=?,Price=? WHERE OrderID=?",
-                    dto.getOrderQTY(), dto.getDiscount(), dto.getTotal(), dto.getOrderID())) {
+
+            boolean update = orderDetailsDAO.update(dto);
+            if (update) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 
@@ -42,7 +47,11 @@ public class UpdateOrderFormController {
 
     public void searchOrderDetaisOnAction(KeyEvent keyEvent) {
         try {
-            ResultSet result = CrudUtil.execute("SELECT * FROM `Order Details` WHERE OrderID=?",txtOrderID.getText());
+
+            String oid = txtOrderID.getText();
+
+            ResultSet result = orderDetailsDAO.search(oid);
+
             if (result.next()) {
 
                 txtItemCode.setText(result.getString(2));
@@ -51,14 +60,14 @@ public class UpdateOrderFormController {
 
 
             } else {
-                 clear();
+                clear();
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void clear(){
+    public void clear() {
 
         txtItemCode.clear();
         txtDiscount.clear();
