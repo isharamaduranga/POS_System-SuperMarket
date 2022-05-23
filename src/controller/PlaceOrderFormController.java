@@ -2,6 +2,9 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.CrudDAO;
+import dao.CustomerDAOImpl;
+import dao.ItemDAOImpl;
 import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -12,6 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import model.CustomerDTO;
+import model.ItemDTO;
 import model.OrderDTO;
 import model.OrderDetailsDTO;
 import util.CrudUtil;
@@ -102,18 +107,23 @@ public class PlaceOrderFormController {
     }
 
     private void setItemData(String itemCode) throws SQLException, ClassNotFoundException {
-        ResultSet result = CrudUtil.execute("SELECT * FROM Item WHERE ItemCode=?", itemCode);
+
+        /**  / di */
+        CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+        ResultSet result = itemDAO.search(itemCode);
+
         if (result.next()) {
             txtDiscription.setText(result.getString(2));
             txtQTYOnHand.setText(result.getString(5));
             txtUnitPrice.setText(result.getString(4));
-
         }
     }
 
     private void setCustomerData(String customerID) throws SQLException, ClassNotFoundException {
+/**  / di */
+        CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+        ResultSet result = customerDAO.search(customerID);
 
-        ResultSet result = CrudUtil.execute("SELECT * FROM Customer WHERE CusID=?", customerID);
         if (result.next()) {
             txtName.setText(result.getString(3));
             txtaddress.setText(result.getString(4));
@@ -124,23 +134,17 @@ public class PlaceOrderFormController {
 
 
     private void loadItemIds() throws SQLException, ClassNotFoundException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
-        ObservableList<String> codes = FXCollections.observableArrayList();
 
-        while (rst.next()) {
-            codes.add(rst.getString(1));
-            ;
-        }
+        CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+        ObservableList<String> codes = itemDAO.getIds();
         cmbItemID.setItems(codes);
+
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
-        ObservableList<String> ids = FXCollections.observableArrayList();
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
-        while (rst.next()) {
-            ids.add(rst.getString(1));
-        }
 
+        CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+        ObservableList<String> ids = customerDAO.getIds();
         cmbCustomerID.setItems(ids);
     }
 
@@ -259,7 +263,10 @@ public class PlaceOrderFormController {
     }
 
     private boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
+
         return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
+
+
     }
 
     private void quntityChange() {

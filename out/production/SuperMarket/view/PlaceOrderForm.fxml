@@ -19,34 +19,34 @@
          </font>
       </Label>
       <Separator layoutX="31.0" layoutY="63.0" prefHeight="0.0" prefWidth="803.0" />
-      <Label layoutX="23.0" layoutY="72.0" text="Order ID :-">
+      <Label layoutX="23.0" layoutY="73.0" text="Order ID :-">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="74.0" text="Order Date :-">
+      <Label layoutX="321.0" layoutY="73.0" text="Order Date :-">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="663.0" layoutY="73.0" text="Order Time :-">
+      <Label layoutX="660.0" layoutY="73.0" text="Order Time :-">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblOrderID" layoutX="123.0" layoutY="73.0" text="O-001">
+      <Label fx:id="lblOrderID" layoutX="128.0" layoutY="73.0" text="O-001" textFill="#1500ff">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblDate" layoutX="461.0" layoutY="74.0" text="2021-08-15">
+      <Label fx:id="lblDate" layoutX="455.0" layoutY="73.0" text="2021-08-15" textFill="#1ab275">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblTime" layoutX="784.0" layoutY="73.0" text="18:18:30">
+      <Label fx:id="lblTime" layoutX="794.0" layoutY="73.0" text="18:18:30" textFill="RED">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <JFXComboBox fx:id="cmbCustomerID" labelFloat="true" layoutX="23.0" layoutY="112.0" prefHeight="31.0" prefWidth="187.0" promptText="Customer ID" />
@@ -68,10 +68,10 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDiscount" layoutX="376.0" layoutY="231.0" prefHeight="40.0" prefWidth="50.0" text="0" />
-      <Label layoutX="437.0" layoutY="233.0" prefHeight="31.0" prefWidth="26.0" text="\%">
+      <TextField fx:id="txtDiscount" layoutX="376.0" layoutY="233.0" prefHeight="31.0" prefWidth="50.0" text="0" />
+      <Label layoutX="437.0" layoutY="233.0" prefHeight="31.0" prefWidth="30.0" text="\%">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <JFXButton layoutX="506.0" layoutY="230.0" onAction="#clearOnAction" prefHeight="40.0" prefWidth="144.0" style="-fx-background-radius: 2.5EM;" styleClass="cashierBtn" stylesheets="@../DarkTheme.css" text="Clear" textFill="WHITE">

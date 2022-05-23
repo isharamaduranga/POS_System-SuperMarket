@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderAndOrderDetailsTableFormController">
    <children>
-      <TableView fx:id="tblOrder" layoutX="62.0" layoutY="222.0" prefHeight="441.0" prefWidth="814.0">
+      <TableView fx:id="tblOrder" layoutX="62.0" layoutY="222.0" prefHeight="441.0" prefWidth="814.0" stylesheets="@../DarkTheme.css">
          <columns>
             <TableColumn fx:id="colOrderTemp" prefWidth="271.0" text="OrderID" />
             <TableColumn fx:id="colOrderDate" prefWidth="271.0" text="Order Date" />
@@ -20,7 +19,7 @@
          </columns>
       </TableView>
       <ComboBox fx:id="cmbSelectTable" layoutX="67.0" layoutY="166.0" onAction="#selectTabelOnAction" prefHeight="26.0" prefWidth="247.0" />
-      <TableView fx:id="tblOrderDetails" layoutX="67.0" layoutY="248.0" prefHeight="408.0" prefWidth="805.0" visible="false">
+      <TableView fx:id="tblOrderDetails" layoutX="62.0" layoutY="222.0" prefHeight="408.0" prefWidth="814.0" stylesheets="@../DarkTheme.css" visible="false">
          <columns>
             <TableColumn fx:id="colOrderID2" prefWidth="161.0" text="Order ID" />
             <TableColumn fx:id="colItemCode2" prefWidth="161.0" text="Item Code" />
