@@ -61,10 +61,10 @@ public class PlaceOrderFormController {
     /**
      * Dependency Injection
      */
-    private final CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
-    private final CrudDAO<CustomerDTO, String> customerDAO = new CustomerDAOImpl();
-    private final CrudDAO<OrderDTO, String> orderDAO = new OrderDAOImpl();
-    private final CrudDAO<OrderDetailsDTO, String> orderDetailsDAO = new OrderDetailsDAOImpl();
+    private final ItemDAO itemDAO = new ItemDAOImpl();
+    private final CustomerDAO customerDAO = new CustomerDAOImpl();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
+    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
 
     public void initialize() {
 
@@ -238,17 +238,10 @@ public class PlaceOrderFormController {
 
     }
 
-    /**
-     * =================================================================================================================
-     */
+
     public boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
-        ItemDAO itemDAO = new ItemDAOImpl();
         return itemDAO.updateQty(itemCode, qty);
     }
-
-    /**
-     * =================================================================================================================
-     */
 
     private void quntityChange() {
         int value = Integer.parseInt(txtQTYOnHand.getText());

@@ -1,8 +1,6 @@
 package controller;
 
-import dao.CrudDAO;
-import dao.OrderDAOImpl;
-import dao.OrderDetailsDAOImpl;
+import dao.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -33,8 +31,8 @@ public class OrderAndOrderDetailsTableFormController {
     /**
      * Dependency Injection
      */
-    private final CrudDAO<OrderDTO, String> orderDAO = new OrderDAOImpl();
-    private final CrudDAO<OrderDetailsDTO, String> orderDetailsDAO = new OrderDetailsDAOImpl();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
+    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
 
 
     public void initialize() {

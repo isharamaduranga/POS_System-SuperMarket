@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
@@ -23,7 +24,7 @@ public class SearchItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
+    private ItemDAO itemDAO = new ItemDAOImpl();
 
 
     public void searchOnAction(ActionEvent actionEvent) {

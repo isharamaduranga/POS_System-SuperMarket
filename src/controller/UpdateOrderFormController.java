@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.OrderDetailsDAO;
 import dao.OrderDetailsDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -21,7 +22,7 @@ public class UpdateOrderFormController {
     /**
      * Dependency Injection
      */
-    private final CrudDAO<OrderDetailsDTO, String> orderDetailsDAO = new OrderDetailsDAOImpl();
+    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
 
     public void UpdateComfirmOnAction(ActionEvent actionEvent) {
         OrderDetailsDTO dto = new OrderDetailsDTO(txtOrderID.getText(), txtItemCode.getText(), Integer.parseInt(txtOrderQty.getText()),

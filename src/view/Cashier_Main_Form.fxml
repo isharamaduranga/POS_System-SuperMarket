@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -190,17 +194,43 @@
                         <Font name="System Bold" size="50.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="108.0" layoutY="568.0" onAction="#orderTabels" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonLightBlue" stylesheets="@../DarkTheme.css" text="ORDER &amp; ORDER DETAILS" textFill="WHITE">
+                  <JFXButton layoutX="108.0" layoutY="596.0" onAction="#orderTabels" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonLightBlue" stylesheets="@../DarkTheme.css" text="ORDER &amp; ORDER DETAILS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="499.0" layoutY="568.0" onAction="#PlaceOrder" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonSearch" stylesheets="@../DarkTheme.css" text="PLACE ORDER" textFill="WHITE">
+                  <JFXButton layoutX="499.0" layoutY="596.0" onAction="#PlaceOrder" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonSearch" stylesheets="@../DarkTheme.css" text="PLACE ORDER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
                   </JFXButton>
                   <Separator layoutX="430.0" layoutY="13.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="6.0" />
+                  <JFXComboBox fx:id="cmbCustomerID" labelFloat="true" layoutX="58.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ID" unFocusColor="RED" />
+                  <TableView fx:id="tblItemDetails" layoutX="58.0" layoutY="334.0" prefHeight="200.0" prefWidth="423.0" stylesheets="@../DarkTheme.css">
+                    <columns>
+                      <TableColumn fx:id="colItems" prefWidth="229.0" text="ITEMS" />
+                      <TableColumn fx:id="colQTY" prefWidth="193.0" text="QUENTITY" />
+                    </columns>
+                  </TableView>
+                  <JFXTextField fx:id="txtCusName" editable="false" labelFloat="true" layoutX="358.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER NAME" unFocusColor="#4059a9" />
+                  <JFXTextField fx:id="txtCusAddress" editable="false" labelFloat="true" layoutX="650.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ADDRESS" unFocusColor="#4059a9" />
+                  <JFXTextField fx:id="TxtDate" editable="false" labelFloat="true" layoutX="358.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="DATE" unFocusColor="#4059a9" />
+                  <JFXTextField fx:id="txtOrderID" editable="false" labelFloat="true" layoutX="58.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="ORDER ID" unFocusColor="#4059a9" />
+                  <Label layoutX="563.0" layoutY="402.0" prefHeight="40.0" prefWidth="210.0" text="Total Price">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTotalprice" layoutX="650.0" layoutY="470.0" prefHeight="54.0" prefWidth="182.0" text="0.00">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="578.0" layoutY="474.0" prefHeight="40.0" prefWidth="56.0" text="RS">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </center>

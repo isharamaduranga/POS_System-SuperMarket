@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -27,7 +28,7 @@ public class UpdateCustomerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
+    private CustomerDAO crudDAO = new CustomerDAOImpl();
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {

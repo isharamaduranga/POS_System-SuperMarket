@@ -71,4 +71,9 @@ public class OrderDAOImpl implements OrderDAO{
     public ObservableList<String> getIds() throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public ResultSet getOrderDetailsSearchByCustomerID(String id)throws SQLException, ClassNotFoundException{
+        return CrudUtil.execute("SELECT * FROM `Order` WHERE CusID=?", id);
+    }
 }

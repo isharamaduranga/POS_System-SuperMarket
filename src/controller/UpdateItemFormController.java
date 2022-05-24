@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +28,7 @@ public class UpdateItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CrudDAO<ItemDTO, String> itemDAO = new ItemDAOImpl();
+    private ItemDAO itemDAO = new ItemDAOImpl();
 
 
     public void initialize() {

@@ -1,19 +1,14 @@
-package view.TM;
+package model;
 
-public class CustomerOrderDetails {
+public class CustomerOrderDTO {
     private String itemCode;
     private int qty;
     private double price;
 
-    public CustomerOrderDetails() {
+    public CustomerOrderDTO() {
     }
 
-    public CustomerOrderDetails(String itemCode, int qty) {
-        this.itemCode = itemCode;
-        this.qty = qty;
-    }
-
-    public CustomerOrderDetails(String itemCode, int qty, double price) {
+    public CustomerOrderDTO(String itemCode, int qty, double price) {
         this.itemCode = itemCode;
         this.qty = qty;
         this.price = price;
@@ -41,5 +36,14 @@ public class CustomerOrderDetails {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerOrderDTO{" +
+                "itemCode='" + itemCode + '\'' +
+                ", qty=" + qty +
+                ", price=" + price +
+                '}';
     }
 }

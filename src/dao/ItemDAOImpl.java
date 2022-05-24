@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class ItemDAOImpl implements ItemDAO {
 
 
-
     @Override
     public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException, SQLException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM Item");
@@ -84,6 +83,8 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
-      return  CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
+        return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
     }
 }
+
+

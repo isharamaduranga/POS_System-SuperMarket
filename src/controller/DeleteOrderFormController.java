@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.OrderDAO;
 import dao.OrderDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -21,7 +22,7 @@ public class DeleteOrderFormController {
     /**
      * Dependency Injection
      */
-    private final CrudDAO<OrderDTO, String> orderDAO = new OrderDAOImpl();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
 
 
     public void removeOnAction(ActionEvent actionEvent) {

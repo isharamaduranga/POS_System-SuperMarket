@@ -2,6 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.CustomerDAO;
+import dao.ItemDAO;
 import dao.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -25,7 +27,7 @@ public class DeleteItemFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+    private ItemDAO itemDAO = new ItemDAOImpl();
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {

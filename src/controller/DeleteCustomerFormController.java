@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.CrudDAO;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ public class DeleteCustomerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
+    private CustomerDAO crudDAO = new CustomerDAOImpl();
 
     public void initialize() {
         try {

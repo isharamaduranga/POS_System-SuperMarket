@@ -1,6 +1,7 @@
 package controller;
 
 import dao.CrudDAO;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
@@ -29,7 +30,7 @@ public class CustomerControllerFormController {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CrudDAO<CustomerDTO, String> crudDAO = new CustomerDAOImpl();
+    private CustomerDAO crudDAO = new CustomerDAOImpl();
 
     public void initialize() {
 
