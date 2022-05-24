@@ -1,14 +1,12 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.OrderDAO;
-import dao.OrderDAOImpl;
+import dao.custom.OrderDAO;
+import dao.custom.impl.OrderDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import model.OrderDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

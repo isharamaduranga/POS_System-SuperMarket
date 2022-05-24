@@ -1,9 +1,8 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.OrderDetailsDAO;
-import dao.OrderDetailsDAOImpl;
+import dao.custom.OrderDetailsDAO;
+import dao.custom.impl.OrderDetailsDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;

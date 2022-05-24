@@ -1,5 +1,6 @@
-package dao;
+package dao.custom.impl;
 
+import dao.custom.CustomerDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.CustomerDTO;

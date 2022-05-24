@@ -1,12 +1,10 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.CustomerDAO;
-import dao.CustomerDAOImpl;
+import dao.custom.CustomerDAO;
+import dao.custom.impl.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
-import model.CustomerDTO;
 import util.Utilities;
 
 import java.io.IOException;

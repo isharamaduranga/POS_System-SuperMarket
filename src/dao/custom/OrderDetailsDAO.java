@@ -1,5 +1,6 @@
-package dao;
+package dao.custom;
 
+import dao.CrudDAO;
 import model.OrderDetailsDTO;
 import util.CrudUtil;
 

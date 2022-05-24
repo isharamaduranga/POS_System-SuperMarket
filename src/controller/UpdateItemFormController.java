@@ -2,9 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.ItemDAO;
-import dao.ItemDAOImpl;
+import dao.custom.ItemDAO;
+import dao.custom.impl.ItemDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

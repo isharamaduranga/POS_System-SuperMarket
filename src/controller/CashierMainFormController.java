@@ -3,15 +3,19 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.*;
+import dao.custom.CustomerDAO;
+import dao.custom.OrderDAO;
+import dao.custom.impl.CustomerDAOImpl;
+import dao.custom.impl.OrderDAOImpl;
+import dao.custom.impl.OrderDetailsDAOImpl;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,8 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.CustomerOrderDTO;
-import model.OrderDetailsDTO;
 import util.Utilities;
 import view.TM.CustomerOrderDetails;
 
@@ -30,7 +32,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class CashierMainFormController {
@@ -87,24 +88,26 @@ public class CashierMainFormController {
             txtCusName.setText(search.getString(3));
             txtCusAddress.setText(search.getString(4));
         }
-
-        loadorder();
         setItems();
+        loadorder();
     }
     private void setItems() throws SQLException, ClassNotFoundException{
-        /*double price=0;
+        double price=0;
         OrderDetailsDAOImpl OrderDetailDAO = new OrderDetailsDAOImpl();
         ResultSet item = OrderDetailDAO.getCustomerOrderItem(txtOrderID.getText());
 
+        ObservableList<CustomerOrderDetails> obList= FXCollections.observableArrayList();
+
         while (item.next()) {
-            price+=item.getDouble(4);
+            price+=item.getDouble(5);
+            obList.add(new CustomerOrderDetails(
+                    item.getString(2),
+                    item.getInt(3)
+            ));
         }
-        item.next();
-        tblItemDetails.getItems().add(new CustomerOrderDetails(
-                item.getString(1),
-                item.getInt(5)
-        ));
-        lblTotalprice.setText(String.valueOf(price));*/
+        tblItemDetails.setItems(obList);
+        lblTotalprice.setText(String.valueOf(price));
+
     }
 
 
@@ -116,10 +119,7 @@ public class CashierMainFormController {
         if(rst.next()){
             txtOrderID.setText(rst.getString(1));
             TxtDate.setText(rst.getString(2));
-        }else {
-            new Alert(Alert.AlertType.WARNING, "Empty Result Set").show();
         }
-
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {

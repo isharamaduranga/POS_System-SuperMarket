@@ -1,8 +1,7 @@
 package controller;
 
-import dao.CrudDAO;
-import dao.CustomerDAO;
-import dao.CustomerDAOImpl;
+import dao.custom.CustomerDAO;
+import dao.custom.impl.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;

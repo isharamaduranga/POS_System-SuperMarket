@@ -2,7 +2,14 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.*;
+import dao.custom.CustomerDAO;
+import dao.custom.ItemDAO;
+import dao.custom.OrderDAO;
+import dao.custom.OrderDetailsDAO;
+import dao.custom.impl.CustomerDAOImpl;
+import dao.custom.impl.ItemDAOImpl;
+import dao.custom.impl.OrderDAOImpl;
+import dao.custom.impl.OrderDetailsDAOImpl;
 import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -13,11 +20,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
-import model.CustomerDTO;
-import model.ItemDTO;
 import model.OrderDTO;
 import model.OrderDetailsDTO;
-import util.CrudUtil;
 import view.TM.CartTM;
 
 import java.sql.Connection;
@@ -235,9 +239,7 @@ public class PlaceOrderFormController {
         } else {
             new Alert(Alert.AlertType.WARNING, "Something went Wrong. Check Fields... ").show();
         }
-
     }
-
 
     public boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
         return itemDAO.updateQty(itemCode, qty);
@@ -267,6 +269,7 @@ public class PlaceOrderFormController {
     }
 
     public void ComfirmOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+
 
         String s = lblOrderID.getText();
         OrderDTO order = new OrderDTO(
