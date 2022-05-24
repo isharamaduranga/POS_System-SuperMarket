@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderDetailsDAOImpl implements CrudDAO<OrderDetailsDTO,String>{
+public class OrderDetailsDAOImpl implements OrderDetailsDAO{
     @Override
     public ArrayList<OrderDetailsDTO> getAll() throws SQLException, ClassNotFoundException {
 

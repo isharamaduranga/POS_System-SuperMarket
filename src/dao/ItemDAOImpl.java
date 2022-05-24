@@ -9,7 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements CrudDAO<ItemDTO,String> {
+public class ItemDAOImpl implements ItemDAO {
+
 
 
     @Override
@@ -81,6 +82,8 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO,String> {
         }
     }
 
-
-
+    @Override
+    public boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
+      return  CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
+    }
 }

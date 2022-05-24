@@ -241,10 +241,9 @@ public class PlaceOrderFormController {
     /**
      * =================================================================================================================
      */
-    private boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
-
-        return CrudUtil.execute("UPDATE Item SET QtyOnHand = QtyOnHand -? WHERE ItemCode=?", qty, itemCode);
-
+    public boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
+        ItemDAO itemDAO = new ItemDAOImpl();
+        return itemDAO.updateQty(itemCode, qty);
     }
 
     /**
