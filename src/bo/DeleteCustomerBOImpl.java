@@ -7,25 +7,26 @@ import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeleteCustomerBOImpl {
+public class DeleteCustomerBOImpl implements DeleteCustomerBO {
     /**
      * Apply Dependency Injection (Property Injection)
      */
     private CustomerDAO customerDAO = new CustomerDAOImpl();
 
-
+    @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
-      return   customerDAO.delete(id);
+        return customerDAO.delete(id);
     }
 
+    @Override
     public ObservableList<String> getAllCustomerIds() throws SQLException, ClassNotFoundException {
-       return customerDAO.getIds();
+        return customerDAO.getIds();
     }
 
+    @Override
     public ResultSet searchCustomer(String id) throws SQLException, ClassNotFoundException {
-       return customerDAO.search(id);
+        return customerDAO.search(id);
     }
-
 
 
 }

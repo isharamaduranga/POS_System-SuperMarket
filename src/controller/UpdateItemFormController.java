@@ -1,5 +1,6 @@
 package controller;
 
+import bo.UpdateItemBO;
 import bo.UpdateItemBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -23,6 +24,10 @@ public class UpdateItemFormController {
     public JFXComboBox<String> cmbItemCode;
     public AnchorPane updateItemContext;
 
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final UpdateItemBO updateItemBO = new UpdateItemBOImpl();
 
     public void initialize() {
 
@@ -43,8 +48,6 @@ public class UpdateItemFormController {
 
             String code = cmbItemCode.getValue();
 
-            /** di / tight*/
-            UpdateItemBOImpl updateItemBO = new UpdateItemBOImpl();
             ResultSet result = updateItemBO.searchItem(code);
 
 
@@ -62,10 +65,7 @@ public class UpdateItemFormController {
 
     private void loadAllItemCode() throws SQLException, ClassNotFoundException {
 
-        /** di / tight*/
-        UpdateItemBOImpl updateItemBO = new UpdateItemBOImpl();
         ObservableList<String> itemsCode = updateItemBO.getAllItemCodes();
-
         cmbItemCode.setItems(itemsCode);
 
     }
@@ -75,9 +75,6 @@ public class UpdateItemFormController {
                 Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQTYOnHand.getText()));
 
         try {
-
-            /** di / tight*/
-            UpdateItemBOImpl updateItemBO = new UpdateItemBOImpl();
 
             if (updateItemBO.UpdateItem(dto)) {
 

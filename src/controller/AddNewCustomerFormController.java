@@ -1,10 +1,9 @@
 package controller;
 
 
+import bo.AddNewCustomerBO;
 import bo.AddNewCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.CustomerDAO;
-import dao.custom.impl.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
@@ -23,12 +22,14 @@ public class AddNewCustomerFormController {
     public JFXTextField txtProvince;
     public AnchorPane addCustomerContext;
 
-
+    /**
+     * Apply Dependency Injection (Property)
+     */
+    private final AddNewCustomerBO addNewCustomerBO = new AddNewCustomerBOImpl();
 
 
     public void initialize() {
         autoId();
-
 
     }
 
@@ -48,8 +49,6 @@ public class AddNewCustomerFormController {
         if (!title.equals("") && !name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postalCode.equals("")) {
             try {
 
-                /** DI/TIGHT */
-                AddNewCustomerBOImpl addNewCustomerBO = new AddNewCustomerBOImpl();
 
                 if (addNewCustomerBO.saveCustomer(dto)) {
 
@@ -81,8 +80,7 @@ public class AddNewCustomerFormController {
 
     public void autoId() {
         try {
-            /** DI/TIGHT */
-            AddNewCustomerBOImpl addNewCustomerBO = new AddNewCustomerBOImpl();
+
             String s = addNewCustomerBO.generateNewCustomerID();
             txtID.setText(s);
 

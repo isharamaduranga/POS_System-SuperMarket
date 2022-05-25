@@ -1,10 +1,9 @@
 package controller;
 
+import bo.DeleteCustomerBO;
 import bo.DeleteCustomerBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.CustomerDAO;
-import dao.custom.impl.CustomerDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -26,7 +25,10 @@ public class DeleteCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane deleteCustomerContext;
 
-
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final DeleteCustomerBO deleteCustomerBO = new DeleteCustomerBOImpl();
 
     public void initialize() {
         try {
@@ -44,7 +46,6 @@ public class DeleteCustomerFormController {
     private void setCustomerData(String id) {
         try {
 
-            DeleteCustomerBOImpl deleteCustomerBO = new DeleteCustomerBOImpl();
             ResultSet result = deleteCustomerBO.searchCustomer(id);
 
             if (result.next()) {
@@ -63,8 +64,6 @@ public class DeleteCustomerFormController {
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
 
-        DeleteCustomerBOImpl deleteCustomerBO = new DeleteCustomerBOImpl();
-
         ObservableList<String> customerIds = deleteCustomerBO.getAllCustomerIds();
         cmdCustomerID.setItems(customerIds);
     }
@@ -81,8 +80,6 @@ public class DeleteCustomerFormController {
 
     public void DeleteCustomerOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
-
-            DeleteCustomerBOImpl deleteCustomerBO = new DeleteCustomerBOImpl();
 
             if (deleteCustomerBO.deleteCustomer(cmdCustomerID.getValue())) {
 

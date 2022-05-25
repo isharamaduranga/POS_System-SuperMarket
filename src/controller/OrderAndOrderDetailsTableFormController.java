@@ -1,5 +1,6 @@
 package controller;
 
+import bo.OrderAndOrderDetailBO;
 import bo.OrderAndOrderDetailBOImpl;
 import dao.custom.OrderDAO;
 import dao.custom.OrderDetailsDAO;
@@ -31,6 +32,11 @@ public class OrderAndOrderDetailsTableFormController {
     public TableColumn colDisCount;
     public TableColumn colPrice;
 
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final OrderAndOrderDetailBO orderAndOrderDetailBO = new OrderAndOrderDetailBOImpl();
+
     public void initialize() {
         try {
             cmbSelectTable.getItems().addAll("Order", "Order Details");
@@ -56,8 +62,7 @@ public class OrderAndOrderDetailsTableFormController {
     }
 
     private void loadAllOrder() throws SQLException, ClassNotFoundException {
-        /** DI / TIGHT */
-        OrderAndOrderDetailBOImpl orderAndOrderDetailBO = new OrderAndOrderDetailBOImpl();
+
         ArrayList<OrderDTO> allOrder = orderAndOrderDetailBO.getAllOrder();
 
         for (OrderDTO order : allOrder) {
@@ -71,8 +76,7 @@ public class OrderAndOrderDetailsTableFormController {
     }
 
     private void loadAllOrderDetails() throws SQLException, ClassNotFoundException {
-        /** DI / TIGHT */
-        OrderAndOrderDetailBOImpl orderAndOrderDetailBO = new OrderAndOrderDetailBOImpl();
+
         ArrayList<OrderDetailsDTO> allOrderDetails = orderAndOrderDetailBO.getAllOrderDetails();
 
         for (OrderDetailsDTO Details : allOrderDetails) {

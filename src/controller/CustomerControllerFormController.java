@@ -1,5 +1,6 @@
 package controller;
 
+import bo.CustomerControllerBO;
 import bo.CustomerControllerBOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
@@ -25,6 +26,10 @@ public class CustomerControllerFormController {
     public TableColumn colProvince;
     public TableColumn colPostCode;
 
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final CustomerControllerBO customerControllerBO = new CustomerControllerBOImpl();
 
     public void initialize() {
 
@@ -43,8 +48,8 @@ public class CustomerControllerFormController {
     private void loadAllCustomers() {
 
         try {
-            /** DI/TIGHT */
-            CustomerControllerBOImpl customerControllerBO = new CustomerControllerBOImpl();
+
+
             ArrayList<CustomerDTO> allCustomer = customerControllerBO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {

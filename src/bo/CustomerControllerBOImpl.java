@@ -7,15 +7,16 @@ import model.CustomerDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerControllerBOImpl {
+public class CustomerControllerBOImpl implements CustomerControllerBO {
 
     /**
      * Apply Dependency Injection (Property Injection)
      */
     private CustomerDAO customerDAO = new CustomerDAOImpl();
 
+    @Override
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
-       return customerDAO.getAll();
+        return customerDAO.getAll();
     }
 
 }

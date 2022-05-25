@@ -1,8 +1,7 @@
 package controller;
 
+import bo.ItemControllerBO;
 import bo.ItemControllerBOImpl;
-import dao.custom.ItemDAO;
-import dao.custom.impl.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,7 +26,10 @@ public class ItemControllerFormController {
     public TableColumn colQtyOnHand;
 
 
-
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final ItemControllerBO itemControllerBO = new ItemControllerBOImpl();
 
     public void initialize() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("itemID"));
@@ -41,8 +43,6 @@ public class ItemControllerFormController {
 
     private void loadAllItems() {
         try {
-            /** DI / TIGHT*/
-            ItemControllerBOImpl itemControllerBO = new ItemControllerBOImpl();
             ArrayList<ItemDTO> allItems = itemControllerBO.getAllItems();
 
             for (ItemDTO item : allItems) {

@@ -7,12 +7,13 @@ import model.CustomDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SearchOrderBOImpl {
+public class SearchOrderBOImpl implements SearchOrderBO {
     /**
      * Dependency Injection
      */
     private final QueryDAO queryDAO = new QueryDAOImpl();
 
+    @Override
     public ArrayList<CustomDTO> searchOrderByOrderID(String oid) throws SQLException, ClassNotFoundException {
         return queryDAO.searchOrderByCusID(oid);
     }

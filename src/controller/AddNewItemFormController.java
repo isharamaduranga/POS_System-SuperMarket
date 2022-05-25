@@ -1,9 +1,8 @@
 package controller;
 
+import bo.AddNewItemBO;
 import bo.AddNewItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.ItemDAO;
-import dao.custom.impl.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
@@ -21,7 +20,10 @@ public class AddNewItemFormController {
     public JFXTextField txtUnitPrice;
     public JFXTextField txtQtyOnHand;
 
-
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final AddNewItemBO addNewItemBO = new AddNewItemBOImpl();
 
     public void initialize() {
         autoId();
@@ -44,9 +46,6 @@ public class AddNewItemFormController {
         );
         try {
 
-            /** DI/TIGHT */
-            AddNewItemBOImpl addNewItemBO = new AddNewItemBOImpl();
-
             if (addNewItemBO.saveItem(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
@@ -65,8 +64,6 @@ public class AddNewItemFormController {
 
     public void autoId() {
         try {
-            /** DI/TIGHT */
-            AddNewItemBOImpl addNewItemBO = new AddNewItemBOImpl();
             String s = addNewItemBO.generateNewItemCode();
             txtCode.setText(s);
 

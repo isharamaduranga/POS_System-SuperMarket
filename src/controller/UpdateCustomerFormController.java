@@ -1,9 +1,8 @@
 package controller;
 
+import bo.UpdateCustomerBO;
 import bo.UpdateCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.CustomerDAO;
-import dao.custom.impl.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
@@ -25,14 +24,16 @@ public class UpdateCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane updateCustomerContext;
 
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final UpdateCustomerBO updateCustomerBO = new UpdateCustomerBOImpl();
 
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
             String cusId = txtCustomerID.getText();
 
-            /** DI / TIGHT*/
-            UpdateCustomerBOImpl updateCustomerBO = new UpdateCustomerBOImpl();
             ResultSet rst = updateCustomerBO.searchCustomer(cusId);
 
             if (rst.next()) {
@@ -56,9 +57,6 @@ public class UpdateCustomerFormController {
                 txtAddress.getText(), txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
 
         try {
-
-            /** DI / TIGHT*/
-            UpdateCustomerBOImpl updateCustomerBO = new UpdateCustomerBOImpl();
 
             if (updateCustomerBO.updateCustomer(dto)) {
 
@@ -86,7 +84,6 @@ public class UpdateCustomerFormController {
         txtProvince.clear();
         txtPostCode.clear();
     }
-
 
 
 }

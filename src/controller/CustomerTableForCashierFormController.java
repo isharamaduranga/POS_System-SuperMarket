@@ -1,8 +1,7 @@
 package controller;
 
+import bo.CustomerControllerBO;
 import bo.CustomerControllerBOImpl;
-import dao.custom.CustomerDAO;
-import dao.custom.impl.CustomerDAOImpl;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,7 +22,10 @@ public class CustomerTableForCashierFormController {
     public TableColumn colProvince;
     public TableColumn colPostCode;
 
-
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final CustomerControllerBO customerControllerBO = new CustomerControllerBOImpl();
 
     public void initialize() {
         colID.setCellValueFactory(new PropertyValueFactory<>("cusID"));
@@ -41,8 +43,6 @@ public class CustomerTableForCashierFormController {
 
         try {
 
-            /** DI/TIGHT */
-            CustomerControllerBOImpl customerControllerBO = new CustomerControllerBOImpl();
             ArrayList<CustomerDTO> allCustomer = customerControllerBO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {

@@ -1,9 +1,8 @@
 package controller;
 
+import bo.DeleteItemBO;
 import bo.DeleteItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.ItemDAO;
-import dao.custom.impl.ItemDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
@@ -22,14 +21,15 @@ public class DeleteItemFormController {
     public JFXTextField txtQtyOnHand;
     public AnchorPane deleteItemContext;
 
-
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final DeleteItemBO deleteItemBO = new DeleteItemBOImpl();
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {
             String code = txtCode.getText();
 
-            /** DI/TIGHT */
-            DeleteItemBOImpl deleteItemBO = new DeleteItemBOImpl();
             ResultSet result = deleteItemBO.searchItem(code);
 
             if (result.next()) {
@@ -51,9 +51,6 @@ public class DeleteItemFormController {
 
         try {
             String code = txtCode.getText();
-
-            /** DI/TIGHT */
-            DeleteItemBOImpl deleteItemBO = new DeleteItemBOImpl();
 
             if (deleteItemBO.deleteItem(code)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();

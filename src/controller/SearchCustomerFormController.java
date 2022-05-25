@@ -1,9 +1,8 @@
 package controller;
 
+import bo.SearchCustomerBO;
 import bo.SearchCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.CustomerDAO;
-import dao.custom.impl.CustomerDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import util.Utilities;
@@ -22,14 +21,16 @@ public class SearchCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane searchCustomerContext;
 
-
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final SearchCustomerBO searchCustomerBO = new SearchCustomerBOImpl();
 
     public void searchCustomerOnAction(ActionEvent actionEvent) {
         String id = txtID.getText();
 
         try {
-            /** DI / TIGHT*/
-            SearchCustomerBOImpl searchCustomerBO = new SearchCustomerBOImpl();
+
             ResultSet result = searchCustomerBO.searchCustomer(id);
 
             if (result.next()) {

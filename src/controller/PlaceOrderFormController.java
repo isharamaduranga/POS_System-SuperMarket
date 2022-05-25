@@ -1,5 +1,6 @@
 package controller;
 
+import bo.PurchaseOrderBO;
 import bo.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -51,6 +52,12 @@ public class PlaceOrderFormController {
     public Label lblTotal;
     int cartSelectedRowCountForDelete = -1;
 
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
+
+
     public void initialize() {
 
 
@@ -87,8 +94,7 @@ public class PlaceOrderFormController {
     private void setItemData(String itemCode) {
 
         try {
-            /** DI/TIGHT */
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+
             ResultSet result = purchaseOrderBO.searchItem(itemCode);
 
 
@@ -105,8 +111,7 @@ public class PlaceOrderFormController {
 
     private void setCustomerData(String customerID) {
         try {
-            /** DI/TIGHT */
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+
             ResultSet result = purchaseOrderBO.searchCustomer(customerID);
 
             if (result.next()) {
@@ -121,8 +126,6 @@ public class PlaceOrderFormController {
 
     private void loadItemIds() throws SQLException, ClassNotFoundException {
         try {
-            /** DI/TIGHT */
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
             ObservableList<String> codes = purchaseOrderBO.getItemIds();
             cmbItemID.setItems(codes);
 
@@ -133,8 +136,7 @@ public class PlaceOrderFormController {
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
         try {
-            /** DI/TIGHT */
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+
             ObservableList<String> ids = purchaseOrderBO.getCustomerIds();
             cmbCustomerID.setItems(ids);
 
@@ -157,8 +159,7 @@ public class PlaceOrderFormController {
 
     public void autoId() {
         try {
-            /** DI/TIGHT */
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+
             String s = purchaseOrderBO.generateNewOrderID();
 
             lblOrderID.setText(s);
@@ -273,10 +274,8 @@ public class PlaceOrderFormController {
         for (CartTM tm : list) {
             details.add(new OrderDetailsDTO(s, tm.getItemCode(), tm.getQTY(), tm.getDiscount(), tm.getTotal()));
         }
-        /** DI/TIGHT */
-        PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
-        try {
 
+        try {
             purchaseOrderBO.purchaseOrder(order, details);
 
         } catch (SQLException | ClassNotFoundException e) {
