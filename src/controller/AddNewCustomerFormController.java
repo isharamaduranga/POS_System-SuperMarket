@@ -1,6 +1,7 @@
 package controller;
 
 
+import bo.AddNewCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.CustomerDAO;
 import dao.custom.impl.CustomerDAOImpl;
@@ -22,10 +23,7 @@ public class AddNewCustomerFormController {
     public JFXTextField txtProvince;
     public AnchorPane addCustomerContext;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private CustomerDAO crudDAO = new CustomerDAOImpl();
+
 
 
     public void initialize() {
@@ -50,8 +48,10 @@ public class AddNewCustomerFormController {
         if (!title.equals("") && !name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postalCode.equals("")) {
             try {
 
+                /** DI/TIGHT */
+                AddNewCustomerBOImpl addNewCustomerBO = new AddNewCustomerBOImpl();
 
-                if (crudDAO.save(dto)) {
+                if (addNewCustomerBO.saveCustomer(dto)) {
 
                     new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
@@ -81,8 +81,9 @@ public class AddNewCustomerFormController {
 
     public void autoId() {
         try {
-
-            String s = crudDAO.generateNewId();
+            /** DI/TIGHT */
+            AddNewCustomerBOImpl addNewCustomerBO = new AddNewCustomerBOImpl();
+            String s = addNewCustomerBO.generateNewCustomerID();
             txtID.setText(s);
 
         } catch (ClassNotFoundException | SQLException e) {
