@@ -1,10 +1,8 @@
 package controller;
 
+import bo.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.*;
-import dao.custom.impl.*;
-import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,7 +16,6 @@ import model.OrderDTO;
 import model.OrderDetailsDTO;
 import view.TM.CartTM;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -51,23 +48,10 @@ public class PlaceOrderFormController {
     public TableColumn colUnitPrice;
     public TableColumn colDiscount;
     public TableColumn colTotal;
-
     public Label lblTotal;
-
     int cartSelectedRowCountForDelete = -1;
 
-    /**
-     * Dependency Injection
-     */
-    private final ItemDAO itemDAO = new ItemDAOImpl();
-    private final CustomerDAO customerDAO = new CustomerDAOImpl();
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
-    private final QueryDAO queryDAO = new QueryDAOImpl();
-
     public void initialize() {
-
-        QueryDAO queryDAO = new QueryDAOImpl();
 
 
         colItemID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
@@ -89,60 +73,74 @@ public class PlaceOrderFormController {
         }
 
         cmbCustomerID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                setCustomerData(newValue);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            setCustomerData(newValue);
         });
+
         cmbItemID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                setItemData(newValue);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            setItemData(newValue);
         });
         tblCart.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             cartSelectedRowCountForDelete = (int) newValue;
         });
     }
 
-    private void setItemData(String itemCode) throws SQLException, ClassNotFoundException {
+    private void setItemData(String itemCode) {
+
+        try {
+            /** DI/TIGHT */
+            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            ResultSet result = purchaseOrderBO.searchItem(itemCode);
 
 
-        ResultSet result = itemDAO.search(itemCode);
+            if (result.next()) {
+                txtDiscription.setText(result.getString(2));
+                txtQTYOnHand.setText(result.getString(5));
+                txtUnitPrice.setText(result.getString(4));
+            }
 
-        if (result.next()) {
-            txtDiscription.setText(result.getString(2));
-            txtQTYOnHand.setText(result.getString(5));
-            txtUnitPrice.setText(result.getString(4));
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    private void setCustomerData(String customerID) throws SQLException, ClassNotFoundException {
+    private void setCustomerData(String customerID) {
+        try {
+            /** DI/TIGHT */
+            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            ResultSet result = purchaseOrderBO.searchCustomer(customerID);
 
-        ResultSet result = customerDAO.search(customerID);
-
-        if (result.next()) {
-            txtName.setText(result.getString(3));
-            txtaddress.setText(result.getString(4));
-            txtCity.setText(result.getString(5));
-
+            if (result.next()) {
+                txtName.setText(result.getString(3));
+                txtaddress.setText(result.getString(4));
+                txtCity.setText(result.getString(5));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
     private void loadItemIds() throws SQLException, ClassNotFoundException {
+        try {
+            /** DI/TIGHT */
+            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            ObservableList<String> codes = purchaseOrderBO.getItemIds();
+            cmbItemID.setItems(codes);
 
-
-        ObservableList<String> codes = itemDAO.getIds();
-        cmbItemID.setItems(codes);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
+        try {
+            /** DI/TIGHT */
+            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            ObservableList<String> ids = purchaseOrderBO.getCustomerIds();
+            cmbCustomerID.setItems(ids);
 
-
-        ObservableList<String> ids = customerDAO.getIds();
-        cmbCustomerID.setItems(ids);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void curDateTime() {
@@ -159,14 +157,16 @@ public class PlaceOrderFormController {
 
     public void autoId() {
         try {
-            String s = orderDAO.generateNewId();
+            /** DI/TIGHT */
+            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            String s = purchaseOrderBO.generateNewOrderID();
+
             lblOrderID.setText(s);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
-
 
     public void clearOnAction(ActionEvent actionEvent) {
         if (cartSelectedRowCountForDelete == -1) {
@@ -187,7 +187,6 @@ public class PlaceOrderFormController {
         }
         return -1;
     }
-
 
     ObservableList<CartTM> list = FXCollections.observableArrayList();
 
@@ -239,9 +238,6 @@ public class PlaceOrderFormController {
         }
     }
 
-    public boolean updateQty(String itemCode, int qty) throws SQLException, ClassNotFoundException {
-        return itemDAO.updateQty(itemCode, qty);
-    }
 
     private void quntityChange() {
         int value = Integer.parseInt(txtQTYOnHand.getText());
@@ -258,7 +254,6 @@ public class PlaceOrderFormController {
         }
     }
 
-
     private void calculateCost() {
         double total = 0;
         for (CartTM tm : list) {
@@ -267,60 +262,25 @@ public class PlaceOrderFormController {
         lblTotal.setText(total + " /=");
     }
 
-    public void ComfirmOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void ComfirmOrderOnAction(ActionEvent actionEvent) {
 
 
         String s = lblOrderID.getText();
-        OrderDTO order = new OrderDTO(
-                s,
-                lblDate.getText(),
-                cmbCustomerID.getSelectionModel().getSelectedItem()
+        OrderDTO order = new OrderDTO(s, lblDate.getText(), cmbCustomerID.getSelectionModel().getSelectedItem()
         );
+
         ArrayList<OrderDetailsDTO> details = new ArrayList<>();
-        for (CartTM tm : list
-        ) {
-            details.add(
-                    new OrderDetailsDTO(
-                            s,
-                            tm.getItemCode(),
-                            tm.getQTY(),
-                            tm.getDiscount(),
-                            tm.getTotal()
-                    )
-            );
+        for (CartTM tm : list) {
+            details.add(new OrderDetailsDTO(s, tm.getItemCode(), tm.getQTY(), tm.getDiscount(), tm.getTotal()));
         }
-        Connection connection = null;
+        /** DI/TIGHT */
+        PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
         try {
-            connection = DBConnection.getDbConnection().getConnection();
-            connection.setAutoCommit(false);
 
-            boolean isOrderSaved = orderDAO.save(order);
+            purchaseOrderBO.purchaseOrder(order, details);
 
-            if (isOrderSaved) {
-
-                boolean isDetailsSaved = false;
-                for (OrderDetailsDTO detail : details) {
-
-
-                    isDetailsSaved = orderDetailsDAO.save(detail);
-
-                    /**  quantity update */
-                    updateQty(detail.getItemCode(), detail.getOrderQTY());
-                }
-
-                if (isDetailsSaved) {
-                    connection.commit();
-                    new Alert(Alert.AlertType.CONFIRMATION, "Saved Successfully...!").showAndWait();
-                } else {
-                    connection.rollback();
-                    new Alert(Alert.AlertType.ERROR, "Error...!").show();
-                }
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Error...!").show();
-            }
         } catch (SQLException | ClassNotFoundException e) {
-        } finally {
-            connection.setAutoCommit(true);
+            e.printStackTrace();
         }
         autoId();
         lblTotal.setText("0.00 /=");

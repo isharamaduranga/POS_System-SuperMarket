@@ -18,9 +18,14 @@ public class SearchOrderFormController {
     public JFXTextField txtOrderQty;
     public JFXTextField txtPrice;
 
+    /**
+     * Dependency Injection
+     */
+    private final QueryDAO queryDAO = new QueryDAOImpl();;
+
     public void searchOrderDetaisOnAction(KeyEvent keyEvent) throws SQLException, ClassNotFoundException {
         String oid=txtOrderID.getText();
-        QueryDAO queryDAO = new QueryDAOImpl();
+
         ArrayList<CustomDTO> record = queryDAO.searchOrderByCusID(oid);
         for (CustomDTO dto : record) {
             txtOrderDate.setText(dto.getOrderDate());
@@ -34,7 +39,6 @@ public class SearchOrderFormController {
             clear();
         }
     }
-
 
     public void clear() {
 
