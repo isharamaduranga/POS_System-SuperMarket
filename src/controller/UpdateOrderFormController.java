@@ -1,7 +1,7 @@
 package controller;
 
-import bo.UpdateOrderBO;
-import bo.UpdateOrderBOImpl;
+import bo.custom.UpdateOrderBO;
+import bo.custom.impl.UpdateOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

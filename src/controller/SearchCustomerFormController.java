@@ -1,7 +1,7 @@
 package controller;
 
-import bo.SearchCustomerBO;
-import bo.SearchCustomerBOImpl;
+import bo.custom.SearchCustomerBO;
+import bo.custom.impl.SearchCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;

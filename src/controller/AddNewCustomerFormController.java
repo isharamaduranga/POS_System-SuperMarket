@@ -1,8 +1,8 @@
 package controller;
 
 
-import bo.AddNewCustomerBO;
-import bo.AddNewCustomerBOImpl;
+import bo.custom.AddNewCustomerBO;
+import bo.custom.impl.AddNewCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

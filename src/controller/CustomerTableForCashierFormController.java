@@ -1,7 +1,7 @@
 package controller;
 
-import bo.CustomerControllerBO;
-import bo.CustomerControllerBOImpl;
+import bo.custom.CustomerControllerBO;
+import bo.custom.impl.CustomerControllerBOImpl;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;

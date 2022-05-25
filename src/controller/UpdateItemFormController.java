@@ -1,7 +1,7 @@
 package controller;
 
-import bo.UpdateItemBO;
-import bo.UpdateItemBOImpl;
+import bo.custom.UpdateItemBO;
+import bo.custom.impl.UpdateItemBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;

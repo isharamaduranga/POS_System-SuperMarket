@@ -1,7 +1,7 @@
 package controller;
 
-import bo.AddNewItemBO;
-import bo.AddNewItemBOImpl;
+import bo.custom.AddNewItemBO;
+import bo.custom.impl.AddNewItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

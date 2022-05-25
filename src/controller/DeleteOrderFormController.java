@@ -1,7 +1,7 @@
 package controller;
 
-import bo.DeleteOrderBO;
-import bo.DeleteOrderBOImpl;
+import bo.custom.DeleteOrderBO;
+import bo.custom.impl.DeleteOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

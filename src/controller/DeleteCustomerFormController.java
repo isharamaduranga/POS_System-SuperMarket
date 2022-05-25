@@ -1,7 +1,7 @@
 package controller;
 
-import bo.DeleteCustomerBO;
-import bo.DeleteCustomerBOImpl;
+import bo.custom.DeleteCustomerBO;
+import bo.custom.impl.DeleteCustomerBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;

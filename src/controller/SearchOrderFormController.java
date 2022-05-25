@@ -1,7 +1,7 @@
 package controller;
 
-import bo.SearchOrderBO;
-import bo.SearchOrderBOImpl;
+import bo.custom.SearchOrderBO;
+import bo.custom.impl.SearchOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.input.KeyEvent;
 import model.CustomDTO;

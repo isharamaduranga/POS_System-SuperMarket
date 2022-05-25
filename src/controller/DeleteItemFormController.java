@@ -1,7 +1,7 @@
 package controller;
 
-import bo.DeleteItemBO;
-import bo.DeleteItemBOImpl;
+import bo.custom.DeleteItemBO;
+import bo.custom.impl.DeleteItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

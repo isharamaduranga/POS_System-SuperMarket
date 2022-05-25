@@ -1,7 +1,7 @@
 package controller;
 
-import bo.ItemControllerBO;
-import bo.ItemControllerBOImpl;
+import bo.custom.ItemControllerBO;
+import bo.custom.impl.ItemControllerBOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
