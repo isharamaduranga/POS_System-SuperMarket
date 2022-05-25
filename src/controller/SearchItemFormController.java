@@ -1,5 +1,6 @@
 package controller;
 
+import bo.SearchItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.ItemDAO;
 import dao.custom.impl.ItemDAOImpl;
@@ -19,17 +20,15 @@ public class SearchItemFormController {
     public JFXTextField txtCode;
     public AnchorPane searchItemContext;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+
 
 
     public void searchOnAction(ActionEvent actionEvent) {
         try {
             String code = txtCode.getText();
-
-            ResultSet result = itemDAO.search(code);
+            /**  DI / TIGHT*/
+            SearchItemBOImpl searchItemBO = new SearchItemBOImpl();
+            ResultSet result = searchItemBO.searchItem(code);
 
             if (result.next()) {
                 txtDescription.setText(result.getString(2));

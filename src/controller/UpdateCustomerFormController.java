@@ -1,5 +1,6 @@
 package controller;
 
+import bo.UpdateCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.CustomerDAO;
 import dao.custom.impl.CustomerDAOImpl;
@@ -24,16 +25,16 @@ public class UpdateCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane updateCustomerContext;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private CustomerDAO crudDAO = new CustomerDAOImpl();
+
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
             String cusId = txtCustomerID.getText();
 
-            ResultSet rst = crudDAO.search(cusId);
+            /** DI / TIGHT*/
+            UpdateCustomerBOImpl updateCustomerBO = new UpdateCustomerBOImpl();
+            ResultSet rst = updateCustomerBO.searchCustomer(cusId);
+
             if (rst.next()) {
                 txtTitle.setText(rst.getString(2));
                 txtName.setText(rst.getString(3));
@@ -55,7 +56,11 @@ public class UpdateCustomerFormController {
                 txtAddress.getText(), txtCity.getText(), txtProvince.getText(), txtPostCode.getText());
 
         try {
-            if (crudDAO.update(dto)) {
+
+            /** DI / TIGHT*/
+            UpdateCustomerBOImpl updateCustomerBO = new UpdateCustomerBOImpl();
+
+            if (updateCustomerBO.updateCustomer(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
 

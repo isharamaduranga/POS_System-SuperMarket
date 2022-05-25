@@ -1,5 +1,6 @@
 package controller;
 
+import bo.UpdateOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.OrderDetailsDAO;
 import dao.custom.impl.OrderDetailsDAOImpl;
@@ -18,10 +19,7 @@ public class UpdateOrderFormController {
     public JFXTextField txtOrderQty;
     public JFXTextField txtDiscount;
 
-    /**
-     * Dependency Injection
-     */
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
+
 
     public void UpdateComfirmOnAction(ActionEvent actionEvent) {
         OrderDetailsDTO dto = new OrderDetailsDTO(txtOrderID.getText(), txtItemCode.getText(), Integer.parseInt(txtOrderQty.getText()),
@@ -29,7 +27,10 @@ public class UpdateOrderFormController {
 
         try {
 
-            boolean update = orderDetailsDAO.update(dto);
+            /** DI/ TIGHT*/
+            UpdateOrderBOImpl updateOrderBO = new UpdateOrderBOImpl();
+            boolean update = updateOrderBO.updateOrderDetails(dto);
+
             if (update) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").showAndWait();
@@ -47,10 +48,11 @@ public class UpdateOrderFormController {
 
     public void searchOrderDetaisOnAction(KeyEvent keyEvent) {
         try {
-
             String oid = txtOrderID.getText();
 
-            ResultSet result = orderDetailsDAO.search(oid);
+            /** DI/ TIGHT*/
+            UpdateOrderBOImpl updateOrderBO = new UpdateOrderBOImpl();
+            ResultSet result = updateOrderBO.searchOrderDetails(oid);
 
             if (result.next()) {
 

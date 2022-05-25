@@ -1,5 +1,6 @@
 package controller;
 
+import bo.SearchOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.QueryDAO;
 import dao.custom.impl.QueryDAOImpl;
@@ -18,15 +19,15 @@ public class SearchOrderFormController {
     public JFXTextField txtOrderQty;
     public JFXTextField txtPrice;
 
-    /**
-     * Dependency Injection
-     */
-    private final QueryDAO queryDAO = new QueryDAOImpl();;
+
 
     public void searchOrderDetaisOnAction(KeyEvent keyEvent) throws SQLException, ClassNotFoundException {
         String oid=txtOrderID.getText();
 
-        ArrayList<CustomDTO> record = queryDAO.searchOrderByCusID(oid);
+        /** DI / TIGHT*/
+        SearchOrderBOImpl searchOrderBO = new SearchOrderBOImpl();
+        ArrayList<CustomDTO> record = searchOrderBO.searchOrderByOrderID(oid);
+
         for (CustomDTO dto : record) {
             txtOrderDate.setText(dto.getOrderDate());
             txtItemCode.setText(dto.getItemCode());

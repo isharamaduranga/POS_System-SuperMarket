@@ -1,5 +1,6 @@
 package controller;
 
+import bo.DeleteOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.OrderDAO;
 import dao.custom.impl.OrderDAOImpl;
@@ -17,10 +18,7 @@ public class DeleteOrderFormController {
     public JFXTextField txtDate;
     public JFXTextField txtCustID;
 
-    /**
-     * Dependency Injection
-     */
-    private final OrderDAO orderDAO = new OrderDAOImpl();
+
 
 
     public void removeOnAction(ActionEvent actionEvent) {
@@ -28,9 +26,11 @@ public class DeleteOrderFormController {
 
             String oid = txtOrderId.getText();
 
-            boolean isDelete = orderDAO.delete(oid);
+            /** DI / TIGHT*/
+            DeleteOrderBOImpl deleteOrderBO = new DeleteOrderBOImpl();
+            boolean isDeleted = deleteOrderBO.deleteOrder(oid);
 
-            if (isDelete) {
+            if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();
@@ -46,7 +46,11 @@ public class DeleteOrderFormController {
         try {
 
             String oid = txtOrderId.getText();
-            ResultSet result = orderDAO.search(oid);
+
+            /** DI / TIGHT*/
+            DeleteOrderBOImpl deleteOrderBO = new DeleteOrderBOImpl();
+            ResultSet result = deleteOrderBO.searchOrder(oid);
+
             if (result.next()) {
 
                 txtDate.setText(result.getString(2));

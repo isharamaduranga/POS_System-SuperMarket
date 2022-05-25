@@ -1,5 +1,6 @@
 package controller;
 
+import bo.OrderAndOrderDetailBOImpl;
 import dao.custom.OrderDAO;
 import dao.custom.OrderDetailsDAO;
 import dao.custom.impl.OrderDAOImpl;
@@ -30,14 +31,6 @@ public class OrderAndOrderDetailsTableFormController {
     public TableColumn colDisCount;
     public TableColumn colPrice;
 
-
-    /**
-     * Dependency Injection
-     */
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
-
-
     public void initialize() {
         try {
             cmbSelectTable.getItems().addAll("Order", "Order Details");
@@ -63,8 +56,9 @@ public class OrderAndOrderDetailsTableFormController {
     }
 
     private void loadAllOrder() throws SQLException, ClassNotFoundException {
-
-        ArrayList<OrderDTO> allOrder = orderDAO.getAll();
+        /** DI / TIGHT */
+        OrderAndOrderDetailBOImpl orderAndOrderDetailBO = new OrderAndOrderDetailBOImpl();
+        ArrayList<OrderDTO> allOrder = orderAndOrderDetailBO.getAllOrder();
 
         for (OrderDTO order : allOrder) {
             tblOrder.getItems().add(new OrderTM(
@@ -77,8 +71,9 @@ public class OrderAndOrderDetailsTableFormController {
     }
 
     private void loadAllOrderDetails() throws SQLException, ClassNotFoundException {
-
-        ArrayList<OrderDetailsDTO> allOrderDetails = orderDetailsDAO.getAll();
+        /** DI / TIGHT */
+        OrderAndOrderDetailBOImpl orderAndOrderDetailBO = new OrderAndOrderDetailBOImpl();
+        ArrayList<OrderDetailsDTO> allOrderDetails = orderAndOrderDetailBO.getAllOrderDetails();
 
         for (OrderDetailsDTO Details : allOrderDetails) {
             tblOrderDetails.getItems().add(new OrderDetailsTM(

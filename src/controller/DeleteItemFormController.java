@@ -1,5 +1,6 @@
 package controller;
 
+import bo.DeleteItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.ItemDAO;
 import dao.custom.impl.ItemDAOImpl;
@@ -21,16 +22,15 @@ public class DeleteItemFormController {
     public JFXTextField txtQtyOnHand;
     public AnchorPane deleteItemContext;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {
             String code = txtCode.getText();
 
-            ResultSet result = itemDAO.search(code);
+            /** DI/TIGHT */
+            DeleteItemBOImpl deleteItemBO = new DeleteItemBOImpl();
+            ResultSet result = deleteItemBO.searchItem(code);
 
             if (result.next()) {
 
@@ -38,7 +38,6 @@ public class DeleteItemFormController {
                 txtPackSize.setText(result.getString(3));
                 txtUnitPrice.setText(String.valueOf(result.getDouble(4)));
                 txtQtyOnHand.setText(String.valueOf(result.getInt(5)));
-
 
             } else {
                 clear();
@@ -53,7 +52,10 @@ public class DeleteItemFormController {
         try {
             String code = txtCode.getText();
 
-            if (itemDAO.delete(code)) {
+            /** DI/TIGHT */
+            DeleteItemBOImpl deleteItemBO = new DeleteItemBOImpl();
+
+            if (deleteItemBO.deleteItem(code)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();

@@ -1,5 +1,6 @@
 package controller;
 
+import bo.DeleteCustomerBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.CustomerDAO;
@@ -25,10 +26,7 @@ public class DeleteCustomerFormController {
     public JFXTextField txtPostCode;
     public AnchorPane deleteCustomerContext;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private CustomerDAO crudDAO = new CustomerDAOImpl();
+
 
     public void initialize() {
         try {
@@ -46,7 +44,8 @@ public class DeleteCustomerFormController {
     private void setCustomerData(String id) {
         try {
 
-            ResultSet result = crudDAO.search(id);
+            DeleteCustomerBOImpl deleteCustomerBO = new DeleteCustomerBOImpl();
+            ResultSet result = deleteCustomerBO.searchCustomer(id);
 
             if (result.next()) {
                 txtTitle.setText(result.getString(2));
@@ -64,7 +63,9 @@ public class DeleteCustomerFormController {
 
     private void loadAllCustomerIds() throws SQLException, ClassNotFoundException {
 
-        ObservableList<String> customerIds = crudDAO.getIds();
+        DeleteCustomerBOImpl deleteCustomerBO = new DeleteCustomerBOImpl();
+
+        ObservableList<String> customerIds = deleteCustomerBO.getAllCustomerIds();
         cmdCustomerID.setItems(customerIds);
     }
 
@@ -81,7 +82,10 @@ public class DeleteCustomerFormController {
     public void DeleteCustomerOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
 
-            if (crudDAO.delete(cmdCustomerID.getValue())) {
+            DeleteCustomerBOImpl deleteCustomerBO = new DeleteCustomerBOImpl();
+
+            if (deleteCustomerBO.deleteCustomer(cmdCustomerID.getValue())) {
+
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").showAndWait();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();

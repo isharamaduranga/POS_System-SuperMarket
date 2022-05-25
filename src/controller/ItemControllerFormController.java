@@ -1,5 +1,6 @@
 package controller;
 
+import bo.ItemControllerBOImpl;
 import dao.custom.ItemDAO;
 import dao.custom.impl.ItemDAOImpl;
 import javafx.event.ActionEvent;
@@ -25,10 +26,7 @@ public class ItemControllerFormController {
     public TableColumn colUnitPrice;
     public TableColumn colQtyOnHand;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+
 
 
     public void initialize() {
@@ -43,7 +41,9 @@ public class ItemControllerFormController {
 
     private void loadAllItems() {
         try {
-            ArrayList<ItemDTO> allItems = itemDAO.getAll();
+            /** DI / TIGHT*/
+            ItemControllerBOImpl itemControllerBO = new ItemControllerBOImpl();
+            ArrayList<ItemDTO> allItems = itemControllerBO.getAllItems();
 
             for (ItemDTO item : allItems) {
                 tblItem.getItems().add(new ItemTM(

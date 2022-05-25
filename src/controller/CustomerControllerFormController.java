@@ -1,7 +1,6 @@
 package controller;
 
-import dao.custom.CustomerDAO;
-import dao.custom.impl.CustomerDAOImpl;
+import bo.CustomerControllerBOImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,10 +25,6 @@ public class CustomerControllerFormController {
     public TableColumn colProvince;
     public TableColumn colPostCode;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private CustomerDAO crudDAO = new CustomerDAOImpl();
 
     public void initialize() {
 
@@ -41,14 +36,16 @@ public class CustomerControllerFormController {
         colProvince.setCellValueFactory(new PropertyValueFactory<>("Province"));
         colPostCode.setCellValueFactory(new PropertyValueFactory<>("postCode"));
 
-
         loadAllCustomers();
     }
 
 
     private void loadAllCustomers() {
+
         try {
-            ArrayList<CustomerDTO> allCustomer = crudDAO.getAll();
+            /** DI/TIGHT */
+            CustomerControllerBOImpl customerControllerBO = new CustomerControllerBOImpl();
+            ArrayList<CustomerDTO> allCustomer = customerControllerBO.getAllCustomer();
 
             for (CustomerDTO customer : allCustomer) {
                 tblCustomer.getItems().add(new CustomerTM(
@@ -60,6 +57,7 @@ public class CustomerControllerFormController {
                         customer.getProvince(),
                         customer.getPostCode()));
             }
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

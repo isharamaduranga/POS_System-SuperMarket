@@ -1,5 +1,6 @@
 package controller;
 
+import bo.AddNewItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.ItemDAO;
 import dao.custom.impl.ItemDAOImpl;
@@ -20,10 +21,7 @@ public class AddNewItemFormController {
     public JFXTextField txtUnitPrice;
     public JFXTextField txtQtyOnHand;
 
-    /**
-     * Apply Dependency Injection (Property Injection)
-     */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+
 
     public void initialize() {
         autoId();
@@ -46,7 +44,10 @@ public class AddNewItemFormController {
         );
         try {
 
-            if (itemDAO.save(dto)) {
+            /** DI/TIGHT */
+            AddNewItemBOImpl addNewItemBO = new AddNewItemBOImpl();
+
+            if (addNewItemBO.saveItem(dto)) {
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved...").showAndWait();
 
@@ -64,7 +65,9 @@ public class AddNewItemFormController {
 
     public void autoId() {
         try {
-            String s = itemDAO.generateNewId();
+            /** DI/TIGHT */
+            AddNewItemBOImpl addNewItemBO = new AddNewItemBOImpl();
+            String s = addNewItemBO.generateNewItemCode();
             txtCode.setText(s);
 
         } catch (ClassNotFoundException | SQLException e) {
