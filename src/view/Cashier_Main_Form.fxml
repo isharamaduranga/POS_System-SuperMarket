@@ -139,6 +139,18 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#searchOrderOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text="SEARCH ORDER" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/deleteOrder.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                         <JFXButton alignment="BASELINE_LEFT" onAction="#deleteOrderOnAction" prefHeight="60.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text="DELETE ORDER" textFill="WHITE">
                            <font>
                               <Font size="19.0" />
@@ -179,17 +191,17 @@
                         <Image url="@assests/background.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblDate" layoutX="262.0" layoutY="27.0" prefHeight="51.0" prefWidth="233.0" text="2022-03-05">
+                  <Label fx:id="lblDate" alignment="BASELINE_CENTER" layoutX="199.0" layoutY="27.0" prefHeight="51.0" prefWidth="198.0" text="2022-03-05">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblDay" layoutX="278.0" layoutY="78.0" prefHeight="35.0" prefWidth="167.0" text="SUNDAY">
+                  <Label fx:id="lblDay" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="78.0" prefHeight="36.0" prefWidth="197.0" text="SUNDAY">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTime" layoutX="445.0" layoutY="27.0" prefHeight="73.0" prefWidth="213.0" text="4:20:30">
+                  <Label fx:id="lblTime" alignment="BASELINE_CENTER" layoutX="432.0" layoutY="28.0" prefHeight="73.0" prefWidth="213.0" text="4:20:30">
                      <font>
                         <Font name="System Bold" size="50.0" />
                      </font>
@@ -204,7 +216,7 @@
                         <Font name="System Bold" size="23.0" />
                      </font>
                   </JFXButton>
-                  <Separator layoutX="430.0" layoutY="13.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="6.0" />
+                  <Separator layoutX="417.0" layoutY="13.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="6.0" />
                   <JFXComboBox fx:id="cmbCustomerID" labelFloat="true" layoutX="58.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ID" unFocusColor="RED" />
                   <TableView fx:id="tblItemDetails" layoutX="58.0" layoutY="334.0" prefHeight="200.0" prefWidth="423.0" stylesheets="@../DarkTheme.css">
                     <columns>
@@ -216,21 +228,23 @@
                   <JFXTextField fx:id="txtCusAddress" editable="false" labelFloat="true" layoutX="650.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ADDRESS" unFocusColor="#4059a9" />
                   <JFXTextField fx:id="TxtDate" editable="false" labelFloat="true" layoutX="358.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="DATE" unFocusColor="#4059a9" />
                   <JFXTextField fx:id="txtOrderID" editable="false" labelFloat="true" layoutX="58.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="ORDER ID" unFocusColor="#4059a9" />
-                  <Label layoutX="563.0" layoutY="402.0" prefHeight="40.0" prefWidth="210.0" text="Total Price">
+                  <Label layoutX="531.0" layoutY="366.0" prefHeight="51.0" prefWidth="327.0" text="T O T A L   P R I C E">
                      <font>
-                        <Font name="System Bold" size="31.0" />
+                        <Font name="System Bold" size="35.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotalprice" layoutX="650.0" layoutY="470.0" prefHeight="54.0" prefWidth="182.0" text="0.00">
+                  <Label fx:id="lblTotalprice" layoutX="651.0" layoutY="447.0" prefHeight="54.0" prefWidth="182.0" text="0.00">
                      <font>
-                        <Font name="System Bold" size="31.0" />
+                        <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
-                  <Label layoutX="578.0" layoutY="474.0" prefHeight="40.0" prefWidth="56.0" text="RS">
+                  <Label layoutX="568.0" layoutY="447.0" prefHeight="60.0" prefWidth="66.0" text="RS">
                      <font>
-                        <Font name="System Bold" size="31.0" />
+                        <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
+                  <Separator layoutX="520.0" layoutY="415.0" prefHeight="4.0" prefWidth="335.0" />
+                  <Separator layoutX="520.0" layoutY="366.0" prefHeight="4.0" prefWidth="335.0" />
                </children>
             </AnchorPane>
          </center>

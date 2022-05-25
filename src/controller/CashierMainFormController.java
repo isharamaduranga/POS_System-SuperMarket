@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -119,6 +120,15 @@ public class CashierMainFormController {
         if(rst.next()){
             txtOrderID.setText(rst.getString(1));
             TxtDate.setText(rst.getString(2));
+
+            setItems();
+        }else if(!rst.next()){
+
+            tblItemDetails.getItems().clear();
+            txtOrderID.clear();
+            lblTotalprice.setText("0.00");
+            TxtDate.clear();
+            new Alert(Alert.AlertType.WARNING, "Empty Result Set").show();
         }
     }
 
@@ -127,20 +137,6 @@ public class CashierMainFormController {
         ObservableList<String> ids = customerDAO.getIds();
         cmbCustomerID.setItems(ids);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void curDateTime() {
         lblDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -208,5 +204,7 @@ public class CashierMainFormController {
         Utilities.setUiChildren(dashBoardContext, "OrderAndOrderDetailsTableForm");
     }
 
-
+    public void searchOrderOnAction(ActionEvent actionEvent) throws IOException {
+        Utilities.setUiChildren(dashBoardContext, "SearchOrderForm");
+    }
 }

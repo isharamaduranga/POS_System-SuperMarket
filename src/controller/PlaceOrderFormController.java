@@ -2,14 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.custom.CustomerDAO;
-import dao.custom.ItemDAO;
-import dao.custom.OrderDAO;
-import dao.custom.OrderDetailsDAO;
-import dao.custom.impl.CustomerDAOImpl;
-import dao.custom.impl.ItemDAOImpl;
-import dao.custom.impl.OrderDAOImpl;
-import dao.custom.impl.OrderDetailsDAOImpl;
+import dao.custom.*;
+import dao.custom.impl.*;
 import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -69,8 +63,12 @@ public class PlaceOrderFormController {
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
+    private final QueryDAO queryDAO = new QueryDAOImpl();
 
     public void initialize() {
+
+        QueryDAO queryDAO = new QueryDAOImpl();
+
 
         colItemID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -259,6 +257,7 @@ public class PlaceOrderFormController {
             }
         }
     }
+
 
     private void calculateCost() {
         double total = 0;
