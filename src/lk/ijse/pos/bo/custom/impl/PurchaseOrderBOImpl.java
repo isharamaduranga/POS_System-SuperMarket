@@ -56,7 +56,12 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
                         ));
 
                 //**  quantity update *//*
-                updateQty(detail.getItemCode(), detail.getOrderQTY());
+
+                boolean qtyUpdate = itemDAO.updateQty(detail.getItemCode(), detail.getOrderQTY());
+                if (qtyUpdate) {
+
+                }
+
             }
 
             if (isDetailsSaved) {
