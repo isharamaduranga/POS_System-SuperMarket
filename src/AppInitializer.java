@@ -9,7 +9,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(this.getClass().getResource("/view/Login_Form.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("/lk/ijse/pos/view/Login_Form.fxml"));
         Scene mainScene = new Scene(root);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(mainScene);

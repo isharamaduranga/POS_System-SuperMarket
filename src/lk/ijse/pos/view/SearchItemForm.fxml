@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="searchItemContext" prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.SearchItemFormController">
+   <children>
+      <Label layoutX="395.0" layoutY="82.0" text="Search Item">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="118.0" layoutY="138.0" prefHeight="0.0" prefWidth="800.0" />
+      <Label alignment="BASELINE_LEFT" layoutX="303.0" layoutY="152.0" prefHeight="27.0" prefWidth="393.0" text="Enter The Customer ID For Need To Search " textFill="#f22626">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="540.0" layoutY="208.0" onAction="#searchOnAction" prefHeight="31.0" prefWidth="189.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonSearch" stylesheets="@DarkTheme.css" text="SEARCH" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <Pane layoutX="44.0" layoutY="44.0" prefHeight="47.0" prefWidth="935.0" style="-fx-background-color: #002b52;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXTextField fx:id="txtPackSize" layoutX="370.0" layoutY="387.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtDescription" layoutX="370.0" layoutY="328.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtUnitPrice" layoutX="370.0" layoutY="444.0" prefHeight="26.0" prefWidth="339.0" />
+      <JFXTextField fx:id="txtQtyOnHand" layoutX="370.0" layoutY="504.0" prefHeight="26.0" prefWidth="339.0" />
+      <Label alignment="BASELINE_LEFT" layoutX="175.0" layoutY="334.0" prefHeight="26.0" prefWidth="167.0" text="Description          :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="175.0" layoutY="394.0" prefHeight="26.0" prefWidth="167.0" text="Pack  Size             :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="175.0" layoutY="454.0" prefHeight="26.0" prefWidth="167.0" text="Unit  Price            :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="BASELINE_LEFT" layoutX="175.0" layoutY="514.0" prefHeight="26.0" prefWidth="167.0" text="Qty On Hand        :-">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCode" labelFloat="true" layoutX="175.0" layoutY="214.0" prefHeight="26.0" prefWidth="339.0" promptText="Please Enter Item Code" />
+      <JFXButton layoutX="4.0" layoutY="53.0" onAction="#btnBackOnAction" prefHeight="38.0" prefWidth="109.0" style="-fx-background-radius: 3.0EM;" styleClass="cashierBtn" stylesheets="@DarkTheme.css" text="BACK">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true">
+               <image>
+                  <Image url="@assests/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
