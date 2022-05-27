@@ -44,11 +44,11 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtCode" labelFloat="true" layoutX="326.0" layoutY="174.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtDescription" labelFloat="true" layoutX="329.0" layoutY="249.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtPackSize" labelFloat="true" layoutX="328.0" layoutY="319.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtUnitPrice" labelFloat="true" layoutX="329.0" layoutY="389.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtQtyOnHand" labelFloat="true" layoutX="328.0" layoutY="465.0" prefHeight="31.0" prefWidth="472.0" />
-      <JFXButton layoutX="345.0" layoutY="586.0" onAction="#addItemOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonAdd" stylesheets="@DarkTheme.css" text="ADD" textFill="WHITE">
+      <JFXTextField fx:id="txtDescription" labelFloat="true" layoutX="329.0" layoutY="249.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtPackSize" labelFloat="true" layoutX="328.0" layoutY="319.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtUnitPrice" labelFloat="true" layoutX="329.0" layoutY="389.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtQtyOnHand" labelFloat="true" layoutX="328.0" layoutY="465.0" onKeyReleased="#textFields_Key_Released" prefHeight="31.0" prefWidth="472.0" />
+      <JFXButton fx:id="btnAdd" layoutX="345.0" layoutY="586.0" onAction="#addItemOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonAdd" stylesheets="@DarkTheme.css" text="ADD" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

@@ -52,13 +52,13 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtID" editable="false" labelFloat="true" layoutX="316.0" layoutY="152.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtTitle" labelFloat="true" layoutX="317.0" layoutY="218.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="316.0" layoutY="277.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtPostCode" labelFloat="true" layoutX="317.0" layoutY="530.0" prefHeight="31.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="317.0" layoutY="340.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtCity" labelFloat="true" layoutX="316.0" layoutY="399.0" prefHeight="31.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtProvince" labelFloat="true" layoutX="317.0" layoutY="460.0" prefHeight="31.0" prefWidth="472.0" />
-      <JFXButton layoutX="335.0" layoutY="611.0" onAction="#addNewCustomerOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonAdd" stylesheets="@DarkTheme.css" text="ADD" textFill="WHITE">
+      <JFXTextField fx:id="txtTitle" labelFloat="true" layoutX="317.0" layoutY="218.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="316.0" layoutY="277.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtPostCode" labelFloat="true" layoutX="317.0" layoutY="530.0" onKeyReleased="#textFields_Key_Released" prefHeight="31.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="317.0" layoutY="340.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtCity" labelFloat="true" layoutX="316.0" layoutY="399.0" onKeyReleased="#textFields_Key_Released" prefHeight="31.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtProvince" labelFloat="true" layoutX="317.0" layoutY="460.0" onKeyReleased="#textFields_Key_Released" prefHeight="31.0" prefWidth="472.0" />
+      <JFXButton fx:id="btnAdd" layoutX="335.0" layoutY="611.0" onAction="#addNewCustomerOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonAdd" stylesheets="@DarkTheme.css" text="ADD" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
