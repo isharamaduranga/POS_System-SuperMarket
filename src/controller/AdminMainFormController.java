@@ -1,5 +1,6 @@
 package controller;
 
+import bo.custom.AdminMainBO;
 import bo.custom.impl.AdminMainBOImpl;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
@@ -47,7 +48,7 @@ public class AdminMainFormController {
      * Dependency Injection
      */
 
-    private final AdminMainBOImpl adminMainBO = new AdminMainBOImpl();
+    private final AdminMainBO adminMainBO = new AdminMainBOImpl();
 
 
     public void initialize() {

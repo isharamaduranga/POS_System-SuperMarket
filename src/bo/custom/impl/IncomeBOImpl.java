@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.IncomeBO;
+import dao.DAOFactory;
 import dao.custom.QueryDAO;
 import dao.custom.impl.QueryDAOImpl;
 
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IncomeBOImpl implements IncomeBO {
-    private final QueryDAO queryDAO = new QueryDAOImpl();
+    private final QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERY_DAO);
 
     @Override
     public ResultSet getOrderDetailsSearchByDate(String month, String year) throws SQLException, ClassNotFoundException {

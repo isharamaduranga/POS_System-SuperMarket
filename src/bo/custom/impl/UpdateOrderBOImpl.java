@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.UpdateOrderBO;
+import dao.DAOFactory;
 import dao.custom.OrderDetailsDAO;
 import dao.custom.impl.OrderDetailsDAOImpl;
 import model.OrderDetailsDTO;
@@ -12,7 +13,7 @@ public class UpdateOrderBOImpl implements UpdateOrderBO {
     /**
      * Dependency Injection
      */
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
+    private final OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
 
     @Override
     public ResultSet searchOrderDetails(String id) throws SQLException, ClassNotFoundException {

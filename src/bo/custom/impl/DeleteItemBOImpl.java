@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.DeleteItemBO;
+import dao.DAOFactory;
 import dao.custom.ItemDAO;
 import dao.custom.impl.ItemDAOImpl;
 
@@ -11,7 +12,7 @@ public class DeleteItemBOImpl implements DeleteItemBO {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private ItemDAO itemDAO = new ItemDAOImpl();
+    private ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
 
     @Override
     public ResultSet searchItem(String code) throws SQLException, ClassNotFoundException {

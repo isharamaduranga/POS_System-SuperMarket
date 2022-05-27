@@ -9,6 +9,9 @@
 package bo.custom.impl;
 
 import bo.custom.AdminMainBO;
+import dao.DAOFactory;
+import dao.custom.ItemDAO;
+import dao.custom.OrderDetailsDAO;
 import dao.custom.impl.ItemDAOImpl;
 import dao.custom.impl.OrderDetailsDAOImpl;
 import model.ItemDTO;
@@ -18,11 +21,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AdminMainBOImpl implements AdminMainBO {
-    private final OrderDetailsDAOImpl orderDetailsDAO = new OrderDetailsDAOImpl();
-    private final ItemDAOImpl itemDAO = new ItemDAOImpl();
+    private final OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
+    private final ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
 
     @Override
     public ArrayList<OrderDetailsDTO> getAllOrderDetails() throws SQLException, ClassNotFoundException {
+
+
+
+
         return orderDetailsDAO.getAll();
     }
     @Override

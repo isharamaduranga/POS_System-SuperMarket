@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.DeleteCustomerBO;
+import dao.DAOFactory;
 import dao.custom.CustomerDAO;
 import dao.custom.impl.CustomerDAOImpl;
 import javafx.collections.ObservableList;
@@ -12,7 +13,7 @@ public class DeleteCustomerBOImpl implements DeleteCustomerBO {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
 
     @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {

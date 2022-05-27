@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.OrderAndOrderDetailBO;
+import dao.DAOFactory;
 import dao.custom.OrderDAO;
 import dao.custom.OrderDetailsDAO;
 import dao.custom.impl.OrderDAOImpl;
@@ -15,8 +16,8 @@ public class OrderAndOrderDetailBOImpl implements OrderAndOrderDetailBO {
     /**
      * Dependency Injection
      */
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
+    private final OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
+    private final OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
 
     @Override
     public ArrayList<OrderDTO> getAllOrder() throws SQLException, ClassNotFoundException {

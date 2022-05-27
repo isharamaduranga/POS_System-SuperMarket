@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.UpdateCustomerBO;
+import dao.DAOFactory;
 import dao.custom.CustomerDAO;
 import dao.custom.impl.CustomerDAOImpl;
 import model.CustomerDTO;
@@ -12,7 +13,7 @@ public class UpdateCustomerBOImpl implements UpdateCustomerBO {
     /**
      * Apply Dependency Injection (Property Injection)
      */
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
+    private CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
 
     @Override
     public ResultSet searchCustomer(String id) throws SQLException, ClassNotFoundException {

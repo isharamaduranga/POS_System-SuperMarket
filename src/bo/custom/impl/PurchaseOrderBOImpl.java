@@ -1,6 +1,7 @@
 package bo.custom.impl;
 
 import bo.custom.PurchaseOrderBO;
+import dao.DAOFactory;
 import dao.custom.*;
 import dao.custom.impl.*;
 import db.DBConnection;
@@ -18,11 +19,11 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
     /**
      * Dependency Injection
      */
-    private final ItemDAO itemDAO = new ItemDAOImpl();
-    private final CustomerDAO customerDAO = new CustomerDAOImpl();
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
-    private final QueryDAO queryDAO = new QueryDAOImpl();
+    private final ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
+    private final CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+    private final OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
+    private final OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
+    private final QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERY_DAO);
 
     @Override
     public void purchaseOrder(OrderDTO order, ArrayList<OrderDetailsDTO> details) throws SQLException, ClassNotFoundException {
