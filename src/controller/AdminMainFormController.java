@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.AdminMainBO;
 import bo.custom.impl.AdminMainBOImpl;
 import com.jfoenix.controls.JFXButton;
@@ -48,7 +49,7 @@ public class AdminMainFormController {
      * Dependency Injection
      */
 
-    private final AdminMainBO adminMainBO = new AdminMainBOImpl();
+    private final AdminMainBO adminMainBO = (AdminMainBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADMIN_MAIN);
 
 
     public void initialize() {

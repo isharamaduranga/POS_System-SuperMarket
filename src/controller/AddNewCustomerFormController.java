@@ -1,6 +1,7 @@
 package controller;
 
 
+import bo.BOFactory;
 import bo.custom.AddNewCustomerBO;
 import bo.custom.impl.AddNewCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -25,7 +26,7 @@ public class AddNewCustomerFormController {
     /**
      * Apply Dependency Injection (Property)
      */
-    private final AddNewCustomerBO addNewCustomerBO = new AddNewCustomerBOImpl();
+    private final AddNewCustomerBO addNewCustomerBO = (AddNewCustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADD_NEW_CUSTOMER);
 
 
     public void initialize() {

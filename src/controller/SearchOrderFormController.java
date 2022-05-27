@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.SearchOrderBO;
 import bo.custom.impl.SearchOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -21,7 +22,7 @@ public class SearchOrderFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final SearchOrderBO searchOrderBO = new SearchOrderBOImpl();
+    private final SearchOrderBO searchOrderBO = (SearchOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SEARCH_ORDER);
 
 
     public void searchOrderDetaisOnAction(KeyEvent keyEvent) throws SQLException, ClassNotFoundException {

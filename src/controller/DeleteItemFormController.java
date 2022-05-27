@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.DeleteItemBO;
 import bo.custom.impl.DeleteItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -24,7 +25,7 @@ public class DeleteItemFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final DeleteItemBO deleteItemBO = new DeleteItemBOImpl();
+    private final DeleteItemBO deleteItemBO = (DeleteItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DELETE_ITEM);
 
     public void SelectItemKeyReleased(KeyEvent keyEvent) {
         try {

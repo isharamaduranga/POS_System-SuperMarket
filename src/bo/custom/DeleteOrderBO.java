@@ -1,9 +1,11 @@
 package bo.custom;
 
+import bo.SuperBO;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface DeleteOrderBO {
+public interface DeleteOrderBO extends SuperBO {
     ResultSet searchOrder(String id) throws SQLException, ClassNotFoundException;
 
     boolean deleteOrder(String id) throws SQLException, ClassNotFoundException;

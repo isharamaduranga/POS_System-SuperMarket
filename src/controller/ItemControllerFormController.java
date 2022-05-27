@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.ItemControllerBO;
 import bo.custom.impl.ItemControllerBOImpl;
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ public class ItemControllerFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final ItemControllerBO itemControllerBO = new ItemControllerBOImpl();
+    private final ItemControllerBO itemControllerBO = (ItemControllerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ITEM_CONTROLLER);
 
     public void initialize() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("itemID"));

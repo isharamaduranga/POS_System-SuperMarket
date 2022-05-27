@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.DeleteOrderBO;
 import bo.custom.impl.DeleteOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -20,7 +21,7 @@ public class DeleteOrderFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final DeleteOrderBO deleteOrderBO = new DeleteOrderBOImpl();
+    private final DeleteOrderBO deleteOrderBO = (DeleteOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DELETE_ORDER);
 
 
     public void removeOnAction(ActionEvent actionEvent) {

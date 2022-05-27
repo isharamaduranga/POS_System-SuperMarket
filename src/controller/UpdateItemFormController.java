@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.UpdateItemBO;
 import bo.custom.impl.UpdateItemBOImpl;
 import com.jfoenix.controls.JFXComboBox;
@@ -27,7 +28,7 @@ public class UpdateItemFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final UpdateItemBO updateItemBO = new UpdateItemBOImpl();
+    private final UpdateItemBO updateItemBO = (UpdateItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.UPDATE_ITEM);
 
     public void initialize() {
 

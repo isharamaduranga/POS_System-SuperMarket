@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.DeleteCustomerBO;
 import bo.custom.impl.DeleteCustomerBOImpl;
 import com.jfoenix.controls.JFXComboBox;
@@ -28,7 +29,7 @@ public class DeleteCustomerFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final DeleteCustomerBO deleteCustomerBO = new DeleteCustomerBOImpl();
+    private final DeleteCustomerBO deleteCustomerBO = (DeleteCustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DELETE_CUSTOMER);
 
     public void initialize() {
         try {

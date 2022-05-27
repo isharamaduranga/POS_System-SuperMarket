@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.IncomeBO;
 import bo.custom.impl.IncomeBOImpl;
 import com.jfoenix.controls.JFXComboBox;
@@ -31,7 +32,7 @@ public class IncomeFormController {
     /**
      * Dependency Injection
      */
-    private final IncomeBO incomeBO = new IncomeBOImpl();
+    private final IncomeBO incomeBO = (IncomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.INCOME);
 
     public void initialize(){
         colOid.setCellValueFactory(new PropertyValueFactory("orderID"));

@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.UpdateOrderBO;
 import bo.custom.impl.UpdateOrderBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -21,7 +22,7 @@ public class UpdateOrderFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final UpdateOrderBO updateOrderBO = new UpdateOrderBOImpl();
+    private final UpdateOrderBO updateOrderBO = (UpdateOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.UPDATE_ORDER);
 
     public void UpdateComfirmOnAction(ActionEvent actionEvent) {
         OrderDetailsDTO dto = new OrderDetailsDTO(txtOrderID.getText(), txtItemCode.getText(), Integer.parseInt(txtOrderQty.getText()),

@@ -1,5 +1,8 @@
 package controller;
 
+import bo.BOFactory;
+import bo.custom.CashierMainBO;
+import bo.custom.impl.CashierMainBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -52,7 +55,7 @@ public class CashierMainFormController {
     public JFXTextField txtOrderID;
     public Label lblTotalprice;
 
-        private final CustomerDAO customerDAO = new CustomerDAOImpl();
+        private final CashierMainBO cashierMainBO = (CashierMainBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CASHIER_MAIN);
 
     public void initialize() {
         colItems.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
@@ -69,22 +72,17 @@ public class CashierMainFormController {
         cmbCustomerID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 setCustomerData(newValue);
-
-
             } catch (SQLException|ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
-
-
-
         curDateTime();curDateTime();
     }
 
     private void setCustomerData(String cid) throws SQLException, ClassNotFoundException {
 
+        ResultSet search = cashierMainBO.searchCustomer(cid);
 
-        ResultSet search = customerDAO.search(cid);
         if (search.next()) {
             txtCusName.setText(search.getString(3));
             txtCusAddress.setText(search.getString(4));
@@ -94,9 +92,7 @@ public class CashierMainFormController {
     }
     private void setItems() throws SQLException, ClassNotFoundException{
         double price=0;
-        OrderDetailsDAOImpl OrderDetailDAO = new OrderDetailsDAOImpl();
-        ResultSet item = OrderDetailDAO.getCustomerOrderItem(txtOrderID.getText());
-
+        ResultSet item = cashierMainBO.getCustomerOrderFromOrderID(txtOrderID.getText());
         ObservableList<CustomerOrderDetails> obList= FXCollections.observableArrayList();
 
         while (item.next()) {
@@ -110,12 +106,8 @@ public class CashierMainFormController {
         lblTotalprice.setText(String.valueOf(price));
 
     }
-
-
         public void loadorder() throws SQLException, ClassNotFoundException {
-
-        OrderDAO orderDAO = new OrderDAOImpl();
-        ResultSet rst = orderDAO.getOrderDetailsSearchByCustomerID((String) cmbCustomerID.getValue());
+            ResultSet rst = cashierMainBO.getOrderDetailsFromCustomerID(cmbCustomerID.getValue());
 
         if(rst.next()){
             txtOrderID.setText(rst.getString(1));
@@ -133,8 +125,7 @@ public class CashierMainFormController {
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
-
-        ObservableList<String> ids = customerDAO.getIds();
+        ObservableList<String> ids = cashierMainBO.getAllCustomerIDS();
         cmbCustomerID.setItems(ids);
     }
 

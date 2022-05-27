@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.OrderAndOrderDetailBO;
 import bo.custom.impl.OrderAndOrderDetailBOImpl;
 import javafx.event.ActionEvent;
@@ -31,7 +32,7 @@ public class OrderAndOrderDetailsTableFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final OrderAndOrderDetailBO orderAndOrderDetailBO = new OrderAndOrderDetailBOImpl();
+    private final OrderAndOrderDetailBO orderAndOrderDetailBO = (OrderAndOrderDetailBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ORDER_AND_ORDER_DETAIL);
 
     public void initialize() {
         try {

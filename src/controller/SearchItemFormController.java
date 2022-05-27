@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.SearchItemBO;
 import bo.custom.impl.SearchItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -22,7 +23,7 @@ public class SearchItemFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final SearchItemBO searchItemBO = new SearchItemBOImpl();
+    private final SearchItemBO searchItemBO = (SearchItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SEARCH_ITEM);
 
 
     public void searchOnAction(ActionEvent actionEvent) {

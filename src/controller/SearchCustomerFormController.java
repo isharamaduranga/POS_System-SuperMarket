@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.SearchCustomerBO;
 import bo.custom.impl.SearchCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -24,7 +25,7 @@ public class SearchCustomerFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final SearchCustomerBO searchCustomerBO = new SearchCustomerBOImpl();
+    private final SearchCustomerBO searchCustomerBO = (SearchCustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SEARCH_CUSTOMER);
 
     public void searchCustomerOnAction(ActionEvent actionEvent) {
         String id = txtID.getText();

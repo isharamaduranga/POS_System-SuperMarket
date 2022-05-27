@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.AddNewItemBO;
 import bo.custom.impl.AddNewItemBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -23,7 +24,7 @@ public class AddNewItemFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final AddNewItemBO addNewItemBO = new AddNewItemBOImpl();
+    private final AddNewItemBO addNewItemBO = (AddNewItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADD_NEW_ITEM);
 
     public void initialize() {
         autoId();

@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.CustomerControllerBO;
 import bo.custom.impl.CustomerControllerBOImpl;
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ public class CustomerControllerFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final CustomerControllerBO customerControllerBO = new CustomerControllerBOImpl();
+    private final CustomerControllerBO customerControllerBO = (CustomerControllerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER_CONTROLLER);
 
     public void initialize() {
 

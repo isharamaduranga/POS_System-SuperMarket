@@ -1,5 +1,6 @@
 package controller;
 
+import bo.BOFactory;
 import bo.custom.UpdateCustomerBO;
 import bo.custom.impl.UpdateCustomerBOImpl;
 import com.jfoenix.controls.JFXTextField;
@@ -27,7 +28,7 @@ public class UpdateCustomerFormController {
     /**
      * Apply Dependency Injection(Property)
      */
-    private final UpdateCustomerBO updateCustomerBO = new UpdateCustomerBOImpl();
+    private final UpdateCustomerBO updateCustomerBO = (UpdateCustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.UPDATE_CUSTOMER);
 
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
