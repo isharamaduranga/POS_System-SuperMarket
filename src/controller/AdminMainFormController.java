@@ -1,28 +1,37 @@
 package controller;
 
+import bo.custom.impl.AdminMainBOImpl;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.ItemDTO;
+import model.OrderDetailsDTO;
 import util.Utilities;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 
 public class AdminMainFormController {
-
     public AnchorPane dashBoardContext;
     public JFXButton btnCustomerMenu;
     public JFXButton btnItemMenu;
@@ -31,14 +40,71 @@ public class AdminMainFormController {
     public Label lblDate;
     public Label lblDay;
     public Label lblTime;
-    public BarChart barChartItem;
-    public Label lblCustomers;
-    public Label lblItems;
+    public LineChart lineChartAccess;
+    public PieChart mostOrderItemPieChart;
+
+    /**
+     * Dependency Injection
+     */
+
+    private final AdminMainBOImpl adminMainBO = new AdminMainBOImpl();
+
 
     public void initialize() {
-        curDateTime();
+
+        try {
+            initLineChart();
+            curDateTime();
+            initPieChart();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        lineChartAccess.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
 
     }
+
+    private void initPieChart() {
+        ObservableList<PieChart.Data> productData = FXCollections.observableArrayList();
+
+        try {
+
+            ArrayList<OrderDetailsDTO> allOrderDetails = adminMainBO.getAllOrderDetails();
+
+            for (OrderDetailsDTO allOrderDetail : allOrderDetails) {
+                String code = allOrderDetail.getItemCode();
+                int qty = allOrderDetail.getOrderQTY();
+
+                productData.add(new PieChart.Data(code, qty));
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        productData.forEach(data ->
+                data.nameProperty().bind(
+                        Bindings.concat(data.getName(), " ", data.pieValueProperty())
+                )
+        );
+        mostOrderItemPieChart.setData(productData);
+        mostOrderItemPieChart.setTitle("M O S T   S A L E   I T E M S   P R O G R E S S");
+
+    }
+
+    private void initLineChart() throws SQLException, ClassNotFoundException {
+        XYChart.Series seriesRe = new XYChart.Series();
+        seriesRe.setName("I T E M   W I S E   P R O G R E S S");
+
+
+        ArrayList<ItemDTO> allItems = adminMainBO.getAllItem();
+
+        for (ItemDTO allItem : allItems) {
+            String code = allItem.getItemID();
+            int qty = allItem.getQtyOnHand();
+            seriesRe.getData().add(new XYChart.Data(code, qty));
+        }
+        lineChartAccess.getData().add(seriesRe);
+    }
+
 
     private void curDateTime() {
         lblDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -71,6 +137,10 @@ public class AdminMainFormController {
         Utilities.setUiChildren(dashBoardContext, "CustomerControllerForm");
     }
 
+    public void displayIncomeOnAction(ActionEvent actionEvent) throws IOException {
+        Utilities.setUiChildren(dashBoardContext, "IncomeForm");
+    }
+
     public void customerListOnAction(ActionEvent actionEvent) throws IOException {
         Utilities.leftTransition("CustomerControllerForm", btnCustomerMenu, dashBoardContext);
     }
@@ -87,4 +157,6 @@ public class AdminMainFormController {
     public void logOutOnAction(ActionEvent actionEvent) {
         System.exit(0);
     }
+
+
 }

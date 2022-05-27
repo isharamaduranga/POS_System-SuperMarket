@@ -76,4 +76,5 @@ public class OrderDAOImpl implements OrderDAO {
     public ResultSet getOrderDetailsSearchByCustomerID(String id)throws SQLException, ClassNotFoundException{
         return CrudUtil.execute("SELECT * FROM `Order` WHERE CusID=?", id);
     }
+
 }

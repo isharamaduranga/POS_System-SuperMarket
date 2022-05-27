@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class QueryDAOImpl implements QueryDAO {
 
     @Override
-    public ArrayList<CustomDTO> searchOrderByCusID(String id)throws SQLException,ClassNotFoundException{
-     String sql=   "SELECT `order`.orderid,`order`.orderdate,`order`.cusid,`order details`.itemcode,`order details`.orderqty,`order details`.discount,`order details`.price from `order` inner join `order details` on `order`.orderid=`order details`.orderid where `order`.orderid=?;";
+    public ArrayList<CustomDTO> searchOrderByCusID(String id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT `order`.orderid,`order`.orderdate,`order`.cusid,`order details`.itemcode,`order details`.orderqty,`order details`.discount,`order details`.price from `order` inner join `order details` on `order`.orderid=`order details`.orderid where `order`.orderid=?;";
         ResultSet rst = CrudUtil.execute(sql, id);
-        ArrayList<CustomDTO> orderRecords= new ArrayList();
+        ArrayList<CustomDTO> orderRecords = new ArrayList();
         while (rst.next()) {
 
             CustomDTO customDTO = new CustomDTO();
@@ -31,4 +31,24 @@ public class QueryDAOImpl implements QueryDAO {
         }
         return orderRecords;
     }
+
+    @Override
+    public ResultSet getOrderDetailsSearchByDate(String month, String year) throws SQLException, ClassNotFoundException {
+
+        return CrudUtil.execute("SELECT `order`.orderid,`order`.orderdate,`order details`.price from `order` inner join `order details` on`order`.orderid= `order details`.orderid where MONTH(orderdate) =? AND YEAR(orderdate)=?", month, year);
+
+    }
+
+    @Override
+    public ResultSet getOrderDetailsSearchByMonthName(String monthName, String year) throws SQLException, ClassNotFoundException {
+
+        return CrudUtil.execute("SELECT `order`.orderid,`order`.orderdate,`order details`.price from `order` inner join `order details` on`order`.orderid=`order details`.orderid where MONTHNAME(orderdate) =? AND YEAR(orderdate)=?", monthName, year);
+
+    }
+
+    @Override
+    public ResultSet getTotalIncome() throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("SELECT SUM(Price) FROM `order details`");
+    }
+
 }

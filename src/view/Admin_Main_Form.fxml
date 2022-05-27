@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,10 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminMainFormController">
    <children>
@@ -48,9 +46,9 @@
          <left>
             <AnchorPane prefHeight="694.0" prefWidth="265.0" style="-fx-background-color: #002B52FF;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="66.0" layoutY="209.0" prefHeight="485.0" prefWidth="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="209.0">
+                  <VBox layoutX="66.0" layoutY="183.0" prefHeight="511.0" prefWidth="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="183.0">
                      <children>
-                        <JFXButton alignment="BASELINE_LEFT" onAction="#dashBoardOnAction" prefHeight="130.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" DASH-BOARD" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#dashBoardOnAction" prefHeight="110.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" DASH-BOARD" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -62,7 +60,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton alignment="BASELINE_LEFT" onAction="#manageCustomerOnAction" prefHeight="130.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" MANAGE CUSTOMERS" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#manageCustomerOnAction" prefHeight="110.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" MANAGE CUSTOMERS" textFill="WHITE">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -74,7 +72,19 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton alignment="BASELINE_LEFT" onAction="#manageItemsOnAction" prefHeight="130.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" MANAGE  ITEMS" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#manageItemsOnAction" prefHeight="110.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" MANAGE  ITEMS" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assests/itemWhite.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#displayIncomeOnAction" prefHeight="110.0" prefWidth="265.0" styleClass="sidebarItem" stylesheets="@../DarkTheme.css" text=" INCOME" textFill="WHITE">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -114,64 +124,15 @@
                         <Image url="@assests/background.jpg" />
                      </image>
                   </ImageView>
-                  <BarChart fx:id="barChartItem" layoutX="123.0" layoutY="242.0" prefHeight="364.0" prefWidth="647.0">
+                  <LineChart fx:id="lineChartAccess" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="28.0" layoutY="368.0" prefHeight="315.0" prefWidth="880.0" verticalGridLinesVisible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
-                  </BarChart>
-                  <Label fx:id="lblCustomers" alignment="BASELINE_CENTER" layoutX="243.0" layoutY="50.0" prefHeight="111.0" prefWidth="181.0" style="-fx-background-color: #D980FA; -fx-background-radius: 2.0em;" text="02">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@assests/client.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <textFill>
-                        <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                           <stops>
-                              <Stop color="#d73434" />
-                              <Stop color="#3c2e2e" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
-                  </Label>
-                  <Label fx:id="lblItems" alignment="BASELINE_CENTER" layoutX="533.0" layoutY="51.0" prefHeight="111.0" prefWidth="181.0" style="-fx-background-color: #fdcb6e; -fx-background-radius: 2.0em;" text="06">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="47.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@assests/itemsBlack.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <textFill>
-                        <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                           <stops>
-                              <Stop color="#d73434" />
-                              <Stop color="#3c2e2e" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
-                  </Label>
-                  <Text layoutX="283.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CUSTOMERS">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="591.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ITEMS" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
+                  </LineChart>
+                  <PieChart fx:id="mostOrderItemPieChart" layoutX="210.0" layoutY="8.0" prefHeight="369.0" prefWidth="505.0" />
                </children>
             </AnchorPane>
          </center>

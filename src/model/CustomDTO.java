@@ -36,6 +36,12 @@ public class CustomDTO {
         this.total = total;
     }
 
+    public CustomDTO(String orderID, String orderDate, double total) {
+        this.orderID = orderID;
+        this.orderDate = orderDate;
+        this.total = total;
+    }
+
     public String getCusID() {
         return cusID;
     }
