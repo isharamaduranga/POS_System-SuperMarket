@@ -44,11 +44,11 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtDescription" layoutX="337.0" layoutY="268.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtPackSize" layoutX="336.0" layoutY="327.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtUnitPrice" layoutX="337.0" layoutY="390.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtQTYOnHand" layoutX="336.0" layoutY="449.0" prefHeight="31.0" prefWidth="472.0" />
-      <JFXButton layoutX="355.0" layoutY="597.0" onAction="#ConfirmUpdateOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonUpdate" stylesheets="@DarkTheme.css" text="UPDATE" textFill="WHITE">
+      <JFXTextField fx:id="txtDescription" layoutX="337.0" layoutY="268.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtPackSize" layoutX="336.0" layoutY="327.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtUnitPrice" layoutX="337.0" layoutY="390.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtQTYOnHand" layoutX="336.0" layoutY="449.0" onKeyReleased="#textFields_Key_Released" prefHeight="31.0" prefWidth="472.0" />
+      <JFXButton fx:id="btnUpdate" layoutX="355.0" layoutY="597.0" onAction="#ConfirmUpdateOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonUpdate" stylesheets="@DarkTheme.css" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

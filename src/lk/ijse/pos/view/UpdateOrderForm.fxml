@@ -32,9 +32,9 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtOrderID" labelFloat="true" layoutX="354.0" layoutY="210.0" onKeyReleased="#searchOrderDetaisOnAction" prefHeight="31.0" prefWidth="265.0" promptText="Order ID" />
-      <JFXTextField fx:id="txtItemCode" labelFloat="true" layoutX="337.0" layoutY="299.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXTextField fx:id="txtOrderQty" labelFloat="true" layoutX="336.0" layoutY="372.0" prefHeight="26.0" prefWidth="472.0" />
-      <JFXButton layoutX="355.0" layoutY="582.0" onAction="#UpdateComfirmOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonUpdate" stylesheets="@DarkTheme.css" text="UPDATE" textFill="WHITE">
+      <JFXTextField fx:id="txtItemCode" editable="false" labelFloat="true" layoutX="337.0" layoutY="299.0" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtOrderQty" labelFloat="true" layoutX="336.0" layoutY="372.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
+      <JFXButton fx:id="btnUpdate" layoutX="355.0" layoutY="582.0" onAction="#UpdateComfirmOnAction" prefHeight="54.0" prefWidth="247.0" style="-fx-background-radius: 3.5EM;" styleClass="buttonUpdate" stylesheets="@DarkTheme.css" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
@@ -45,6 +45,6 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtDiscount" labelFloat="true" layoutX="340.0" layoutY="443.0" prefHeight="26.0" prefWidth="472.0" />
+      <JFXTextField fx:id="txtDiscount" labelFloat="true" layoutX="340.0" layoutY="443.0" onKeyReleased="#textFields_Key_Released" prefHeight="26.0" prefWidth="472.0" />
    </children>
 </AnchorPane>

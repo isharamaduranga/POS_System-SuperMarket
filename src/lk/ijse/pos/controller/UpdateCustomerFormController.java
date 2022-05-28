@@ -1,20 +1,29 @@
 package lk.ijse.pos.controller;
 
-import lk.ijse.pos.bo.BOFactory;
-import lk.ijse.pos.bo.custom.UpdateCustomerBO;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.pos.bo.BOFactory;
+import lk.ijse.pos.bo.custom.UpdateCustomerBO;
 import lk.ijse.pos.dto.CustomerDTO;
 import lk.ijse.pos.util.Utilities;
+import lk.ijse.pos.util.ValidationUtil;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.regex.Pattern;
 
 public class UpdateCustomerFormController {
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final UpdateCustomerBO updateCustomerBO = (UpdateCustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.UPDATE_CUSTOMER);
     public JFXTextField txtCustomerID;
     public JFXTextField txtTitle;
     public JFXTextField txtName;
@@ -23,12 +32,45 @@ public class UpdateCustomerFormController {
     public JFXTextField txtProvince;
     public JFXTextField txtPostCode;
     public AnchorPane updateCustomerContext;
-
+    public JFXButton btnUpdate;
     /**
-     * Apply Dependency Injection(Property)
+     * Define Linked-HashMap for the validation
      */
-    private final UpdateCustomerBO updateCustomerBO = (UpdateCustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.UPDATE_CUSTOMER);
+    LinkedHashMap<JFXTextField, Pattern> map = new LinkedHashMap<>();
 
+    public void initialize(){
+        /** create validation pattern*/
+        //Create a pattern and compile it to use
+        Pattern TitlePattern = Pattern.compile("^[A-z .]{3,}$");
+        Pattern NamePattern = Pattern.compile("^[A-z]{3,20}$");
+        Pattern AddressPattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
+        Pattern CityPattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
+        Pattern ProvincePattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
+        Pattern postalCodePattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
+
+        //add pattern and text to the map
+        map.put(txtTitle,TitlePattern);
+        map.put(txtName,NamePattern);
+        map.put(txtAddress,AddressPattern);
+        map.put(txtCity,CityPattern);
+        map.put(txtProvince,ProvincePattern);
+        map.put(txtPostCode,postalCodePattern);
+    }
+    /** Define the function of cross to among the textFields(use Enter press)  */
+    public void textFields_Key_Released(KeyEvent keyEvent) {
+
+        ValidationUtil.validate(map,btnUpdate);
+
+        if (keyEvent.getCode()== KeyCode.ENTER){
+            Object response = ValidationUtil.validate(map,btnUpdate);
+            if (response instanceof JFXTextField){
+                JFXTextField textField = (JFXTextField) response;
+                textField.requestFocus();
+            }else if (response instanceof Boolean){
+
+            }
+        }
+    }
 
     public void SelectCustomerKeyReleased(KeyEvent keyEvent) {
         try {
