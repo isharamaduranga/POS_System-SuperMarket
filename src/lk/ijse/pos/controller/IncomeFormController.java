@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 
+import animatefx.animation.ZoomIn;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.IncomeBO;
 import com.jfoenix.controls.JFXComboBox;
@@ -41,7 +42,9 @@ public class IncomeFormController {
         loadAllIncome();
         comboLoad();
         calulateTotalIncome();
-
+        new ZoomIn(tblIncomes).play();
+        new ZoomIn(lblMonthIncome).play();
+        new ZoomIn(lblTotalIncome).play();
     }
 
     private void calulateTotalIncome() {

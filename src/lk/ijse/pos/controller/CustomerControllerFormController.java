@@ -1,5 +1,10 @@
 package lk.ijse.pos.controller;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.Pulse;
+import animatefx.animation.ZoomIn;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.CustomerControllerBO;
 import javafx.event.ActionEvent;
@@ -25,6 +30,11 @@ public class CustomerControllerFormController {
     public TableColumn colCity;
     public TableColumn colProvince;
     public TableColumn colPostCode;
+    public JFXButton btnAdd;
+    public JFXButton btnUpdate;
+    public JFXButton btnSearch;
+    public JFXButton btnDelete;
+
 
     /**
      * Apply Dependency Injection(Property)
@@ -42,6 +52,8 @@ public class CustomerControllerFormController {
         colPostCode.setCellValueFactory(new PropertyValueFactory<>("postCode"));
 
         loadAllCustomers();
+        new ZoomIn(tblCustomer).play();
+
     }
 
 
@@ -82,5 +94,20 @@ public class CustomerControllerFormController {
 
     public void removeCustomerOnAction(ActionEvent actionEvent) throws IOException {
         Utilities.setUiChildren(CustomerContext, "DeleteCustomerForm");
+    }
+
+    public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
+        if(((JFXButton) mouseEvent.getSource()).getText().equals("ADD CUSTOMER")){
+            new Bounce(btnAdd).play();
+
+        }else if(((JFXButton) mouseEvent.getSource()).getText().equals("UPDATE CUSTOMER")){
+            new Bounce(btnUpdate).play();
+
+        }else if(((JFXButton) mouseEvent.getSource()).getText().equals("SEARCH CUSTOMER")){
+            new Bounce(btnSearch).play();
+
+        }else{
+            new Bounce(btnDelete).play();
+        }
     }
 }

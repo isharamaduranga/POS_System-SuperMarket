@@ -1,5 +1,10 @@
 package lk.ijse.pos.controller;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.Pulse;
+import animatefx.animation.ZoomIn;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.ItemControllerBO;
 import javafx.event.ActionEvent;
@@ -30,6 +35,10 @@ public class ItemControllerFormController {
      * Apply Dependency Injection(Property)
      */
     private final ItemControllerBO itemControllerBO = (ItemControllerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ITEM_CONTROLLER);
+    public JFXButton btnAdd;
+    public JFXButton btnUpdate;
+    public JFXButton btnSearch;
+    public JFXButton btnDelete;
 
     public void initialize() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("itemID"));
@@ -39,6 +48,8 @@ public class ItemControllerFormController {
         colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
 
         loadAllItems();
+
+        new ZoomIn(tblItem).play();
     }
 
     private void loadAllItems() {
@@ -75,5 +86,20 @@ public class ItemControllerFormController {
 
     public void deleteItemOnAction(ActionEvent actionEvent) throws IOException {
         Utilities.setUiChildren(ItemContext, "DeleteItemForm");
+    }
+
+    public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
+        if(((JFXButton) mouseEvent.getSource()).getText().equals("ADD ITEM")){
+            new Bounce(btnAdd).play();
+
+        }else if(((JFXButton) mouseEvent.getSource()).getText().equals("UPDATE ITEM")){
+            new Bounce(btnUpdate).play();
+
+        }else if(((JFXButton) mouseEvent.getSource()).getText().equals("SEARCH ITEM")){
+            new Bounce(btnSearch).play();
+
+        }else{
+            new Bounce(btnDelete).play();
+        }
     }
 }

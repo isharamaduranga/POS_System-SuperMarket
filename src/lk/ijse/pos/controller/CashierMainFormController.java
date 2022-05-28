@@ -1,5 +1,8 @@
 package lk.ijse.pos.controller;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.ZoomIn;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.CashierMainBO;
 import com.jfoenix.controls.JFXButton;
@@ -50,6 +53,11 @@ public class CashierMainFormController {
     public Label lblTotalprice;
 
         private final CashierMainBO cashierMainBO = (CashierMainBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CASHIER_MAIN);
+    public JFXButton btndetails;
+    public JFXButton btnplaceOrder;
+    public Label lblTotPrice;
+    public Label lblRs;
+
 
     public void initialize() {
         colItems.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
@@ -71,6 +79,12 @@ public class CashierMainFormController {
             }
         });
         curDateTime();curDateTime();
+
+        new ZoomIn(tblItemDetails).play();
+        new ZoomIn(lblTotalprice).play();
+        new ZoomIn(lblTotPrice).play();
+        new ZoomIn(lblRs).play();
+
     }
 
     private void setCustomerData(String cid) throws SQLException, ClassNotFoundException {
@@ -191,5 +205,13 @@ public class CashierMainFormController {
 
     public void searchOrderOnAction(ActionEvent actionEvent) throws IOException {
         Utilities.setUiChildren(dashBoardContext, "SearchOrderForm");
+    }
+
+    public void btnMouseMovedOnAction(MouseEvent mouseEvent) {
+        if(((JFXButton) mouseEvent.getSource()).getText().equals("ORDER & ORDER DETAILS")){
+            new Bounce(btndetails).play();
+        }else{
+            new Bounce(btnplaceOrder).play();
+        }
     }
 }

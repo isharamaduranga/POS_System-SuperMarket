@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 
+import animatefx.animation.ZoomIn;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.AdminMainBO;
 import com.jfoenix.controls.JFXButton;
@@ -61,7 +62,8 @@ public class AdminMainFormController {
             e.printStackTrace();
         }
         lineChartAccess.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
-
+        new ZoomIn(mostOrderItemPieChart).play();
+        new ZoomIn(lineChartAccess).play();
     }
 
     private void initPieChart() {

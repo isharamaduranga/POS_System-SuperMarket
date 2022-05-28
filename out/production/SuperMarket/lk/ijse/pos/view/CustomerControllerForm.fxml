@@ -32,7 +32,7 @@
       </TableView>
       <HBox layoutX="20.0" layoutY="103.0" prefHeight="63.0" prefWidth="888.0">
          <children>
-            <JFXButton onAction="#addCustomerOnAction" prefHeight="64.0" prefWidth="222.0" styleClass="buttonAdd" stylesheets="@DarkTheme.css" text="ADD CUSTOMER" textFill="WHITE">
+            <JFXButton fx:id="btnAdd" onAction="#addCustomerOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="64.0" prefWidth="225.0" style="-fx-background-radius: 1.40em;" styleClass="buttonAdd" stylesheets="@DarkTheme.css" text="ADD CUSTOMER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -44,7 +44,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#editCustomerOnAction" prefHeight="70.0" prefWidth="222.0" styleClass="buttonUpdate" stylesheets="@DarkTheme.css" text="UPDATE CUSTOMER" textFill="WHITE">
+            <JFXButton fx:id="btnUpdate" onAction="#editCustomerOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="70.0" prefWidth="222.0" style="-fx-background-radius: 1.40em;" styleClass="buttonUpdate" stylesheets="@DarkTheme.css" text="UPDATE CUSTOMER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -56,7 +56,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#searchCustomerOnAction" prefHeight="63.0" prefWidth="222.0" styleClass="buttonSearch" stylesheets="@DarkTheme.css" text="SEARCH CUSTOMER" textFill="WHITE">
+            <JFXButton fx:id="btnSearch" onAction="#searchCustomerOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="63.0" prefWidth="222.0" style="-fx-background-radius: 1.40em;" styleClass="buttonSearch" stylesheets="@DarkTheme.css" text="SEARCH CUSTOMER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -68,7 +68,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#removeCustomerOnAction" prefHeight="63.0" prefWidth="222.0" styleClass="buttonDelete" stylesheets="@DarkTheme.css" text="DELETE CUSTOMER" textFill="WHITE">
+            <JFXButton fx:id="btnDelete" onAction="#removeCustomerOnAction" onMouseMoved="#btnMouseMovedOnAction" prefHeight="63.0" prefWidth="222.0" style="-fx-background-radius: 1.40em;" styleClass="buttonDelete" stylesheets="@DarkTheme.css" text="DELETE CUSTOMER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

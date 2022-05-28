@@ -206,12 +206,12 @@
                         <Font name="System Bold" size="50.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="108.0" layoutY="596.0" onAction="#orderTabels" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonLightBlue" stylesheets="@DarkTheme.css" text="ORDER &amp; ORDER DETAILS" textFill="WHITE">
+                  <JFXButton fx:id="btndetails" layoutX="108.0" layoutY="596.0" onAction="#orderTabels" onMouseMoved="#btnMouseMovedOnAction" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonLightBlue" stylesheets="@DarkTheme.css" text="ORDER &amp; ORDER DETAILS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="499.0" layoutY="596.0" onAction="#PlaceOrder" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonSearch" stylesheets="@DarkTheme.css" text="PLACE ORDER" textFill="WHITE">
+                  <JFXButton fx:id="btnplaceOrder" layoutX="499.0" layoutY="596.0" onAction="#PlaceOrder" onMouseMoved="#btnMouseMovedOnAction" prefHeight="68.0" prefWidth="315.0" style="-fx-background-radius: 3.0EM;" styleClass="buttonSearch" stylesheets="@DarkTheme.css" text="PLACE ORDER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -228,7 +228,7 @@
                   <JFXTextField fx:id="txtCusAddress" editable="false" labelFloat="true" layoutX="650.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ADDRESS" unFocusColor="#4059a9" />
                   <JFXTextField fx:id="TxtDate" editable="false" labelFloat="true" layoutX="358.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="DATE" unFocusColor="#4059a9" />
                   <JFXTextField fx:id="txtOrderID" editable="false" labelFloat="true" layoutX="58.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="ORDER ID" unFocusColor="#4059a9" />
-                  <Label layoutX="531.0" layoutY="366.0" prefHeight="51.0" prefWidth="327.0" text="T O T A L   P R I C E">
+                  <Label fx:id="lblTotPrice" layoutX="531.0" layoutY="366.0" prefHeight="51.0" prefWidth="327.0" text="T O T A L   P R I C E">
                      <font>
                         <Font name="System Bold" size="35.0" />
                      </font>
@@ -238,7 +238,7 @@
                         <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
-                  <Label layoutX="568.0" layoutY="447.0" prefHeight="60.0" prefWidth="66.0" text="RS">
+                  <Label fx:id="lblRs" layoutX="568.0" layoutY="447.0" prefHeight="60.0" prefWidth="66.0" text="RS">
                      <font>
                         <Font name="System Bold" size="40.0" />
                      </font>

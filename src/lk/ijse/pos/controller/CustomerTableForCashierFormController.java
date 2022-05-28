@@ -1,5 +1,7 @@
 package lk.ijse.pos.controller;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.ZoomIn;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.CustomerControllerBO;
 import javafx.scene.control.TableColumn;
@@ -37,6 +39,7 @@ public class CustomerTableForCashierFormController {
         colPostCode.setCellValueFactory(new PropertyValueFactory<>("postCode"));
 
         loadAllCustomers();
+        new ZoomIn(tblCustomer).play();
     }
 
     private void loadAllCustomers() {
