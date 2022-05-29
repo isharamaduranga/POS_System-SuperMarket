@@ -3,15 +3,15 @@
     -fx-background-color: linear-gradient
 }
 .menuItem:hover{
-    -fx-background-color: #4b7bec;
-    -fx-border-color: #8854d0;
+    -fx-background-color: #69d20a;
+    -fx-border-color: #6c25b6;
     -fx-border-width: 0px 0px 4px 0px;
 }
 
 .sidebarItem:hover{
     -fx-background-color: #0f82af;
     -fx-border-color: #ffff00;
-    -fx-border-width: 0px 4px 0px 0px;
+    -fx-border-width: 0px 6px 0px 0px;
 }
 .text-fill{
     -fx-background-color-fill: #972cbe;

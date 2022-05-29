@@ -6,9 +6,13 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="paymentContext" prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.PaymentInfoFormController">
@@ -22,22 +26,44 @@
       <Pane layoutX="44.0" layoutY="44.0" prefHeight="47.0" prefWidth="935.0" style="-fx-background-color: #002b52;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <HBox layoutX="275.0" layoutY="134.0" prefHeight="54.0" prefWidth="409.0">
          <children>
-            <JFXButton fx:id="btnCredit" onAction="#creditOnAction" prefHeight="52.0" prefWidth="203.0" style="-fx-background-radius: 1.20EM;" styleClass="menuItem" stylesheets="@DarkTheme.css" text="C R E D I T" textFill="#e4ab00">
+            <JFXButton fx:id="btnCredit" onAction="#creditOnAction" prefHeight="52.0" prefWidth="203.0" style="-fx-background-radius: 1.20EM;" styleClass="menuItem" stylesheets="@DarkTheme.css" text="C R E D I T" textFill="#0900e3">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="23.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/credit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnCash" onAction="#cashOnAction" prefHeight="52.0" prefWidth="204.0" style="-fx-background-radius: 1.20EM;" styleClass="menuItem" stylesheets="@DarkTheme.css" text="C A S H" textFill="#e4ab00">
+            <JFXButton fx:id="btnCash" onAction="#cashOnAction" prefHeight="55.0" prefWidth="208.0" style="-fx-background-radius: 1.20EM;" styleClass="menuItem" stylesheets="@DarkTheme.css" text="C A S H" textFill="#0900e3">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="23.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assests/cash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </JFXButton>
          </children>
       </HBox>
-      <Label fx:id="lblTotalBill" alignment="BASELINE_CENTER" layoutX="509.0" layoutY="265.0" prefHeight="47.0" prefWidth="228.0" style="-fx-background-radius: 2.0EM;" styleClass="adminBtn" stylesheets="@DarkTheme.css" text="DDD" textFill="WHITE">
+      <Label fx:id="lblTotalBill" alignment="BASELINE_CENTER" layoutX="509.0" layoutY="265.0" prefHeight="47.0" prefWidth="228.0" style="-fx-background-radius: 2.0EM; -fx-border-color: #002B52FF; -fx-border-radius: 2.0EM;" stylesheets="@DarkTheme.css" text="ASDFGHJK">
          <font>
             <Font name="System Bold" size="22.0" />
-         </font></Label>
+         </font>
+         <textFill>
+            <LinearGradient endX="0.7378640776699029" endY="1.0" startX="0.8009708737864079" startY="0.23300970873786409">
+               <stops>
+                  <Stop color="#c6a91b" />
+                  <Stop color="#c41ba1" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
       <Label layoutX="175.0" layoutY="265.0" prefHeight="47.0" prefWidth="319.0" text="T O T A L   B I L L    P A Y M E N T ">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -50,20 +76,20 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <TextField fx:id="cashOfCustomer" alignment="BASELINE_CENTER" layoutX="510.0" layoutY="375.0" onKeyReleased="#cashKeyReleased" prefHeight="37.0" prefWidth="228.0" promptText="R.S 0.00">
+      <TextField fx:id="cashOfCustomer" alignment="BASELINE_CENTER" layoutX="510.0" layoutY="375.0" onKeyReleased="#cashKeyReleased" prefHeight="37.0" prefWidth="228.0" promptText="R.S 0.00" style="-fx-border-color: #0FC40FFF; -fx-border-radius: 2.0EM;">
          <font>
             <Font size="20.0" />
          </font></TextField>
-      <TextField fx:id="saveBalance" alignment="BASELINE_CENTER" editable="false" layoutX="510.0" layoutY="460.0" prefHeight="44.0" prefWidth="228.0" styleClass="text-fill" stylesheets="@DarkTheme.css">
+      <TextField fx:id="saveBalance" alignment="BASELINE_CENTER" editable="false" layoutX="510.0" layoutY="460.0" prefHeight="44.0" prefWidth="228.0" style="-fx-border-color: RED; -fx-border-radius: 2.0EM;" styleClass="text-fill" stylesheets="@DarkTheme.css">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font></TextField>
       <JFXButton fx:id="printInvoice" layoutX="378.0" layoutY="590.0" onAction="#printInvoiceOnAction" prefHeight="52.0" prefWidth="217.0" styleClass="buttonLightBlue" stylesheets="@DarkTheme.css" text="P R I N T   I N V O I C E" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <AnchorPane fx:id="cardPaymentContext" layoutX="125.0" layoutY="223.0" prefHeight="324.0" prefWidth="689.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane fx:id="cardPaymentContext" layoutX="125.0" layoutY="223.0" prefHeight="324.0" prefWidth="689.0" style="-fx-background-color: #ffffff;" visible="false">
          <effect>
             <DropShadow />
          </effect>
@@ -107,5 +133,7 @@
                </font></JFXButton>
          </children>
       </AnchorPane>
+      <Separator layoutX="278.0" layoutY="133.0" prefHeight="3.0" prefWidth="391.0" />
+      <Separator layoutX="282.0" layoutY="191.0" prefHeight="3.0" prefWidth="391.0" />
    </children>
 </AnchorPane>

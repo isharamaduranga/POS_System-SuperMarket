@@ -4,11 +4,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="694.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.IncomeFormController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="90.0" layoutX="200.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="531.0" />
+      <ImageView fitHeight="85.0" fitWidth="528.0" layoutX="202.0" layoutY="40.0" pickOnBounds="true">
+         <image>
+            <Image url="@assests/background.jpg" />
+         </image>
+      </ImageView>
       <TableView fx:id="tblIncomes" layoutX="79.0" layoutY="264.0" prefHeight="394.0" prefWidth="776.0" stylesheets="@DarkTheme.css">
          <columns>
             <TableColumn fx:id="colOid" maxWidth="225.0" prefWidth="225.0" text="ORDER ID" />
@@ -16,18 +25,18 @@
             <TableColumn fx:id="colAmount" maxWidth="310.0" minWidth="0.0" prefWidth="306.0" text="AMOUNT" />
          </columns>
       </TableView>
-      <Label fx:id="lblTotal" layoutX="186.0" layoutY="48.0" prefHeight="60.0" prefWidth="338.0" text="T O T A L   I N C O M E :  " textFill="#757373">
+      <Label fx:id="lblTotal" layoutX="210.0" layoutY="51.0" prefHeight="60.0" prefWidth="338.0" text="T O T A L   I N C O M E :  " textFill="#5e4b4b">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="monthLoadCombo" labelFloat="true" layoutX="203.0" layoutY="165.0" onAction="#ComboOnActionSelectMonth" prefHeight="41.0" prefWidth="243.0" promptText="SELECT MONTH" unFocusColor="#00b972" />
-      <Label fx:id="lblMonthIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="492.0" layoutY="159.0" opacity="0.84" prefHeight="52.0" prefWidth="243.0" style="-fx-background-color: #1B9CFC; -fx-background-radius: 2.0em;" text="MONTHLY  INCOME" textFill="#2f2f2e">
+      <JFXComboBox fx:id="monthLoadCombo" labelFloat="true" layoutX="219.0" layoutY="165.0" onAction="#ComboOnActionSelectMonth" prefHeight="41.0" prefWidth="243.0" promptText="SELECT MONTH" unFocusColor="#00b972" />
+      <Label fx:id="lblMonthIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="489.0" layoutY="159.0" opacity="0.84" prefHeight="52.0" prefWidth="243.0" style="-fx-background-radius: 2.0em;" styleClass="adminBtn" stylesheets="@DarkTheme.css" text="MONTHLY  INCOME">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotalIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="524.0" layoutY="48.0" prefHeight="60.0" prefWidth="217.0" text="00000">
+      <Label fx:id="lblTotalIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="527.0" layoutY="51.0" prefHeight="60.0" prefWidth="203.0" text="00000">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>

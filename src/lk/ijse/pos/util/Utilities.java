@@ -46,6 +46,12 @@ public class Utilities {
         ap.getChildren().add(parent);
     }
 
+
+    public static void setUiChildren(AnchorPane ap,Parent parent) throws IOException {
+        ap.getChildren().clear();
+        ap.getChildren().add(parent);
+    }
+
     /**
      * Make a new window and set a fxml file
      * @param location --> the form which want to set

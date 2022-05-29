@@ -63,7 +63,14 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
                 boolean qtyUpdate = itemDAO.updateQty(detail.getItemCode(), detail.getOrderQTY());
                 if (qtyUpdate) {
+                    String title = "Updated Quantity in Stock ";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
 
+                    tray.setAnimationType(type);
+                    tray.setTitle(title);
+                    tray.setNotificationType(NotificationType.SUCCESS);
+                    tray.showAndDismiss(Duration.millis(3000));
                 }
 
             }

@@ -1,8 +1,5 @@
 package lk.ijse.pos.controller;
 
-import javafx.scene.layout.AnchorPane;
-import lk.ijse.pos.bo.BOFactory;
-import lk.ijse.pos.bo.custom.PurchaseOrderBO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
@@ -11,9 +8,14 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import lk.ijse.pos.bo.BOFactory;
+import lk.ijse.pos.bo.custom.PurchaseOrderBO;
 import lk.ijse.pos.dto.OrderDTO;
 import lk.ijse.pos.dto.OrderDetailsDTO;
 import lk.ijse.pos.util.Utilities;
@@ -29,6 +31,10 @@ import java.util.Date;
 
 public class PlaceOrderFormController {
 
+    /**
+     * Apply Dependency Injection(Property)
+     */
+    private final PurchaseOrderBO purchaseOrderBO = (PurchaseOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PURCHASE_ORDER);
     public Label lblOrderID;
     public Label lblDate;
     public Label lblTime;
@@ -36,14 +42,13 @@ public class PlaceOrderFormController {
     public JFXTextField txtName;
     public JFXTextField txtaddress;
     public JFXTextField txtCity;
-
     public JFXComboBox<String> cmbItemID;
     public JFXTextField txtDiscription;
     public JFXTextField txtQTYOnHand;
     public JFXTextField txtUnitPrice;
-
     public TextField txtQTY;
     public TextField txtDiscount;
+
 
     public TableView<CartTM> tblCart;
     public TableColumn colItemID;
@@ -54,14 +59,10 @@ public class PlaceOrderFormController {
     public TableColumn colTotal;
     public Label lblTotal;
     public AnchorPane placeOrderContext;
-
     int cartSelectedRowCountForDelete = -1;
-
-    /**
-     * Apply Dependency Injection(Property)
-     */
-    private final PurchaseOrderBO purchaseOrderBO = (PurchaseOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PURCHASE_ORDER);
-
+    ObservableList<CartTM> list = FXCollections.observableArrayList();
+    ArrayList<Object> cartDetails = new ArrayList<>();
+    Parent parent;
 
     public void initialize() {
 
@@ -194,8 +195,6 @@ public class PlaceOrderFormController {
         return -1;
     }
 
-    ObservableList<CartTM> list = FXCollections.observableArrayList();
-
     public void addToCartOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
         if (!txtQTY.getText().equals("") && !txtDiscount.getText().equals("")) {
@@ -216,9 +215,7 @@ public class PlaceOrderFormController {
             }
 
             CartTM tm = new CartTM(cmbItemID.getValue(), discription, qtyForCustomer, unitPrice, discount, total);
-
             int numberOfRow = isExists(tm);
-
             if (numberOfRow == -1) {
                 list.add(tm);
             } else {
@@ -235,18 +232,14 @@ public class PlaceOrderFormController {
                 list.add(newTm);
             }
             tblCart.setItems(list);
+            cartDetails.addAll(list);
             quntityChange();
-
-
-                calculateCost();
-
+            calculateCost();
 
         } else {
             new Alert(Alert.AlertType.WARNING, "Something went Wrong. Check Fields... ").show();
         }
     }
-
-
 
     private void quntityChange() {
         int value = Integer.parseInt(txtQTYOnHand.getText());
@@ -262,7 +255,6 @@ public class PlaceOrderFormController {
             }
         }
     }
-
 
     public void calculateCost() {
 
@@ -294,7 +286,21 @@ public class PlaceOrderFormController {
         }
         autoId();
 
-        Utilities.setUiChildren(placeOrderContext, "PaymentInfoForm");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/PaymentInfoForm.fxml"));
+
+        try {
+            parent = fxmlLoader.load();
+            Utilities.setUiChildren(placeOrderContext, parent);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        PaymentInfoFormController controller = fxmlLoader.getController();
+        controller.setDataTransfer(tblCart.getItems(),lblTotal.getText());
+
+
         lblTotal.setText("0.00 /=");
         cmbCustomerID.getSelectionModel().clearSelection();
         cmbItemID.getSelectionModel().clearSelection();
@@ -309,8 +315,6 @@ public class PlaceOrderFormController {
         txtDiscount.clear();
 
 
-
-
-
     }
+
 }
