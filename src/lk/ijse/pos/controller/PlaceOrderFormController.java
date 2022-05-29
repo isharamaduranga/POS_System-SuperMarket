@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.PurchaseOrderBO;
 import com.jfoenix.controls.JFXComboBox;
@@ -15,8 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import lk.ijse.pos.dto.OrderDTO;
 import lk.ijse.pos.dto.OrderDetailsDTO;
+import lk.ijse.pos.util.Utilities;
 import lk.ijse.pos.view.TM.CartTM;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -50,6 +53,8 @@ public class PlaceOrderFormController {
     public TableColumn colDiscount;
     public TableColumn colTotal;
     public Label lblTotal;
+    public AnchorPane placeOrderContext;
+
     int cartSelectedRowCountForDelete = -1;
 
     /**
@@ -231,13 +236,16 @@ public class PlaceOrderFormController {
             }
             tblCart.setItems(list);
             quntityChange();
-            calculateCost();
+
+
+                calculateCost();
 
 
         } else {
             new Alert(Alert.AlertType.WARNING, "Something went Wrong. Check Fields... ").show();
         }
     }
+
 
 
     private void quntityChange() {
@@ -255,7 +263,10 @@ public class PlaceOrderFormController {
         }
     }
 
-    private void calculateCost() {
+
+    public void calculateCost() {
+
+
         double total = 0;
         for (CartTM tm : list) {
             total += tm.getTotal();
@@ -263,7 +274,7 @@ public class PlaceOrderFormController {
         lblTotal.setText(total + " /=");
     }
 
-    public void ComfirmOrderOnAction(ActionEvent actionEvent) {
+    public void ComfirmOrderOnAction(ActionEvent actionEvent) throws IOException {
 
 
         String s = lblOrderID.getText();
@@ -282,6 +293,8 @@ public class PlaceOrderFormController {
             e.printStackTrace();
         }
         autoId();
+
+        Utilities.setUiChildren(placeOrderContext, "PaymentInfoForm");
         lblTotal.setText("0.00 /=");
         cmbCustomerID.getSelectionModel().clearSelection();
         cmbItemID.getSelectionModel().clearSelection();
@@ -294,5 +307,10 @@ public class PlaceOrderFormController {
         txtQTYOnHand.clear();
         txtUnitPrice.clear();
         txtDiscount.clear();
+
+
+
+
+
     }
 }

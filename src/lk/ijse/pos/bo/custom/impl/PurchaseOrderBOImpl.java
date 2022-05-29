@@ -1,5 +1,6 @@
 package lk.ijse.pos.bo.custom.impl;
 
+import javafx.util.Duration;
 import lk.ijse.pos.bo.custom.PurchaseOrderBO;
 import lk.ijse.pos.dao.DAOFactory;
 import lk.ijse.pos.db.DBConnection;
@@ -13,6 +14,9 @@ import lk.ijse.pos.dao.custom.CustomerDAO;
 import lk.ijse.pos.dao.custom.ItemDAO;
 import lk.ijse.pos.dao.custom.OrderDAO;
 import lk.ijse.pos.dao.custom.OrderDetailsDAO;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -67,6 +71,14 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
             if (isDetailsSaved) {
                 connection.commit();
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved Successfully...!").showAndWait();
+                String title = "Hello...!! Cashier Place Order Successfully";
+                TrayNotification tray = new TrayNotification();
+                AnimationType type = AnimationType.POPUP;
+
+                tray.setAnimationType(type);
+                tray.setTitle(title);
+                tray.setNotificationType(NotificationType.SUCCESS);
+                tray.showAndDismiss(Duration.millis(3000));
             } else {
                 connection.rollback();
                 new Alert(Alert.AlertType.ERROR, "Error...!").show();

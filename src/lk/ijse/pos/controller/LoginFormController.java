@@ -10,6 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -32,6 +37,15 @@ public class LoginFormController {
 
                 if (txtUserName.getText().equals("a") & pwdPassword.getText().equals("1")) {
 
+                    String title = "Hello...!! Admin, Sign in Successfully";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+
+                    tray.setAnimationType(type);
+                    tray.setTitle(title);
+                    tray.setNotificationType(NotificationType.SUCCESS);
+                    tray.showAndDismiss(Duration.millis(3000));
+
                     Stage stage = (Stage) loginFormContext.getScene().getWindow();
                     stage.close();
                     URL resource = getClass().getResource("../view/Admin_Main_Form.fxml");
@@ -42,9 +56,22 @@ public class LoginFormController {
                     stage1.centerOnScreen();
                     stage1.show();
 
+
+
                 } else {
                     // error warning information
-                    new Alert(Alert.AlertType.WARNING, "Try Again !").show();
+
+                    String tilte = "Sign In Admin";
+                    String message = "Something Went Wrong  Check fields";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+
+                    tray.setAnimationType(type);
+                    tray.setTitle(tilte);
+                    tray.setMessage(message);
+                    tray.setNotificationType(NotificationType.WARNING);
+                    tray.showAndDismiss(Duration.millis(3000));
+
                 }
 
             } else {
@@ -63,6 +90,15 @@ public class LoginFormController {
 
                 if (txtUserName.getText().equals("c") & pwdPassword.getText().equals("1")) {
 
+                    String title = "Hello...!! Cashier Sign in Successfully";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+
+                    tray.setAnimationType(type);
+                    tray.setTitle(title);
+                    tray.setNotificationType(NotificationType.SUCCESS);
+                    tray.showAndDismiss(Duration.millis(3000));
+
                     // build new Scene
 
                     Stage stage = (Stage) loginFormContext.getScene().getWindow();
@@ -70,8 +106,16 @@ public class LoginFormController {
 
 
                 } else {
-                    // error warning information
-                    new Alert(Alert.AlertType.WARNING, "Try Again !").show();
+                    String tilte = "Sign In Cashier";
+                    String message = "Something Went Wrong  Check fields";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+
+                    tray.setAnimationType(type);
+                    tray.setTitle(tilte);
+                    tray.setMessage(message);
+                    tray.setNotificationType(NotificationType.WARNING);
+                    tray.showAndDismiss(Duration.millis(3000));
                 }
             } else {  //  number of wrong input visible false option
                 txtUserName.setVisible(false);

@@ -2,7 +2,9 @@ package lk.ijse.pos.controller;
 
 import animatefx.animation.Bounce;
 import animatefx.animation.ZoomIn;
+import javafx.animation.FadeTransition;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.CashierMainBO;
 import com.jfoenix.controls.JFXButton;
@@ -34,6 +36,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CashierMainFormController {
     public AnchorPane CashierDashboardContext;
@@ -85,7 +89,10 @@ public class CashierMainFormController {
         new ZoomIn(lblTotPrice).play();
         new ZoomIn(lblRs).play();
 
+
+
     }
+
 
     private void setCustomerData(String cid) throws SQLException, ClassNotFoundException {
 
@@ -114,6 +121,7 @@ public class CashierMainFormController {
         lblTotalprice.setText(String.valueOf(price));
 
     }
+
         public void loadorder() throws SQLException, ClassNotFoundException {
             ResultSet rst = cashierMainBO.getOrderDetailsFromCustomerID(cmbCustomerID.getValue());
 

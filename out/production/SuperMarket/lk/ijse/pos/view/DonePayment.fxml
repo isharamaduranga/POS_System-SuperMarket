@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="694.0" prefWidth="935.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.DonePaymentController">
+   <children>
+      <ImageView fitHeight="312.0" fitWidth="463.0" layoutX="267.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/DonePay.gif" />
+         </image>
+      </ImageView>
+      <Label alignment="BASELINE_CENTER" layoutX="230.0" layoutY="464.0" prefHeight="83.0" prefWidth="483.0" text="P A Y M E N T    S U C C E S S F U L  !!!">
+         <font>
+            <Font size="28.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.4611650485436893" startX="0.4611650485436894" startY="0.5922330097087378">
+               <stops>
+                  <Stop color="#4518e8" />
+                  <Stop color="#b52012" offset="0.15011366865586814" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>
