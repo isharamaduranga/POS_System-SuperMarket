@@ -119,4 +119,8 @@
 .adminBtn{-fx-background-color: linear-gradient(to right,#C4C4C4, #C724D6);
 
 }
+.adminNewBtn{-fx-background-color: linear-gradient(to right, rgba(50, 62, 187, 0.93), #26d92b);
+
+}
+
 .cashierBtn{-fx-background-color: linear-gradient(to right,#C4C4C4, #564B4B);}
