@@ -26,7 +26,7 @@ public class Utilities {
      * @param title
      * @throws IOException
      */
-    public void setUi(AnchorPane ap, String location, String title) throws IOException {
+    public void setUiToCloseCurrentWindow(AnchorPane ap, String location, String title) throws IOException {
         Stage stage = (Stage) ap.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
         stage.setTitle(title);

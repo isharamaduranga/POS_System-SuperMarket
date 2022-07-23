@@ -42,7 +42,7 @@ public class AddNewItemFormController {
         /** create validation pattern*/
         //Create a pattern and compile it to use
         Pattern DescriptionPattern = Pattern.compile("^[A-z0-9 ,/]{4,20}$");
-        Pattern PackSizePattern = Pattern.compile("^[A-z]{3,20}$");
+        Pattern PackSizePattern = Pattern.compile("^[A-z0-9]{3,20}$");
         Pattern UnitPricePattern = Pattern.compile("^[1-9][0-9]*(.[0-9]{2})?$");
         Pattern QtyOnHand = Pattern.compile("^[0-9]{1,20}$");
 

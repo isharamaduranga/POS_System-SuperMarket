@@ -49,7 +49,6 @@ public class PlaceOrderFormController {
     public TextField txtQTY;
     public TextField txtDiscount;
 
-
     public TableView<CartTM> tblCart;
     public TableColumn colItemID;
     public TableColumn colDescription;

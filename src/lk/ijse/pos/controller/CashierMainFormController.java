@@ -82,7 +82,8 @@ public class CashierMainFormController {
                 e.printStackTrace();
             }
         });
-        curDateTime();curDateTime();
+        curDateTime();
+        curDateTime();
 
         new ZoomIn(tblItemDetails).play();
         new ZoomIn(lblTotalprice).play();

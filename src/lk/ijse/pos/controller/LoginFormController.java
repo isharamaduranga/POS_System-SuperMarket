@@ -35,7 +35,7 @@ public class LoginFormController {
             attemptsLogAdmin++;
             if (attemptsLogAdmin < 5) {  // attempts calculate
 
-                if (txtUserName.getText().equals("a") & pwdPassword.getText().equals("1")) {
+                if (txtUserName.getText().equals("admin") & pwdPassword.getText().equals("1234")) {
 
                     String title = "Hello...!! Admin, Sign in Successfully";
                     TrayNotification tray = new TrayNotification();
@@ -88,7 +88,7 @@ public class LoginFormController {
             attemptsLogCashier++;
             if (attemptsLogCashier < 5) {       // attempts calculate
 
-                if (txtUserName.getText().equals("c") & pwdPassword.getText().equals("1")) {
+                if (txtUserName.getText().equals("cashier") & pwdPassword.getText().equals("1234")) {
 
                     String title = "Hello...!! Cashier Sign in Successfully";
                     TrayNotification tray = new TrayNotification();

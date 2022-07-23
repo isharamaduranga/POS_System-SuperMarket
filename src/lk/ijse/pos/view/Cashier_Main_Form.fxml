@@ -31,14 +31,14 @@
                         </Label>
                      </children>
                   </Pane>
-                  <HBox layoutX="347.0" layoutY="52.0" prefHeight="33.0" prefWidth="670.0">
+                  <HBox layoutX="347.0" layoutY="52.0" prefHeight="42.0" prefWidth="670.0">
                      <children>
                         <JFXButton fx:id="btnDetailsMenu" onAction="#ViewOrderDetailsOnAction" prefHeight="39.0" prefWidth="214.0" styleClass="menuItem" stylesheets="@DarkTheme.css" text="Order Details">
                            <font>
-                              <Font name="System Bold" size="21.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true">
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@assests/orderDetails.png" />
                                  </image>
@@ -47,10 +47,10 @@
                         </JFXButton>
                         <JFXButton onAction="#logOutOnAction" prefHeight="50.0" prefWidth="214.0" styleClass="menuItem" stylesheets="@DarkTheme.css" text="Log Out">
                            <font>
-                              <Font name="System Bold" size="21.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@assests/logoutCashier.png" />
                                  </image>
@@ -59,10 +59,10 @@
                         </JFXButton>
                         <JFXButton onAction="#shutDownOnAction" prefHeight="50.0" prefWidth="214.0" styleClass="menuItem" stylesheets="@DarkTheme.css" text="Shut Down">
                            <font>
-                              <Font name="System Bold" size="21.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@assests/shutoff.png" />
                                  </image>
@@ -217,17 +217,29 @@
                      </font>
                   </JFXButton>
                   <Separator layoutX="417.0" layoutY="13.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="6.0" />
-                  <JFXComboBox fx:id="cmbCustomerID" labelFloat="true" layoutX="58.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ID" unFocusColor="RED" />
+                  <JFXComboBox fx:id="cmbCustomerID" labelFloat="true" layoutX="58.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ID" styleClass="list-cell" stylesheets="@DarkTheme.css" unFocusColor="WHITE" />
                   <TableView fx:id="tblItemDetails" layoutX="58.0" layoutY="334.0" prefHeight="200.0" prefWidth="423.0" stylesheets="@DarkTheme.css">
                     <columns>
                       <TableColumn fx:id="colItems" prefWidth="229.0" text="ITEMS" />
                       <TableColumn fx:id="colQTY" prefWidth="193.0" text="QUENTITY" />
                     </columns>
                   </TableView>
-                  <JFXTextField fx:id="txtCusName" editable="false" labelFloat="true" layoutX="358.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER NAME" unFocusColor="#4059a9" />
-                  <JFXTextField fx:id="txtCusAddress" editable="false" labelFloat="true" layoutX="650.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ADDRESS" unFocusColor="#4059a9" />
-                  <JFXTextField fx:id="TxtDate" editable="false" labelFloat="true" layoutX="358.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="DATE" unFocusColor="#4059a9" />
-                  <JFXTextField fx:id="txtOrderID" editable="false" labelFloat="true" layoutX="58.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="ORDER ID" unFocusColor="#4059a9" />
+                  <JFXTextField fx:id="txtCusName" editable="false" labelFloat="true" layoutX="358.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER NAME" styleClass="textFieldEdit" stylesheets="@DarkTheme.css" unFocusColor="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="txtCusAddress" editable="false" labelFloat="true" layoutX="650.0" layoutY="155.0" prefHeight="30.0" prefWidth="220.0" promptText="CUSTOMER ADDRESS" styleClass="textFieldEdit" stylesheets="@DarkTheme.css" unFocusColor="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="TxtDate" editable="false" labelFloat="true" layoutX="358.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="DATE" styleClass="textFieldEdit" stylesheets="@DarkTheme.css" unFocusColor="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="txtOrderID" editable="false" labelFloat="true" layoutX="58.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="ORDER ID" styleClass="textFieldEdit" stylesheets="@DarkTheme.css" unFocusColor="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></JFXTextField>
                   <Label fx:id="lblTotPrice" layoutX="531.0" layoutY="366.0" prefHeight="51.0" prefWidth="327.0" text="T O T A L   P R I C E">
                      <font>
                         <Font name="System Bold" size="35.0" />

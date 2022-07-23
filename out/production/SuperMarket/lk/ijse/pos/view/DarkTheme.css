@@ -124,3 +124,7 @@
 }
 
 .cashierBtn{-fx-background-color: linear-gradient(to right,#C4C4C4, #564B4B);}
+
+.textFieldEdit{-fx-background-color: linear-gradient(to right,#C4C4C4, #1eb61e);}
+
+.list-cell{-fx-background-color: linear-gradient(to right, rgba(103, 113, 238, 0.93), #53e858);}
