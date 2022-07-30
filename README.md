@@ -57,6 +57,7 @@ But first this Project was started by Mvc architecture and later it was converte
 
 ## Technology/Framework used
 * Java(Layered Architechture
+*Javafx
 * CSS
 
 ## License
