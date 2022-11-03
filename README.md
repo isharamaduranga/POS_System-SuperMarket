@@ -3,7 +3,7 @@
 
 ## Description
 
-#### This Application is single Alone Application.Create a Pos System for wholesale Store to manage basic Process. The Project is Implemented Layered architecture.
+#### This Application is Stand Alone Application.Create a Pos System for wholesale Store to manage basic Process. The Project is Implemented Layered architecture.
 But first this Project was started by Mvc architecture and later it was converted over to Layered Architecture.
 
 ## Main Functions of Application
